@@ -11,7 +11,7 @@
       <p class="text-center"><%= link_to '退会しない', user_path(@user), class: "sbtn btn-6 confirm" %></p>
       <p><%= form_with model: @user, url: user_destroy_path(@user), local: true do |f| %>
         <%= f.hidden_field :is_deleted, value: true %>
-        <%= f.submit '退会する', class: "sbtn btn-5 confirm ml-3" %>
+        <%= f.submit '退会する' %>
       <% end %>
       </p>
     </div>
