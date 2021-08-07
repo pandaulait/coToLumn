@@ -20,6 +20,9 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <% if user_signed_in? %>
               <li class="nav-item">
+                <%= link_to '投稿フォーム', new_text_path,class: "nav-link active" %>
+              </li>
+              <li class="nav-item">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete  ,class: "nav-link active"%>
               </li>
               <li class="nav-item">
@@ -49,7 +52,7 @@
                 <%= link_to "ログイン", new_admin_session_path ,class: "nav-link active"%>
               </li>
             <% end %>
-         
+
         </div>
       </div>
     </nav>
