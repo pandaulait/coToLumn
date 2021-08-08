@@ -18,7 +18,6 @@ module MarkdownHelper
       fenced_code_blocks: true, # コードを表す「```」を認識
       no_intra_emphasis:  true, # 文字の強調を無視
       strikethrough:      true, # 取り消し線を表す「~~」を認識
-      superscript:        true, # 上つき文字を表す「^」を認識
       tables:             true, # テーブルを認識
       escape_html:        true, # xss対策 全てのHTMLタグをエスケープ(filter_htmlより優先) 
       quote:              true  # xss対策 引用符を表す「""」を認識

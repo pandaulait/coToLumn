@@ -10,56 +10,70 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to '投稿フォーム', new_text_path,class: "nav-link active" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete  ,class: "nav-link active"%>
-              </li>
-              <li class="nav-item">
-                <%= link_to "マイページ", user_path(current_user) ,class: "nav-link active"%>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "新規登録", new_user_registration_path,class: "nav-link active"%>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログイン", new_user_session_path ,class: "nav-link active"%>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post ,class: "nav-link active"%>
-              </li>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        tex2jax: { inlineMath: [['$','$'],['\(','\)']] }
+      });
+    </script>
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to '投稿フォーム', new_text_path,class: "nav-link active" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete  ,class: "nav-link active"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "マイページ", user_path(current_user) ,class: "nav-link active"%>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "新規登録", new_user_registration_path,class: "nav-link active"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_user_session_path ,class: "nav-link active"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post ,class: "nav-link active"%>
+                </li>
 
-            <% end %>
-            <% if admin_signed_in? %>
-              <li class="nav-item bg-secondary">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete  ,class: "nav-link active"%>
-              </li>
-            <% else %>
-              <li class="nav-item  bg-secondary">
-                <%= link_to "新規登録", new_admin_registration_path,class: "nav-link active"%>
-              </li>
-              <li class="nav-item  bg-secondary">
-                <%= link_to "ログイン", new_admin_session_path ,class: "nav-link active"%>
-              </li>
-            <% end %>
+              <% end %>
+              <% if admin_signed_in? %>
+                <li class="nav-item bg-secondary">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete  ,class: "nav-link active"%>
+                </li>
+              <% else %>
+                <li class="nav-item  bg-secondary">
+                  <%= link_to "新規登録", new_admin_registration_path,class: "nav-link active"%>
+                </li>
+                <li class="nav-item  bg-secondary">
+                  <%= link_to "ログイン", new_admin_session_path ,class: "nav-link active"%>
+                </li>
+              <% end %>
 
+          </div>
         </div>
+      </nav>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key} alert-view") %>
+      <% end %>
+    </header>
+    <main>
+      <div class="container">
+        <%= yield %>
       </div>
-    </nav>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key} alert-view") %>
-    <% end %>
 
-    <%= yield %>
+    </main>
+
   </body>
 </html>
