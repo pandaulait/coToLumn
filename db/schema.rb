@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_08_06_141429) do
   end
 
   create_table "texts", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "admin_id", null: false
     t.string "title", null: false
     t.text "body", null: false
     t.string "image_id"
