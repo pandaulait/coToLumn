@@ -67,3 +67,6 @@ gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+gem 'redcarpet', '~> 2.3.0'  # マークダウン形式での表示
+gem 'coderay'                # シンタックスハイライト対応
+gem 'marked-rails'
