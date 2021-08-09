@@ -1,0 +1,48 @@
+<h1>Public::Columns#confirm</h1>
+<p>Find me in app/views/public/columns/confirm.html.erb</p>
+<div class="bg-light m-3">
+  <% if @column.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+       <% @column.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+       <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= attachment_image_tag @column, :image, :fill, 60, 60 %>
+
+  <p>単元名：<%= @column.title %></p>
+  <p>本文：<%= markdown(@column.body) %></p>
+  <p>ユーザーネーム：<%= @column.user.name %></p>
+  <% if @column.user == current_user %>
+    <%= link_to "編集", edit_column_path(@column) %>
+    <%= link_to "削除", column_path(@column), method: :delete %>
+  <% end %>
+
+  <%= link_to "たしかめ", columns_link_path(@column) %>
+</div>
+
+<h1>関連するテキストを選んでください。</h1>
+<!--テキストを選択して、仮表示ようのrender-->
+<div class="variation_texts">
+    <%= render 'public/links/text', {text: @text, texts: @texts, link: @link, column: @column} %>
+</div>
+<h1>すでに結びつけたテキスト</h1>
+<div>
+  <% @links.each do |link| %>
+    <div class="bg-light m-3">
+      <%= attachment_image_tag link.text, :image, :fill, 60, 60 %><%= link.text.id %>
+      <p><%if link.text.image_id == nil%>
+            nil
+        <%end%></p>
+      <p>単元名：<%= link.text.title %></p>
+      <p>本文：<%= markdown(link.text.body) %></p>
+      <p>ユーザーネーム：<%= link.text.admin.name %></p>
+      リンクID:<%= link.id%></br>
+      コラムID:<%= link.column.id%>
+      コラムID:<%= @column.id%>
+      <%= link_to "結びつきを解除",column_link_path(link.column,link) ,method: :delete%>
+    </div>
+  <% end %>
+

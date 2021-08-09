@@ -12,3 +12,20 @@
     <%= link_to "削除", admin_text_path(@text), method: :delete %>
   <% end %>
 </div>
+<div>
+  <% @links.each do |link| %>
+    <div class="bg-light m-3">
+      <%= attachment_image_tag link.column, :image, :fill, 60, 60 %><%= link.column.id %>
+      <p><%if link.column.image_id == nil%>
+            nil
+        <%end%></p>
+      <p>単元名：<%= link.column.title %></p>
+      <p>本文：<%= markdown(link.column.body) %></p>
+      <p>ユーザーネーム：<%= link.column.user.name %></p>
+      <%= link_to "詳細", column_path(link.column) %>
+      <% if link.column.user == current_user %>
+        <%= link_to "削除", column_path(link.column), method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
