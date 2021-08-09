@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_021208) do
+ActiveRecord::Schema.define(version: 2021_08_09_071731) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(version: 2021_08_09_021208) do
     t.datetime "updated_at", null: false
     t.index ["column_id"], name: "index_links_on_column_id"
     t.index ["text_id"], name: "index_links_on_text_id"
+  end
+
+  create_table "patches", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "text_id", null: false
+    t.string "title", null: false
+    t.text "body", null: false
+    t.string "image_id"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "texts", force: :cascade do |t|

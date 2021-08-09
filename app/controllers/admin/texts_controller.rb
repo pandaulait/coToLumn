@@ -1,5 +1,5 @@
 class Admin::TextsController < ApplicationController
-def index
+  def index
     @texts = Text.all
   end
 
