@@ -24,6 +24,8 @@ class Admin::TextsController < ApplicationController
 
   def edit
     @text = Text.find(params[:id])
+    @literature = Literature.new
+    
   end
 
   def update

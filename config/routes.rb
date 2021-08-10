@@ -23,18 +23,28 @@ Rails.application.routes.draw do
     patch 'users/destroy/:id' => 'users#destroy' , as: 'user_destroy'
     resources :users ,only: [:show,:edit,:update]
     resources :texts ,only: [:show, :index] do
-      resources :patches ,only: [:new, :create, :show, :index, :edit, :update, :destroy]
+      resources :patches ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+        post 'literatures' => 'literatures#text_patch_create'
+        delete 'literature/:id' => 'literatures#text_patch_destroy',as: 'literature'
+      end
     end
     resources :columns ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+      post 'literatures' => 'literatures#column_create'
+      delete 'literature/:id' => 'literatures#column_destroy',as: 'literature'
+
       resources :links ,only: [:create, :destroy]
     end
+
     get 'columns/:id/link' => 'columns#link', as: 'columns_link'
     get 'ajax',         to: 'links#ajax'
   end
 
 
   namespace :admin do
-    resources :texts ,only: [:new, :create, :show, :index, :edit, :update, :destroy]
+    resources :texts ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+      post 'literatures' => 'literatures#text_create'
+      delete 'literature/:id' => 'literatures#text_destroy',as: 'literature'
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

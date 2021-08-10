@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_071731) do
+ActiveRecord::Schema.define(version: 2021_08_09_144142) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 2021_08_09_071731) do
     t.datetime "updated_at", null: false
     t.index ["column_id"], name: "index_links_on_column_id"
     t.index ["text_id"], name: "index_links_on_text_id"
+  end
+
+  create_table "literatures", force: :cascade do |t|
+    t.string "subject_type", null: false
+    t.integer "subject_id", null: false
+    t.string "author"
+    t.string "explanation"
+    t.string "document", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_type", "subject_id"], name: "index_literatures_on_subject_type_and_subject_id"
   end
 
   create_table "patches", force: :cascade do |t|

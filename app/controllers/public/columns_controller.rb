@@ -24,6 +24,7 @@ class Public::ColumnsController < ApplicationController
 
   def edit
     @column = Column.find(params[:id])
+    @literature = Literature.new
   end
 
   def update
@@ -44,6 +45,7 @@ class Public::ColumnsController < ApplicationController
     @texts = Text.all
     @text = Text.first
     @links = @column.links
+    @literature = Literature.new
   end
 
   private

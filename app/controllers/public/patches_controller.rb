@@ -7,6 +7,7 @@ class Public::PatchesController < ApplicationController
   def show
     @text = Text.find(params[:text_id])
     @patch = Patch.find(params[:id])
+    @literature = Literature.new
   end
 
   def new
@@ -32,6 +33,7 @@ class Public::PatchesController < ApplicationController
   def edit
     @text = Text.find(params[:text_id])
     @patch = Patch.find(params[:id])
+    @literature = Literature.new
   end
 
   def update

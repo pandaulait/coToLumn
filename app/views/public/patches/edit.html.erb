@@ -29,3 +29,6 @@
   </script>
   <%= f.submit '更新' %>
 <% end %>
+<div class="patch_literature">
+  <%= render 'public/literatures/text_patch_new', {text: @text, literature: @literature, patch: @patch} %>
+</div>

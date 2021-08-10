@@ -11,3 +11,4 @@
     <%= link_to "削除", admin_text_path(@text), method: :delete %>
   <% end %>
 </div>
+<%= render 'admin/literatures/text_index', {literature: @literature, text: @text} %>
