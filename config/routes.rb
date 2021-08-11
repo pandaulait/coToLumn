@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+
   root to: 'homes#top'
   devise_scope :user do
     post '/users/guest_sign_in',to: 'public/devise/sessions#guest_sign_in'
@@ -31,10 +32,9 @@ Rails.application.routes.draw do
     resources :columns ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       post 'literatures' => 'literatures#column_create'
       delete 'literature/:id' => 'literatures#column_destroy',as: 'literature'
-
       resources :links ,only: [:create, :destroy]
     end
-
+    resources :problems ,only: [:new, :create, :show, :index, :edit, :update, :destroy]
     get 'columns/:id/link' => 'columns#link', as: 'columns_link'
     get 'ajax',         to: 'links#ajax'
   end

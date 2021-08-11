@@ -1,0 +1,9 @@
+<h1>Public::Problems#show</h1>
+<p>Find me in app/views/public/problems/show.html.erb</p>
+<div>
+  <p>単元名：<%= markdown(@problem.body) %></p>
+  <p>本文：<%= markdown(@problem.answer) %></p>
+
+  <p>ユーザーネーム：</p>
+    <%#=@problem.authors.user.name%>
+</div>
