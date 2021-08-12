@@ -1,0 +1,16 @@
+<h1>Public::Columns#show</h1>
+<p>Find me in app/views/public/columns/show.html.erb</p>
+<div>
+  <%= attachment_image_tag @column, :image, :fill, 60, 60 %>
+
+  <p>単元名：<%= @column.title %></p>
+  <p>本文：<%= markdown(@column.body) %></p>
+  <p>ユーザーネーム：<%= @column.user.name %></p>
+  <% if @column.user == current_user %>
+    <%= link_to "編集", edit_column_path(@column) %>
+    <%= link_to "削除", column_path(@column), method: :delete %>
+  <% end %>
+
+  <%= link_to "たしかめ", columns_link_path(@column) %>
+</div>
+<%= render 'public/literatures/column_index', {literature: @literature, column: @column} %>

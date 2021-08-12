@@ -1,0 +1,14 @@
+<h1>Admin::Texts#show</h1>
+<p>Find me in app/views/admin/texts/show.html.erb</p>
+<div>
+  <%= attachment_image_tag @text, :image, :fill, 60, 60 %>
+
+  <p>単元名：<%= @text.title %></p>
+  <p>本文：<%= markdown(@text.body) %></p>
+  <p>ユーザーネーム：<%= @text.admin.name %></p>
+  <% if @text.admin == current_admin %>
+    <%= link_to "編集", edit_admin_text_path(@text) %>
+    <%= link_to "削除", admin_text_path(@text), method: :delete %>
+  <% end %>
+</div>
+<%= render 'admin/literatures/text_index', {literature: @literature, text: @text} %>

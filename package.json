@@ -1,5 +1,7 @@
 {
   "name": "coToLumn",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "easymde": "^2.15.0"
+  }
 }

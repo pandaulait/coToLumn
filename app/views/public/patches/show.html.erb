@@ -1,0 +1,14 @@
+<h1>Public::Patches#show</h1>
+<p>Find me in app/views/public/patches/show.html.erb</p>
+<div>
+  <%= attachment_image_tag @patch, :image, :fill, 60, 60 %>
+
+  <p>単元名：<%= @patch.title %></p>
+  <p>本文：<%= markdown(@patch.body) %></p>
+  <p>ユーザーネーム：<%= @patch.user.name %></p>
+  <% if @patch.user == current_user %>
+    <%= link_to "編集", edit_text_patch_path(@patch.text, @patch) %>
+    <%= link_to "削除", text_patch_path(@patch), method: :delete %>
+  <% end %>
+</div>
+<%= render 'public/literatures/text_patch_index', {literature: @literature, text: @text, patch: @patch} %>

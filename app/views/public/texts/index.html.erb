@@ -1,0 +1,17 @@
+<h1>Public::Texts#index</h1>
+<p>Find me in app/views/public/texts/index.html.erb</p>
+<% @texts.each do |text| %>
+  <div>
+    <%= attachment_image_tag text, :image, :fill, 60, 60 %>
+    <p><%if text.image_id == nil%>
+          nil
+      <%end%></p>
+    <p>単元名：<%= text.title %></p>
+    <p>本文：<%= markdown(text.body) %></p>
+    <p>ユーザーネーム：<%= text.admin.name %></p>
+    <%= link_to "詳細", text_path(text) %>
+    <% if text.admin == current_admin %>
+      <%= link_to "削除", admin_text_path(text), method: :delete %>
+    <% end %>
+  </div>
+<% end %>
