@@ -1,6 +1,6 @@
 class Public::ProblemsController < ApplicationController
   def index
-    @texts = Text.all
+    @problems = Problem.all
   end
 
   def show
@@ -23,21 +23,21 @@ class Public::ProblemsController < ApplicationController
   end
 
   def edit
-    @text = Text.find(params[:id])
-    @literature = Literature.new
+    @problem = Problem.find(params[:id])
+
 
   end
 
   def update
-    text = Text.find(params[:id])
-    text.update(text_params)
-    redirect_to admin_text_path(text)
+    problem = Problem.find(params[:id])
+    problem.update(problem_params)
+    redirect_to problem_path(problem)
   end
 
   def destroy
-    @text = Text.find(params[:id])
-    @text.destroy
-    redirect_to admin_texts_path
+    @problem = Problem.find(params[:id])
+    @problem.destroy
+    redirect_to problems_path
   end
 
   private
