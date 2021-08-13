@@ -1,2 +1,31 @@
 <h1>Public::Problems#edit</h1>
 <p>Find me in app/views/public/problems/edit.html.erb</p>
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<% if @problem.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+       <% @problem.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+       <% end %>
+      </ul>
+    </div>
+  <% end %>
+<h1>画像投稿フォーム</h1>
+<%= form_with model: @problem , local:true do |f| %>
+  <h4>本文</h4>
+  <%= f.text_area :body ,id: "my-text-area"%>
+  <script>
+    var easyMDE = new EasyMDE({
+        autoDownloadFontAwesome: false,
+        showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
+        element: document.getElementById('my-text-area'),
+        // initialValue: '# EasyMDE \n Go ahead, play around with the editor! Be sure to check out **bold**, *italic* and ~~strikethrough~~ styling, [links](https://google.com) and all the other features. You can type the Markdown syntax, use the toolbar, or use shortcuts like `ctrl-b` or `cmd-b`.'
+    });
+  </script>
+  <h4>答え</h4>
+  <%= f.text_area :answer %>
+  <h4>解説</h4>
+  <%= f.text_area :commentary %>
+  <%= f.submit '投稿' %>
+<% end %>

@@ -5,16 +5,13 @@ class Public::LiteraturesController < ApplicationController
   def text_patch_create
     @patch = Patch.find(params[:patch_id])
     @text = Text.find(params[:text_id])
-    if params[:literature][:document] == nil || params[:literature][:document] ==""
-      flash[:alert] = "記事の保存に失敗しました。"
-      @literature = Literature.new
-
-    else
-      @patch.literatures.create(document: params[:literature][:document])
+    literature = @patch.literatures.new(literature_params)
+    if literature.save
       flash[:notice] = "記事の保存に成功しました。"
-      @literature = Literature.new
-
+    else
+      flash[:alert] = "記事の保存に失敗しました。"
     end
+    @literature = Literature.new
   end
 
   def text_patch_destroy
@@ -23,24 +20,22 @@ class Public::LiteraturesController < ApplicationController
     literature = Literature.find(params[:id])
     if  literature.destroy
       flash[:notice] = "記事の削除に成功しました。"
-      @literature = Literature.new
     else
       flash[:notice] = "記事の削除に失敗しました。"
-      @literature = Literature.new
     end
+    @literature = Literature.new
   end
 
 
   def column_create
     @column = Column.find(params[:column_id])
-    if params[:literature][:document] == nil || params[:literature][:document] ==""
-      flash[:alert] = "記事の保存に失敗しました。"
-      @literature = Literature.new
-    else
-      @column.literatures.create(document: params[:literature][:document])
+    literature = @column.literatures.new(literature_params)
+    if literature.save
       flash[:notice] = "記事の保存に成功しました。"
-      @literature = Literature.new
+    else
+      flash[:alert] = "記事の保存に失敗しました。"
     end
+    @literature = @column.literatures.new
   end
 
   def column_destroy
@@ -48,15 +43,15 @@ class Public::LiteraturesController < ApplicationController
     literature = Literature.find(params[:id])
     if  literature.destroy
       flash[:notice] = "記事の削除に成功しました。"
-      @literature = Literature.new
     else
       flash[:notice] = "記事の削除に失敗しました。"
-      @literature = Literature.new
     end
+    @literature = Literature.new
   end
+
   private
   def literature_params
-    params.require(:literature).permit(:subject_id, :subject_type, :document)
+    params.require(:literature).permit(:document)
   end
 end
 
