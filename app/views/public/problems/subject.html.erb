@@ -27,7 +27,6 @@
     <div class="bg-light m-3">
       <%= attachment_image_tag subject.text, :image, :fill, 60, 60 %>
       <%= subject.text.id %>
-      <%= subject.kind %>
       <p><%if subject.text.image_id == nil%>
             nil
         <%end%></p>

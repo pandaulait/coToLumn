@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 2021_08_13_151447) do
   create_table "subjects", force: :cascade do |t|
     t.integer "text_id"
     t.integer "problem_id"
-    t.integer "kind", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["problem_id"], name: "index_subjects_on_problem_id"
