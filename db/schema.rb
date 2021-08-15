@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_145723) do
+ActiveRecord::Schema.define(version: 2021_08_13_151447) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 2021_08_10_145723) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "article_type"
+    t.integer "article_id"
+    t.string "speaker_type"
+    t.integer "speaker_id"
+    t.string "body", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_type", "article_id"], name: "index_comments_on_article_type_and_article_id"
+    t.index ["speaker_type", "speaker_id"], name: "index_comments_on_speaker_type_and_speaker_id"
   end
 
   create_table "links", force: :cascade do |t|
@@ -73,10 +86,20 @@ ActiveRecord::Schema.define(version: 2021_08_10_145723) do
     t.text "body", null: false
     t.text "answer", null: false
     t.text "commentary"
+    t.integer "subject_status", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_problems_on_author_type_and_author_id"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.integer "text_id"
+    t.integer "problem_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["problem_id"], name: "index_subjects_on_problem_id"
+    t.index ["text_id"], name: "index_subjects_on_text_id"
   end
 
   create_table "texts", force: :cascade do |t|

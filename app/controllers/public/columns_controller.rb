@@ -5,6 +5,10 @@ class Public::ColumnsController < ApplicationController
 
   def show
     @column = Column.find(params[:id])
+    @comments = @column.comments
+    if current_user.present? || current_admin.present?
+      @comment = @column.comments.new
+    end
   end
 
   def new

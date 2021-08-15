@@ -4,9 +4,13 @@ class Public::TextsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @text = Text.find(params[:id])
     @links = @text.links
+    @comments = @text.comments
+    @problems = @text.problems
+    if current_user.present? || current_admin.present?
+      @comment = @text.comments.new
+    end
   end
-
-
 end

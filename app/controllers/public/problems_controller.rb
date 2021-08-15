@@ -15,7 +15,7 @@ class Public::ProblemsController < ApplicationController
     user = current_user
     @problem = user.problems.new(problem_params)
     if @problem.save
-      redirect_to problem_path(@problem)
+      redirect_to subject_problem_path(@problem)
     else
       flash[:alert] = "記事の保存に失敗しました。"
       render :new
@@ -24,8 +24,6 @@ class Public::ProblemsController < ApplicationController
 
   def edit
     @problem = Problem.find(params[:id])
-
-
   end
 
   def update
@@ -40,8 +38,17 @@ class Public::ProblemsController < ApplicationController
     redirect_to problems_path
   end
 
+  def subject
+    @texts = Text.all
+    @text = Text.first
+    @problem = Problem.find(params[:id])
+    @subjects = Subject.find_by(problem_id: @problem.id)
+    @subject = Subject.new
+
+  end
+
   private
   def problem_params
-    params.require(:problem).permit(:author_id, :author_type, :body, :answer, :commentary, :status)
+    params.require(:problem).permit(:author_id, :author_type, :body, :answer, :commentary, :status, :subject_status)
   end
 end

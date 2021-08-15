@@ -1,4 +1,5 @@
 class Public::LinksController < ApplicationController
+  #linkをAjaxで作成
   def create
     @column = Column.find(params[:column_id])
     @link = Link.new(link_params)
@@ -10,6 +11,7 @@ class Public::LinksController < ApplicationController
       render columns_link_path(@column)
     end
   end
+  #linkをAjaxで消去
   def destroy
     @column = Column.find(params[:column_id])
     @link = Link.find(params[:id])

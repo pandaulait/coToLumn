@@ -12,3 +12,7 @@
   <% end %>
 </div>
 <%= render 'admin/literatures/text_index', {literature: @literature, text: @text} %>
+
+<div class = "comment_area">
+  <%= render "public/comments/comment_area" ,{comment: @comment, comments: @comments} %>
+</div>

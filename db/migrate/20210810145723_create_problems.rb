@@ -5,6 +5,7 @@ class CreateProblems < ActiveRecord::Migration[5.2]
       t.text :body, null: false
       t.text :answer, null: false
       t.text :commentary
+      t.integer :subject_status, null: false
       t.integer :status, null: false, default: 0
 
       t.timestamps

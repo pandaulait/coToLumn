@@ -14,6 +14,8 @@
 <h1>画像投稿フォーム</h1>
 <%= form_with model: @problem , local:true do |f| %>
   <h4>本文</h4>
+   <%= f.select :subject_status, {'算数': 1, '国語': 2}, { include_blank: '主に関連する教科を選択してください'}, { class: 'form-control' , required: true } %>
+  <h4>本文</h4>
   <%= f.text_area :body ,id: "my-text-area"%>
   <script>
     var easyMDE = new EasyMDE({
