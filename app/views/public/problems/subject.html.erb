@@ -23,7 +23,7 @@
 </div>
 <h1>すでに結びつけたテキスト</h1>
 <div>
-  <% @subjects.each do |subject| %>
+  <% @problem.subjects.each do |subject| %>
     <div class="bg-light m-3">
       <%= attachment_image_tag subject.text, :image, :fill, 60, 60 %>
       <%= subject.text.id %>

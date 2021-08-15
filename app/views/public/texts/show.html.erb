@@ -30,6 +30,19 @@
     </div>
   <% end %>
 </div>
+
+<!--問題一覧-->
+<% @problems.each do |problem| %>
+<div>
+  <p>教科：<%= problem.subject_status %></p>
+  <p>問題文：<%= markdown(problem.body) %></p>
+  <p>回答：<%= markdown(problem.answer) %></p>
+  <p>解説：<%= markdown(problem.commentary) %></p>
+  <p>ユーザーネーム：<%=problem.author.name%></p>
+  <%= link_to "編集", edit_problem_path(problem) %></br>
+</div>
+<% end %>
+
 <!--コメント欄-->
 <div class = "comment_area">
   <%= render "public/comments/comment_area" ,{comment: @comment, comments: @comments} %>

@@ -42,8 +42,9 @@ class Public::ProblemsController < ApplicationController
     @texts = Text.all
     @text = Text.first
     @problem = Problem.find(params[:id])
-    @subjects = @problem.subjects
+    @subjects = Subject.find_by(problem_id: @problem.id)
     @subject = Subject.new
+
   end
 
   private

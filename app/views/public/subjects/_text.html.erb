@@ -19,8 +19,8 @@
 <% else %>
   <%= form_with model: subject ,url: problem_subjects_path(problem) ,local:true do |f| %>
     <%= f.collection_select(:text_id, texts , :id, :title, selected: text.id) %>
-    <%= f.hidden_field :kind ,value: problem.id%>
-    <%= f.hidden_field :problem_id ,value: problem.subject_status%>
+    <%= f.hidden_field :problem_id ,value: problem.id%>
+    <%= f.hidden_field :kind ,value: problem.subject_status%>
     <%= f.submit 'このテキストに紐づける。' %>
   <% end %>
 <% end %>

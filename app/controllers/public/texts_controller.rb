@@ -8,6 +8,7 @@ class Public::TextsController < ApplicationController
     @text = Text.find(params[:id])
     @links = @text.links
     @comments = @text.comments
+    @problems = @text.japanese_problems
     if current_user.present? || current_admin.present?
       @comment = @text.comments.new
     end
