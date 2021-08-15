@@ -5,6 +5,10 @@ class Admin::TextsController < ApplicationController
 
   def show
     @text = Text.find(params[:id])
+    @comments = @text.comments
+    if current_user.present? || current_admin.present?
+      @comment = @text.comments.new
+    end
   end
 
   def new

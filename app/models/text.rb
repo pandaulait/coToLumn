@@ -6,11 +6,11 @@ class Text < ApplicationRecord
   has_many :literatures , as: :subject, dependent: :destroy
 
 
-  # has_many :mathmatical_subjects, -> { where "subject = 1" },
-  # class_name: "Subjects"
-  # has_many :mathmatical_problems, class_name: "Problems" ,through: :mathmatical_subjects
+  has_many :mathmatical_subjects, -> { where "subject = 1" }, class_name: "Subjects"
+  has_many :mathmatical_problems, class_name: "Problems" ,through: :mathmatical_subjects
+
+  has_many :japanese_subjects, -> { where "subject = 0" }, class_name: "Subjects"
+  has_many :japanese_problems, class_name: "Problems" , through: :japanese_subjects
   
-  # has_many :japanese_subjects, -> { where "subject = 0" },
-  # class_name: "Subjects"
-  # has_many :japanese_problems, class_name: "Problems" , through: :japanese_subjects
+  has_many :comments, as: :article, dependent: :destroy
 end

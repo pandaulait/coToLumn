@@ -1,0 +1,42 @@
+<h1>Public::Problems#subject</h1>
+<p>Find me in app/views/public/problems/subject.html.erb</p>
+<p>教科：<%= @problem.subject_status %></p>
+<% if @subject.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+       <% @subject.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+       <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="m-1 bg-yellow">
+  <p>問題文：<%= markdown(@problem.body) %></p>
+  <p>回答：<%= markdown(@problem.answer) %></p>
+  <p>解説：<%= markdown(@problem.commentary) %></p>
+  <p>ユーザーネーム：<%=@problem.author.name%></p>
+</div>
+<h1>関連するテキストを選んでください。</h1>
+<!--テキストを選択して、仮表示ようのrender-->
+<div class="varidation_texts">
+  <%= render 'public/subjects/text', {text: @text, texts: @texts, subject: @subject, problem: @problem} %>
+</div>
+<h1>すでに結びつけたテキスト</h1>
+<div>
+  <% @subjects.each do |subject| %>
+    <div class="bg-light m-3">
+      <%= attachment_image_tag subject.text, :image, :fill, 60, 60 %>
+      <%= subject.text.id %>
+      <%= subject.kind %>
+      <p><%if subject.text.image_id == nil%>
+            nil
+        <%end%></p>
+      <p>単元名：<%= subject.text.title %></p>
+      <p>本文：<%= markdown(subject.text.body) %></p>
+      <p>ユーザーネーム：<%= subject.text.admin.name %></p>
+      サブジェクトID:<%= subject.id%></br>
+      コラムID:<%= @problem.id%>
+      <%= link_to "結びつきを解除",problem_subject_path(@problem,subject) ,method: :delete%>
+    </div>
+  <% end %>
+</div>

@@ -12,3 +12,8 @@
   <% end %>
 </div>
 <%= render 'public/literatures/text_patch_index', {literature: @literature, text: @text, patch: @patch} %>
+
+<div class = "comment_area">
+  <%= render "public/comments/comment_area" ,{comment: @comment, comments: @comments} %>
+</div>
+

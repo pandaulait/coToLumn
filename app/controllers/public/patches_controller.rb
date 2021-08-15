@@ -8,6 +8,8 @@ class Public::PatchesController < ApplicationController
     @text = Text.find(params[:text_id])
     @patch = Patch.find(params[:id])
     @literature = Literature.new
+    @comments = @patch.comments
+    @comment = @patch.comments.new
   end
 
   def new

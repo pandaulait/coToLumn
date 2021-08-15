@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'users/:id/confirm' => 'users#confirm', as: 'users_confirm'
     patch 'users/destroy/:id' => 'users#destroy' , as: 'user_destroy'
+    resources :comments ,only: [:create, :destroy]
     resources :users ,only: [:show,:edit,:update]
     resources :texts ,only: [:show, :index] do
       resources :patches ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
@@ -34,9 +35,13 @@ Rails.application.routes.draw do
       delete 'literature/:id' => 'literatures#column_destroy',as: 'literature'
       resources :links ,only: [:create, :destroy]
     end
-    resources :problems ,only: [:new, :create, :show, :index, :edit, :update, :destroy]
+    resources :problems ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+      resources :subjects ,only: [:create, :destroy]
+    end
     get 'columns/:id/link' => 'columns#link', as: 'columns_link'
+    get 'problems/:id/subject' => 'problems#subject', as: 'subject_problem'
     get 'ajax',         to: 'links#ajax'
+    get 'ajax/subjects',         to: 'subjects#ajax'
   end
 
 

@@ -1,0 +1,18 @@
+  <div>
+    <% comments.each do |c| %>
+      <% if c != comment %>
+        <p><%= c.speaker.name %>| <%= c.body %> | <%= c.created_at %>|<% if current_user == c.speaker || current_admin == c.speaker%><%= link_to "削除", comment_path(c), method: :delete, remote:true %><% end %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="mx-4 mb-5">
+    <% if current_user.present? || current_admin.present? %>
+      <%= form_with model: comment, url: comments_path , remmote:true do |f| %>
+        <%= f.label :body , 'コメント欄'%><br />
+        <%= f.text_field :body, autofocus: true %>
+        <%= f.hidden_field :article_id %>
+        <%= f.hidden_field :article_type %>
+        <%= f.submit '投稿' %>
+      <% end %>
+    <% end %>
+  </div>

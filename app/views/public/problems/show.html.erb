@@ -1,6 +1,7 @@
 <h1>Public::Problems#show</h1>
 <p>Find me in app/views/public/problems/show.html.erb</p>
 <div>
+  <p>教科：<%= @problem.subject_status %></p>
   <p>問題文：<%= markdown(@problem.body) %></p>
   <p>回答：<%= markdown(@problem.answer) %></p>
   <p>解説：<%= markdown(@problem.commentary) %></p>

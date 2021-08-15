@@ -1,9 +1,12 @@
 <h1>Public::Problems#index</h1>
 <p>Find me in app/views/public/problems/index.html.erb</p>
 <% @problems.each do |problem| %>
+<div>
   <p>問題文：<%= markdown(problem.body) %></p>
   <p>回答：<%= markdown(problem.answer) %></p>
   <p>解説：<%= markdown(problem.commentary) %></p>
   <p>ユーザーネーム：<%=problem.author.name%></p>
   <%= link_to "編集", edit_problem_path(problem) %></br>
+</div>
+
 <% end %>
