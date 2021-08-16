@@ -44,7 +44,6 @@ class Public::ProblemsController < ApplicationController
     @problem = Problem.find(params[:id])
     @subjects = Subject.find_by(problem_id: @problem.id)
     @subject = Subject.new
-
   end
 
   private

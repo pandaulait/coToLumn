@@ -8,9 +8,9 @@ class Text < ApplicationRecord
   has_many :subjects
   has_many :problems ,through: :subjects
 
-  # has_many :mathmatical_subjects, class_name: "Subject"
   has_many :mathmatical_problems, -> { where "subject_status = 1" }, :through => :subjects, :source => "problem"
   has_many :japanese_problems, -> { where "subject_status = 2" }, :through => :subjects, :source => "problem"
 
   has_many :comments, as: :article, dependent: :destroy
+  has_many :text_patch_orders, as: :content, dependent: :destroy
 end

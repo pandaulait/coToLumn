@@ -1,0 +1,33 @@
+<%= order.order %>
+<% if order.content_type == "Problem" %>
+  <div class="bg-info">
+    <p>教科：<%= order.content.subject_status %></p>
+    <p>問題文：<%= markdown(order.content.body) %></p>
+    <p>回答：<%= markdown(order.content.answer) %></p>
+    <p>解説：<%= markdown(order.content.commentary) %></p>
+    <p>ユーザーネーム：<%=order.content.author.name%></p>
+    <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+  </div>
+<% elsif order.content_type == "Comment" %>
+  <div class="bg-primary">
+     <p><%= order.content.speaker.name %>| <%= order.content.body %> | <%= order.content.created_at %></p>
+     <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+  </div>
+<% elsif order.content_type == "Text" %>
+  <div class="bg-warning">
+    <%= attachment_image_tag order.content, :image, :fill, 60, 60 %>
+    <p>単元名：<%= order.content.title %></p>
+    <p>本文：<%= markdown(order.content.body) %></p>
+    <p>ユーザーネーム：<%= order.content.admin.name %></p>
+    <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+  </div>
+<% elsif order.content_type == "Column" %>
+  <% content = Column.find(order.content_id) %>
+  <div class="bg-secondary">
+    <%= attachment_image_tag order.content, :image, :fill, 60, 60 %>
+    <p>コラムタイトル：<%= order.content.title %></p>
+    <p>本文：<%= markdown(order.content.body) %></p>
+    <p>ユーザーネーム：<%= order.content.user.name %></p>
+    <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+  </div>
+<% end %>
