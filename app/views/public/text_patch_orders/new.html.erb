@@ -1,0 +1,33 @@
+<h1>Public::TextPatchOrders#new</h1>
+<p>Find me in app/views/public/text_patch_orders/new.html.erb</p>
+<div>
+  <%= attachment_image_tag @patch, :image, :fill, 60, 60 %>
+
+  <p>単元名：<%= @patch.title %></p>
+  <p>本文：<%= markdown(@patch.body) %></p>
+  <p>ユーザーネーム：<%= @patch.user.name %></p>
+  <% if @patch.user == current_user %>
+    <%= link_to "編集", edit_text_patch_path(@patch.text, @patch) %>
+    <%= link_to "削除", text_patch_path(@text,@patch), method: :delete %>
+  <% end %>
+</div>
+<div class="m-1 bg-light">
+  <%= render 'public/literatures/text_patch_index', {patch: @patch} %>
+</div>
+<div>
+  <% @orders.each do |order| %>
+    <%= render 'public/text_patch_orders/content_view', {order: order} %>
+  <% end %>
+</div>
+
+
+<div>
+  <span class="quick-drop">
+    <%= form_with model: @order ,url: text_patch_order_ajax1_path(@text,@patch), method: :get, remote: true do |f| %>
+      <%= f.select :content_type, {'テキスト': 'Text', 'コラム': 'Column', '問題': 'Problem', 'コメント': 'Comment'}, { include_blank: '主に関連する教科を選択してください'}, { class: 'form-control' , required: true } %>
+      <%= f.submit '決定'%>
+    <% end %>
+  </span>
+</div>
+<div class="content-select">
+</div>

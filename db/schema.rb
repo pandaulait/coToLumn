@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_13_151447) do
+ActiveRecord::Schema.define(version: 2021_08_15_144021) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -100,6 +100,17 @@ ActiveRecord::Schema.define(version: 2021_08_13_151447) do
     t.datetime "updated_at", null: false
     t.index ["problem_id"], name: "index_subjects_on_problem_id"
     t.index ["text_id"], name: "index_subjects_on_text_id"
+  end
+
+  create_table "text_patch_orders", force: :cascade do |t|
+    t.integer "patch_id"
+    t.string "content_type"
+    t.integer "content_id"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_type", "content_id"], name: "index_text_patch_orders_on_content_type_and_content_id"
+    t.index ["patch_id"], name: "index_text_patch_orders_on_patch_id"
   end
 
   create_table "texts", force: :cascade do |t|

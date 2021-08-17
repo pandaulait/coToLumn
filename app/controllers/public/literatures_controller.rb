@@ -2,6 +2,13 @@ class Public::LiteraturesController < ApplicationController
 
   def index
   end
+
+  def text_patch_index
+    @patch = Patch.find(params[:patch_id])
+    @text = Text.find(params[:text_id])
+    @literature = Literature.new
+  end
+
   def text_patch_create
     @patch = Patch.find(params[:patch_id])
     @text = Text.find(params[:text_id])

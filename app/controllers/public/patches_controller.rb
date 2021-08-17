@@ -25,7 +25,7 @@ class Public::PatchesController < ApplicationController
     @patch.user_id = current_user.id
     @patch.text_id = params[:text_id]
     if @patch.save
-      redirect_to text_patch_path(params[:text_id],@patch)
+      redirect_to text_patch_literatures_path(params[:text_id],@patch)
     else
       flash[:alert] = "記事の保存に失敗しました。"
       render :new

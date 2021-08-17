@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text_patch_id: 1
+  article: one
+  order: 1
+
+two:
+  text_patch_id: 1
+  article: two
+  order: 1
