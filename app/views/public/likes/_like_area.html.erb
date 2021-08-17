@@ -1,0 +1,68 @@
+<!--専門的いいねボタン-->
+ <% if content.professional_liked_by?(current_user) %>
+  <div style ="width:150px; margin:0;">
+    <%= link_to like_path(content.likes.where(user_id: current_user.id, category: 1).first), method: :delete, remote: true do %>
+     <span class= "btn btn-success m-1">♥<%= content.professional_likes.count %> 専門的！</span>
+    <% end %>
+  </div>
+<% else %>
+  <div style ="width:150px; margin:0;">
+    <%= form_with  url: likes_path , remote:true do |f| %>
+      <%= f.hidden_field :liked_content_id ,value: content.id%>
+      <%= f.hidden_field :liked_content_type ,value: content.class%>
+      <%= f.hidden_field :category ,value: 1%>
+      <%= f.submit '♥'+content.professional_likes.count.to_s + ' 専門的！', class: "btn btn-success m-1"%>
+    <% end %>
+  </div>
+<% end %>
+<!--科学的いいねボタン-->
+ <% if content.scientifically_liked_by?(current_user) %>
+  <div style ="width:150px; margin:0;">
+    <%= link_to like_path(content.likes.where(user_id: current_user.id, category: 2).first), method: :delete, remote: true do %>
+     <span class= "btn btn-success m-1">♥<%= content.scientifically_likes.count %> 科学的！</span>
+    <% end %>
+  </div>
+<% else %>
+  <div style ="width:150px; margin:0;">
+    <%= form_with  url: likes_path , remote:true do |f| %>
+      <%= f.hidden_field :liked_content_id ,value: content.id%>
+      <%= f.hidden_field :liked_content_type ,value: content.class%>
+      <%= f.hidden_field :category ,value: 2%>
+      <%= f.submit '♥'+content.scientifically_likes.count.to_s + ' 科学的！', class: "btn btn-success m-1 "%>
+    <% end %>
+  </div>
+<% end %>
+<!--論理的いいねボタン-->
+ <% if content.logical_liked_by?(current_user) %>
+  <div style ="width:150px; margin:0;">
+    <%= link_to like_path(content.likes.where(user_id: current_user.id, category: 3).first), method: :delete, remote: true do %>
+     <span class= "btn btn-success m-1">♥<%= content.logical_likes.count %>  論理的！</span>
+    <% end %>
+  </div>
+<% else %>
+  <div style ="width:150px; margin:0;">
+    <%= form_with  url: likes_path , remote:true do |f| %>
+      <%= f.hidden_field :liked_content_id ,value: content.id%>
+      <%= f.hidden_field :liked_content_type ,value: content.class%>
+      <%= f.hidden_field :category ,value: 3%>
+      <%= f.submit '♥'+content.logical_likes.count.to_s + ' 論理的！', class: "btn btn-success m-1 "%>
+    <% end %>
+  </div>
+<% end %>
+<!--嫌いボタン-->
+<% if content.disliked_by?(current_user) %>
+  <div style ="width:150px; margin:0;">
+    <%= link_to like_path(content.likes.where(user_id: current_user.id, category: 4).first), method: :delete, remote: true do %>
+     <span class= "btn btn-danger m-1">♥<%= content.dislikes.count %> 要再考！</span>
+    <% end %>
+  </div>
+<% else %>
+  <div style ="width:150px; margin:0;">
+    <%= form_with  url: likes_path , remote:true do |f| %>
+      <%= f.hidden_field :liked_content_id ,value: content.id%>
+      <%= f.hidden_field :liked_content_type ,value: content.class%>
+      <%= f.hidden_field :category ,value: 4 %>
+      <%= f.submit '♥'+content.dislikes.count.to_s + ' 要再考！', class: "btn btn-danger m-1 "%>
+    <% end %>
+  </div>
+<% end %>
