@@ -1,0 +1,16 @@
+<h1>Public::Topics#index</h1>
+<p>Find me in app/views/public/topics/index.html.erb</p>
+<% if current_user.present? %>
+  <%= form_with model: @topic , local:true do |f| %>
+    <%= f.label :title ,'トピック名'%><br />
+    <%= f.text_field :title %>
+    <%= f.submit '投稿' %>
+  <% end %>
+<% end %>
+
+
+<% @topics.each do |topic| %>
+  <%= link_to  topic_path(topic) do %>
+    <p><%= topic.title %><%= topic.user_id%><%= topic.created_at%></p>
+  <% end %>
+<% end %>

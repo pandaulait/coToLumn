@@ -22,6 +22,12 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'users/:id/confirm' => 'users#confirm', as: 'users_confirm'
     patch 'users/destroy/:id' => 'users#destroy' , as: 'user_destroy'
+    resources :topics ,only: [:create, :show, :index, :destroy] do
+      resources :posts ,only: [:create] do
+        get 'ajax',         to: 'posts#ajax'
+      end
+
+    end
     resources :likes ,only: [:create, :destroy]
     resources :comments ,only: [:create, :destroy]
     resources :users ,only: [:show,:edit,:update]

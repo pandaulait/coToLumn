@@ -1,0 +1,1 @@
+$('.reply-form').html('<%= escape_javascript(render partial: 'public/posts/reply_area', locals: {new_post: @new_post, c: @post, topic: @topic}) %>')
