@@ -48,6 +48,9 @@
                 <li class="nav-item">
                   <%= link_to "マイページ", user_path(current_user) ,class: "nav-link active"%>
                 </li>
+                <li class="nav-item">
+                  <%= link_to 'ブックマーク一覧', user_bookmarks_path(current_user),class: "nav-link active bg-white"%>
+                </li>
               <% else %>
                 <li class="nav-item">
                   <%= link_to "新規登録", new_user_registration_path,class: "nav-link active"%>
@@ -58,7 +61,6 @@
                 <li class="nav-item">
                   <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post ,class: "nav-link active"%>
                 </li>
-
               <% end %>
               <% if admin_signed_in? %>
                 <li class="nav-item bg-secondary">
