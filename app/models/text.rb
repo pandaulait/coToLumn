@@ -14,4 +14,5 @@ class Text < ApplicationRecord
   has_many :comments, as: :article, dependent: :destroy
   has_many :text_patch_orders, as: :content, dependent: :destroy
   has_many :likes, as: :liked_content, dependent: :destroy
+  has_many :bookmarks, as: :marked_content, dependent: :destroy
 end

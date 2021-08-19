@@ -1,9 +1,20 @@
   <% if current_user.present?  %>
     <%= form_with model: new_post, url: topic_posts_path(topic) , local:true do |f| %>
-      <%= f.label :body , c.number.to_s + 'へ返信'%><br/>
-      <%= f.text_area :body %>
+      <br/>
+      <%= f.text_field :body ,class:"form-control"%>
       <%= f.hidden_field :topic_id , value: topic.id %>
-      <%= f.hidden_field :parent_id , value: c.id %><br/>
+      <%= f.hidden_field :parent_id , value: c.id %>
+      <%= f.label :body , c.number.to_s + 'へ'%><%= f.submit '返信' %>
+    <% end %>
+  <% end %>
+<div  style ="display: none;">
+  <% if current_user.present?  %>
+    <%= form_with model: new_post, url: topic_posts_path(topic) , local:true do |f| %>
+      <%= f.label :body , c.number.to_s + 'へ返信'%>
+      <%= f.text_field :body %>
+      <%= f.hidden_field :topic_id , value: topic.id %>
+      <%= f.hidden_field :parent_id , value: c.id %>
       <%= f.submit '投稿' %>
     <% end %>
   <% end %>
+</div>

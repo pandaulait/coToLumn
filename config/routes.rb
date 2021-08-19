@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 
 
+
+
   root to: 'homes#top'
   devise_scope :user do
     post '/users/guest_sign_in',to: 'public/devise/sessions#guest_sign_in'
@@ -25,12 +27,16 @@ Rails.application.routes.draw do
     resources :topics ,only: [:create, :show, :index, :destroy] do
       resources :posts ,only: [:create] do
         get 'ajax',         to: 'posts#ajax'
+        get 'ajax2',         to: 'posts#ajax2'
       end
 
     end
     resources :likes ,only: [:create, :destroy]
     resources :comments ,only: [:create, :destroy]
-    resources :users ,only: [:show,:edit,:update]
+    resources :bookmarks ,only: [:create, :destroy]
+    resources :users ,only: [:show,:edit,:update] do
+      resources :bookmarks ,only: [:index]
+    end
     resources :texts ,only: [:show, :index] do
       resources :patches ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
         get 'literatures' => 'literatures#text_patch_index'

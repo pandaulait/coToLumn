@@ -22,6 +22,13 @@ class Public::PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
   end
 
+  def ajax2
+    @new_post = Post.new
+    @post = Post.find(params[:post_id])
+    @topic = Topic.find(params[:topic_id])
+
+  end
+
   private
   def post_paramas
     params.require(:post).permit(:body ,:user_id, :parent_id, :topic_id)

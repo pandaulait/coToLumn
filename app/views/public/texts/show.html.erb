@@ -11,6 +11,7 @@
     <%= link_to "削除", admin_text_path(@text), method: :delete %>
   <% end %>
   <%= link_to "新規パッチテキストを作成", new_text_patch_path(@text) %>
+  <%= link_to "テキストパッチ一覧", text_patches_path(@text) %>
 </div>
 <!--テキストにlinkしたコラムの表示-->
 <div>
