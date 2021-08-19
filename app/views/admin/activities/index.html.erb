@@ -1,0 +1,9 @@
+<h1>Admin::Activities#index</h1>
+<p>Find me in app/views/admin/activities/index.html.erb</p>
+<% if @activities.present? %>
+  <% @activities.each do |activity| %>
+    <%= render "#{activity.action_type}" ,{activity: activity} %>
+  <% end %>
+<% else %>
+  <p>お知らせはありません。</p>
+<% end %>

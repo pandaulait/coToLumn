@@ -6,4 +6,5 @@ class Admin < ApplicationRecord
   has_many :texts, dependent: :destroy
   has_many :problems, as: :author, dependent: :destroy
   has_many :comments, as: :speaker, dependent: :destroy
+  has_many :activities, as: :receiver, dependent: :destroy
 end

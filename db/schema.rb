@@ -15,13 +15,14 @@ ActiveRecord::Schema.define(version: 2021_08_19_134108) do
   create_table "activities", force: :cascade do |t|
     t.string "target_type"
     t.integer "target_id"
-    t.integer "user_id"
+    t.string "receiver_type"
+    t.integer "receiver_id"
     t.integer "action_type", null: false
     t.boolean "read", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["receiver_type", "receiver_id"], name: "index_activities_on_receiver_type_and_receiver_id"
     t.index ["target_type", "target_id"], name: "index_activities_on_target_type_and_target_id"
-    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "admins", force: :cascade do |t|

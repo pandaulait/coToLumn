@@ -2,7 +2,12 @@
 <p>Find me in app/views/public/texts/show.html.erb</p>
 <!--テキストの表示-->
 <div class ="box5 my-5">
-  <h2 class="main"><%= @text.title %></h2></br>
+  <h2 class="main"><%= @text.title %></h2>
+  <% if current_user.present? %>
+    <span class="bookmark_area">
+      <%= render "public/bookmarks/bookmark_area" ,{content: @text} %>
+    </span></br>
+  <% end %>
   <%= attachment_image_tag @text, :image, :fill, 60, 60 %>
   <p>本文：<%= markdown(@text.body) %></p>
   <p>ユーザーネーム：<%= @text.admin.name %></p>
@@ -10,6 +15,9 @@
     <%= link_to "編集", edit_admin_text_path(@text) %>
     <%= link_to "削除", admin_text_path(@text), method: :delete %>
   <% end %>
+  <div class="d-felx like_area" style ="display:flex;">
+    <%= render "public/likes/like_area" ,{content: @text} %>
+  </div>
   <%= link_to "新規パッチテキストを作成", new_text_patch_path(@text) %>
   <%= link_to "テキストパッチ一覧", text_patches_path(@text) %>
 </div>

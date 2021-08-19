@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
 
 
+
+
   root to: 'homes#top'
   devise_scope :user do
     post '/users/guest_sign_in',to: 'public/devise/sessions#guest_sign_in'
@@ -67,6 +69,8 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
+    resources :activities ,only: [:index]
+
     resources :texts ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       post 'literatures' => 'literatures#text_create'
       delete 'literature/:id' => 'literatures#text_destroy',as: 'literature'

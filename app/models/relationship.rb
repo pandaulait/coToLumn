@@ -9,6 +9,6 @@ class Relationship < ApplicationRecord
   private
 
   def create_activities
-    Activity.create(target: self, user: self.followed, action_type: :followed_me)
+    Activity.create(target: self, receiver: self.followed, action_type: :followed_me)
   end
 end

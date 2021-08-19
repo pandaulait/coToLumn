@@ -14,6 +14,12 @@ module ApplicationHelper
       text_patch_path(activity.target.liked_content.text, activity.target.liked_content)
     when :bookmarked_to_own_patch
       text_patch_path(activity.target.marked_content.text, activity.target.marked_content)
+    when :commented_to_own_text
+      text_path(activity.target.article, anchor: "js-comment-#{activity.target.id}")
+    when :liked_to_own_text
+      text_path(activity.target.liked_content)
+    when :bookmarked_to_own_text
+      text_path(activity.target.marked_content)
     when :followed_me
       user_path(activity.target.follower)
     end
