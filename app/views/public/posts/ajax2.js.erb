@@ -1,0 +1,3 @@
+$('.reply-post-<%=@post.id%>').html('<%= escape_javascript(render partial: 'public/posts/post2', locals: {posts: @post.children, topic: @topic, new_post: @new_post}) %>')
+$('.reply-post-<%=@post.id%>').slideDown();
+

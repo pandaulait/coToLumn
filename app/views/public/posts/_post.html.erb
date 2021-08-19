@@ -1,4 +1,5 @@
 <% posts.each do |c|%>
+  <!--掲示板コメント表示-->
   <p id ="reply-<%=c.id%>">
     <% if c.parent_id.present? %>
       <a href ="#reply-<%=c.parent_id%>" style ="color: green;">>><%= c.parent.number%></a>
@@ -11,18 +12,20 @@
     <% end %>
    <br /><%= c.body %>
   </p>
+  <!--返信画面表示用div-->
   <div class ="btn-reply-<%= c.id%>" style ="display: none;"></div>
+  <!--掲示板の機能一覧-->
   <%= link_to  topic_post_ajax_path(topic,c) ,remote:true do %>
-    <i class="fas fa-reply"></i> 
+    <i class="fas fa-reply"></i>
   <% end %>
   <% if c.children.present? %>
     <%= link_to 'スレッドの表示', topic_post_ajax2_path(topic,c) ,remote:true%>
-  <%end %>
+  <% end %>
   <hr class="cp_hr08" />
+  <!--子要素の表示画面-->
   <% if c.children.present? %>
     <div class="ml-3 reply-post-<%=c.id%>" style ="display: none;"></div>
-  <%end %>
-
+  <% end %>
 <% end %>
 
 <script>

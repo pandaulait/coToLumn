@@ -26,5 +26,10 @@ class Column < ApplicationRecord
   def disliked_by?(user)
     likes.where(user_id: user.id, category: 4).exists?
   end
-
+  # ブックマーク機能
+  has_many :bookmarks, as: :marked_content, dependent: :destroy
+  
+  def bookmarked_by?(user)
+    bookmarks.where(user_id: user.id).exists?
+  end
 end

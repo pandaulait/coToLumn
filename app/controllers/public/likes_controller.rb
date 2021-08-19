@@ -8,11 +8,11 @@ class Public::LikesController < ApplicationController
       flash[:alert] = "記事の保存に失敗しました。"
     end
     if like.liked_content_type == "Text" # text
-      @liked_content = Text.find(comment.article_id.to_i)
+      @liked_content = Text.find(like.liked_content_id)
     elsif like.liked_content_type == "Column" # column
       @liked_content = Column.find(like.liked_content_id)
     elsif like.liked_content_type == "Patch" # patch
-      @liked_content = Patch.find(comment.article_id.to_i)
+      @liked_content = Patch.find(like.liked_content_id)
     end
 
   end
