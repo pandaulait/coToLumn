@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
 
 
+
   root to: 'homes#top'
   devise_scope :user do
     post '/users/guest_sign_in',to: 'public/devise/sessions#guest_sign_in'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
     resources :bookmarks ,only: [:create, :destroy]
     resources :users ,only: [:show,:edit,:update] do
       resources :bookmarks ,only: [:index]
+      resources :activities ,only: [:index]
       resource :relationships ,only: [:create, :destroy]
     end
     resources :texts ,only: [:show, :index] do

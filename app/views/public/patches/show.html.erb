@@ -4,7 +4,14 @@
   <div>
     <%= attachment_image_tag @patch, :image, :fill, 60, 60 %>
 
-    <p>単元名：<%= @patch.title %></p>
+    <p>
+      単元名：<%= @patch.title %>
+      <% if current_user.present? %>
+        <span class="bookmark_area">
+          <%= render "public/bookmarks/bookmark_area" ,{content: @patch} %>
+        </span>
+      <% end %>
+    </p>
     <p>本文：<%= markdown(@patch.body) %></p>
     <p>ユーザーネーム：<%= @patch.user.name %></p>
     <% if @patch.user == current_user %>
@@ -17,6 +24,9 @@
     <% @orders.each do |order| %>
       <%= render 'public/text_patch_orders/content_view', {order: order} %>
     <% end %>
+  </div>
+  <div class="d-felx like_area" style ="display:flex;">
+    <%= render "public/likes/like_area" ,{content: @patch} %>
   </div>
 </div>
 <div class = "comment_area">
