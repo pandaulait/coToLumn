@@ -42,8 +42,11 @@ class Public::LiteraturesController < ApplicationController
     else
       flash[:alert] = "記事の保存に失敗しました。"
     end
-    @literature = @column.literatures.new
+    @literature = Literature.new
   end
+  
+ 
+  
 
   def column_destroy
     @column = Column.find(params[:column_id])

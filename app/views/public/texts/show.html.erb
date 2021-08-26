@@ -1,50 +1,142 @@
-<h1>Public::Texts#show</h1>
-<p>Find me in app/views/public/texts/show.html.erb</p>
-<!--テキストの表示-->
-<div class ="box5 my-5">
-  <h2 class="main"><%= @text.title %></h2></br>
-  <%= attachment_image_tag @text, :image, :fill, 60, 60 %>
-  <p>本文：<%= markdown(@text.body) %></p>
-  <p>ユーザーネーム：<%= @text.admin.name %></p>
-  <% if @text.admin == current_admin %>
-    <%= link_to "編集", edit_admin_text_path(@text) %>
-    <%= link_to "削除", admin_text_path(@text), method: :delete %>
-  <% end %>
-  <%= link_to "新規パッチテキストを作成", new_text_patch_path(@text) %>
-</div>
-<!--テキストにlinkしたコラムの表示-->
-<div>
-  <% @links.each do |link| %>
-    <div class="box4 my-5">
-      <h2><span></span><%= link.column.title %></h2>
-      <%= attachment_image_tag link.column, :image, :fill, 60, 60 %><%= link.column.id %>
-      <p><%if link.column.image_id == nil%>
-            nil
-        <%end%></p>
-      <p>本文：<%= markdown(link.column.body) %></p>
-      <p>ユーザーネーム：<%= link.column.user.name %></p>
-      <%= link_to "詳細", column_path(link.column) %>
-      <% if link.column.user == current_user %>
-        <%= link_to "削除", column_path(link.column), method: :delete %>
+<div class="row" style="display: flex;">
+  <div class ="col-lg-9">
+    <div class="patch-icon-area">
+      <div>
+        <%= link_to  new_text_patch_path(@text) do %>
+          <%= image_tag "plus.png" , class: "plus-btn"%>
+        <% end %>
+        <% @text.patches.each do |patch| %>
+          <%= link_to  text_patch_path(@text, patch) do %>
+            <%= attachment_image_tag patch, :image, fallback: "logo2.png", class: "patch-icon-image" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <!--テキストの表示-->
+    <h1 class="text-main">
+      <% if @text.chapters.first.present? %>
+        <span class="chapter"><%= @text.chapters.first.body %></span>
+        <span class="chapter-bar">-</span>
+        <span class="section"><%= @text.chapters.first.section %></span>
+      <% end %>
+      <%= @text.title %>
+      <% if current_user.present? %>
+        <span class="bookmark_area">
+          <%= render "public/bookmarks/bookmark_area" ,{content: @text} %>
+        </span></br>
+      <% end %>
+    </h1>
+
+    <div class="text-view">
+      <%= attachment_image_tag @text, :image, class: "content-thumbnail" %>
+      <%= markdown(@text.body) %>
+      <p>ユーザーネーム：<%= @text.admin.name %></p>
+      <% if @text.admin == current_admin %>
+        <%= link_to "編集", edit_admin_text_path(@text) ,data: {"turbolinks"=>false}%>
+        <%= link_to "削除", admin_text_path(@text), method: :delete %>
+      <% end %>
+      <div style="width: 100%; display: flex;">
+        <div>
+
+        </div>
+        <div class="like_area">
+          <%= render "public/likes/like_area" ,{content: @text} %>
+        </div>
+
+      </div>
+
+
+    </div>
+    <!--テキストにlinkしたコラムの表示-->
+    <div class="column-back">
+      <% @links.each do |link| %>
+        <div class="column-main" id="index-column-<%=link.column.id%>">
+          <div class="column-title"><%= link.column.title %></div>
+          <div class="column-view">
+            <%= attachment_image_tag link.column, :image, class: "content-thumbnail" %>
+            <%= markdown(link.column.body) %>
+            <p>ユーザーネーム：<%= link.column.user.name %></p>
+            <%= link_to "詳細", column_path(link.column) %>
+            <% if link.column.user == current_user %>
+              <%= link_to "削除", column_path(link.column), method: :delete %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
-  <% end %>
-</div>
-
-<!--問題一覧-->
-<% @problems.each do |problem| %>
-<div class="box3 my-5">
-  <p>教科：<%= problem.subject_status %></p>
-  <p><%= markdown(problem.body) %></p>
-  <p><%= markdown(problem.answer) %></p>
-  <p><%= markdown(problem.commentary) %></p>
-  <p>ユーザーネーム：<%=problem.author.name%></p>
-  <%= link_to "編集", edit_problem_path(problem) %></br>
-</div>
-<% end %>
-
+    <!--問題一覧-->
+    <div class="problem-back">
+      <% @problems.each do |problem| %>
+        <div class="problem-main" id ="index-problem-<%=problem.id%>">
+          <p>教科：<%= problem.subject_status %></p>
+          <div class="problem-view">
+            <%= markdown(problem.body) %>
+          </div>
+          <div class="answer-btn">　模範解答▼
+            <div  style="display: none;" class="problem-view commentary-main">
+              <%= markdown(problem.answer) %>
+            </div>
+          </div>
+          <% unless problem.commentary.blank?  %>
+            <div class="commentary-btn">　解説▼
+              <div  style="display: none;" class="problem-view commentary-main">
+                <%= markdown(problem.commentary) %>
+              </div>
+            </div>
+          <% end %>
+          <p>ユーザーネーム：<%=problem.author.name%></p>
+          <% if problem.author == current_user %>
+            <%= link_to "編集", edit_problem_path(problem) %></br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class ="my-4 col-lg-3" >
+    <div class="sidebar-index">
+      <h4>目次</h4>
+      <h5>パッチテキスト一覧</h5>
+      <% @text.patches.each do |patch| %>
+        <div class="sidebar-problem">
+          <%= link_to  text_patch_path(@text, patch)  do %>
+            <%= patch.title %>
+            <div class="author">
+              <%= attachment_image_tag patch.user.profile_image, :image, fallback: "logo2.png", class: "icon-image" %>
+              <%= patch.user.name %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <h5>コラム一覧</h5>
+      <% @text.links.each do |link| %>
+        <div class="sidebar-problem">
+          <a href ="#index-column-<%=link.column.id%>" ><%= link.column.title %></a>
+        </div>
+      <% end %>
+      <h5>問題一覧</h5>
+      <% @text.problems.each do |problem| %>
+        <div class="sidebar-problem">
+          <a href ="#index-problem-<%=problem.id%>" >
+            <%=markdown(problem.body.truncate(20, separator: '.'))%>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <!--コメント欄-->
-<div class = "comment_area">
-  <%= render "public/comments/comment_area" ,{comment: @comment, comments: @comments} %>
+  <div class = "comment_area">
+    <%= render "public/comments/comment_area" ,{comment: @comment, comments: @comments} %>
+  </div>
 </div>
 
+
+<script>
+  $('table').wrap('<div class="table-scroll">');
+  $('.problem-view').children('h3').wrap('<div class="h3-div">');
+  $('.commentary-btn').on('click',function(){
+    $(this).children().slideToggle();
+  });
+  $('.answer-btn').on('click',function(){
+   　$(this).children().slideToggle();
+  });
+</script>

@@ -4,9 +4,10 @@
     <title>coToLumn</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/199c184033.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -19,30 +20,23 @@
     </script>
     <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
-          <%= image_tag "logo2.png" ,class: "logo mx-2"%>
-          <!--<div class="logo"></div>-->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item bg-white">
-                  <%= link_to '記事一覧', texts_path,class: "nav-link active" %>
-                </li>
-              <% if user_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to '新規問題投稿', new_problem_path,class: "nav-link active bg-white" ,data: {"turbolinks"=>false}%>
-                </li>
-                <li class="nav-item">
-                  <%= link_to 'コラム投稿', new_column_path,class: "nav-link active bg-white" ,data: {"turbolinks"=>false}%>
+<!--ヘッダ-->
+    <nav class="navbar navbar-expand-md navbar-light ">
+      <div class="container-fluid">
+        <%= link_to root_path do %>
+           <%= image_tag "logo2.png" ,class: "logo mx-2"%>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="Navbar">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+             <% if user_signed_in? %>
+                 <li class="nav-item">
+                  <%= link_to '記事一覧', texts_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete  ,class: "nav-link active"%>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "マイページ", user_path(current_user) ,class: "nav-link active"%>
+                  <%= link_to 'トピック一覧', topics_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
                 </li>
               <% else %>
                 <li class="nav-item">
@@ -54,11 +48,10 @@
                 <li class="nav-item">
                   <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post ,class: "nav-link active"%>
                 </li>
-
               <% end %>
               <% if admin_signed_in? %>
                 <li class="nav-item bg-secondary">
-                  <%= link_to '投稿フォーム', new_admin_text_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
+                  <%= link_to 'テキスト', new_admin_text_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
                 </li>
                 <li class="nav-item bg-secondary">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete  ,class: "nav-link active"%>
@@ -71,22 +64,61 @@
                   <%= link_to "ログイン", new_admin_session_path ,class: "nav-link active"%>
                 </li>
               <% end %>
-
-          </div>
+            <% if user_signed_in? %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= attachment_image_tag current_user.profile_image, :image, fallback: "logo2.png", class: "profile-icon" %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <%= link_to "マイページ", user_path(current_user) ,class: "dropdown-item"%>
+                  <%= link_to "通知欄", activities_path ,class: "dropdown-item"%>
+                  <%= link_to 'ブックマーク', bookmarks_path,class: "dropdown-item"%>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete  ,class: "dropdown-item"%>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+         <form class="d-flex ml-auto mr-0">
+            <input class="form-control me-2" type="search" placeholder="検索..." aria-label="検索...">
+            <button class="btn btn-outline-success flex-shrink-0" type="submit">検索</button>
+          </form>
         </div>
+      </div>
+    </nav>
+<!--ヘッダー-->
+
+    <div class="nav-scroller py-1 mb-2 mx-auto" style="width: 90vw; overflow-x: auto;     white-space: nowrap;">
+      <nav class="blog-nav d-flex justify-content-between">
+        <%= link_to '問題一覧', problems_path, class: "text-muted p-2" %>
+        <% if user_signed_in? %>
+          <%= link_to '新規問題投稿', new_problem_path,class: "text-muted p-2" ,data: {"turbolinks"=>false}%>
+        <% end %>
+        <%= link_to 'コラム一覧', columns_path,class: "text-muted p-2" %>
+        <% if user_signed_in? %>
+          <%= link_to 'コラム投稿', new_column_path,class: "text-muted p-2" ,data: {"turbolinks"=>false}%>
+        <% end %>
+        <a class="text-muted p-2" style="display: box;" href="#">算数</a>
+        <a class="text-muted p-2" style="display: box;" href="#">理科</a>
+        <a class="text-muted p-2" style="display: box;" href="#">国語</a>
+        <a class="text-muted p-2" style="display: box;" href="#">社会</a>
+        <a class="text-muted p-2" style="display: box;" href="#">英語</a>
+        <a class="text-muted p-2" style="display: box;" href="#">体育</a>
+        <a class="text-muted p-2" style="display: box;" href="#">音楽</a>
+        <a class="text-muted p-2" style="display: box;" href="#">家庭科</a>
+        <a class="text-muted p-2" style="display: box;" href="#">技術</a>
+        <a class="text-muted p-2" style="display: box;" href="#">図工</a>
+        <a class="text-muted p-2" style="display: box;" href="#">図書</a>
+        <a class="text-muted p-2" style="display: box;" href="#">総合</a>
       </nav>
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key} alert-view") %>
-      <% end %>
+    </div>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key} alert-view") %>
+    <% end %>
     </header>
     <main>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-1">aaa</div>
-          <div class="col-lg-8"><%= yield %></div>
-          <div class="col-lg-3">aaa</div>
-        </div>
 
+      <div class="container bg-note">
+        <%= yield %>
       </div>
     </main>
   </body>

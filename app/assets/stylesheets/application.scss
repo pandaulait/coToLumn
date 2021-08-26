@@ -17,21 +17,58 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
-div{
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+.bg-note{
   // background-image: url("dot-grid.png");
-  background-image: url("linedpaper.png");
+
 }
 
 body{
-  background-color: #F0F4F4;
+  background-image: url("dot-grid.png");
+  // background-image: url("linedpaper.png");
 }
+
+header{
+  & .profile-icon{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border: solid 3px $cGreen;
+    border-radius: 50%;
+    transition: all 0.3s;
+    &:hover{
+      box-shadow: 0 0px 10px 5px  rgba(200, 200, 250, 0.5);
+    }
+  }
+}
+
+
+
 .logo{
   height: 45px;
 }
-
+.cp_hr08 {
+	border-top: 1px dashed #8c8b8b;
+	border-bottom: 1px dashed #ffffff;
+}
+.post-area{
+  border: 1px solid black;
+  padding: 10px;
+  max-width: 540px;
+  min-width: 300px;
+  min-height: 150px;
+  position: fixed;
+  z-index: 1;
+  bottom: 10px;
+  right: 15%;
+  background: $white;
+}
 
 $cWhite : white;
-$cGreen: #46A2A0;
+
 $cPurple: #a03c8b;
 .box1{
   width: 100%;
@@ -120,6 +157,1417 @@ $cPurple: #a03c8b;
       content: '';
       border-top: 10px solid $cGreen;
       border-left: 10px solid transparent;
+    }
+  }
+}
+
+
+.content-thumbnail{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  &::after{
+    border: dashed 2px red;
+    content: 'zzzz';
+    right: 3%;
+    top: 2%;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+.text-main{
+  margin-left: 0px;
+  margin-top: 80px;
+  padding: 12px 30px;
+  padding-left: 1rem;
+  color: #fff;
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, left top, right top, from($cGreen), to(#298dc7));
+  background-image: -webkit-linear-gradient(left, $cGreen 0%, #1c886d 100%);
+  background-image: linear-gradient(to right, $cGreen, #37a4d6 100%);
+  font-size: 2rem;
+  position:  relative;
+  &>.bookmark_area{
+    font-size: 1rem;
+    color: white;
+    position: absolute;
+    right: 1rem;
+    & a{
+      text-decoration: none;
+      line-height: 2rem;
+      color: white;
+      &:hover{
+        color: skyblue;
+      }
+    }
+  }
+  &>.section{
+    position:  absolute;
+    font-size: 3rem;
+    left:  150px;
+    top: -60px;
+    z-index:  -1;
+  	font-style: italic;
+    &::before{
+      content:  '';               /* 空白の要素を作る */
+      background-color: $cLightGreen;  /* 背景色指定 */
+      height: 70px;               /* 高さ指定 */
+      width: 70px;                /* 幅指定 */
+      border-radius:  50%;
+      position:  absolute;        /* 位置調整 */
+      left: -20px;
+      top: -5px;                     /* 位置調整 */
+      z-index:  -1;
+    }
+  }
+  &>.chapter-bar{
+  	position: absolute;
+  	top: -155px;
+  	left: 80px;
+  	transform: translateX(-50%);
+  	color: $cGreen;
+  	font-size: 180px;
+  	font-style: italic;
+  	opacity: 0.2;
+    z-index:  -1;
+  }
+  &>.chapter{
+  	position: absolute;
+  	top: -130px;
+  	left: -1rem;
+  	transform: translateX(-50%);
+  	color: $cGreen;
+  	font-size: 180px;
+  	font-style: italic;
+  	opacity: 0.2;
+    z-index:  -1;
+  }
+}
+
+.text-view{
+  background-color: white;
+  box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.05);
+  padding: 0.5rem;
+  & hr{
+    border-top: 1px dashed $cDarkGreen;
+	  border-bottom: 1px dashed #ffffff;
+  }
+  & strong{
+    color: $cDarkGreen;
+  }
+  & p{
+    margin-left: 1rem;
+  }
+  & h1{
+    padding: 10px 20px;
+    border-left: 4px solid $cGreen;
+    border-bottom: 1px solid $cGreen;
+    box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    font-size: 1.6rem;
+  }
+  & h2{
+    position: relative;
+    padding: 0 .5em .2em 1.5em;
+    border-bottom: 3px solid $cGreen;
+    font-size: 1.5rem;
+    // box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    &::before{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .1em;
+      left: .1em;
+      z-index: 2;
+      width: 18px;
+      height: 18px;
+      background: $cGreen;
+    }
+    &::after{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .6em;
+      left: .6em;
+      width: 13px;
+      height: 13px;
+      background: $cLightGreen;
+    }
+  }
+  & h3{
+    padding: 0.5rem 1rem;
+    border-left: 4px solid $cGreen;
+    font-size: 1.2rem;
+  }
+  & h4{
+    color: $cDarkGreen;
+    font-size: 1.2rem;
+  }
+  & h5{
+    position: relative;
+    padding: 0.7rem 1rem;
+    border: 2px solid $cGreen;
+    color: #0d1316;
+    border-radius: 10px 10px 10px 10px;
+    background: #ffffff;
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+  & h6{
+    font-size: 1rem;
+    font-weight: normal;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: $cLightGreen;
+    box-shadow: 0 0px 1px 1px  white;
+    box-shadow: inset 0 0px 0px 1px  white;
+  }
+  & >ul{
+    border: solid 2px $cGreen;
+    border-radius: 5px;
+    padding: 0.5em 1em 0.5em 2.3em;
+    position: relative;
+    &>li{
+      line-height: 1.5;
+      padding: 0.5em 0;
+      list-style-type: none!important;
+      &::before{
+        font-family: "Font Awesome 5 Free";
+        content: "○";/*アイコンの種類*/
+        position: absolute;
+        left : 1em;/*左端からのアイコンまでの距離*/
+        color: $cGreen;/*アイコン色*/
+      }
+    }
+    &>ul>li{
+    line-height: 1.5;
+    padding: 0.5em 0;
+    list-style-type: none!important;
+    &::before{
+      font-family: "Font Awesome 5 Free";
+      content: "●";/*アイコンの種類*/
+      position: absolute;
+      left : 3.5em;/*左端からのアイコンまでの距離*/
+      color: $cGreen;/*アイコン色*/
+      }
+    }
+  }
+  &>div{
+    overflow-x: auto;
+    &>table {
+      border-collapse: collapse;
+      border: solid 1px $cGreen;/*表全体を線で囲う*/
+      border-right: solid 2px $cGreen;/*表全体を線で囲う*/
+      border-left: solid 2px $cGreen;/*表全体を線で囲う*/
+      margin-left: 0.5rem;
+      &>thead{
+        &>tr{
+          border-bottom: solid 1px $cGreen;/*表全体を線で囲う*/
+          &>th{
+            font-weight: normal;
+            padding: 0.5rem 1rem;
+            border-right: solid 1px $cGreen;/*表全体を線で囲う*/
+          }
+        }
+      }
+      &>tbody{
+        &>tr{
+          border-bottom: solid 1px $cGreen;/*表全体を線で囲う*/
+          &>td{
+            border-right: solid 1px $cGreen;/*表全体を線で囲う*/
+            padding: 0.5rem 1rem;
+          }
+        }
+      }
+    }
+  }
+  & blockquote {
+    margin: 10px 20px;
+    position: relative;
+    padding: 35px 15px 10px 15px;
+    box-sizing: border-box;
+    font-style: italic;
+    background-image: url("linedpaper.png");
+    color: #777777;
+    border-left: 4px solid $cGreen;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    &::before{
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      content: "\f10d";
+      font-family: FontAwesome;
+      color: $cGreen;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+      & p{
+        padding: 0;
+        margin: 7px 0;
+        line-height: 1.7;
+      }
+      & cite {
+        display: block;
+        text-align: right;
+        color: #888888;
+        font-size: 0.9em;
+      }
+    }
+  }
+  & ol{
+    counter-reset:number; /*数字をリセット*/
+    list-style-type: none!important; /*数字を一旦消す*/
+    padding:0.5em;
+    &>li{
+      position: relative;
+      padding-left: 30px;
+      line-height: 1.5em;
+      padding: 0.5em 0.5em 0.5em 30px;
+      &::before{
+        position: absolute;
+        counter-increment: number;
+        content: counter(number);
+        /*以下数字のデザイン変える*/
+        display:inline-block;
+        background: $cGreen;
+        color: white;
+        font-family: 'Avenir','Arial Black','Arial',sans-serif;
+        font-weight:bold;
+        font-size: 15px;
+        border-radius: 50%;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        /*以下 上下中央寄せのため*/
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+.patch-back{
+  background: linear-gradient(rgba(0,0,0,0),rgba(139, 143, 230, 0.1));
+  height: 100%;
+  width: 100%;
+  margin: -20px;
+  padding: 20px;
+  position: relative;
+  &::after{
+    position: absolute;
+    margin: -20px;
+    bottom: -20px;
+    content: "";
+    width: 100%;
+    height: 40px;
+    z-index: -1;
+
+    // background: rgba(139, 143, 230, 0.3);
+    background: rgba(139, 143, 230, 0.1);
+
+  }
+}
+.patch-icon-area{
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  padding: 10px;
+  width: 50%;
+  height: 70px;
+  text-decoration: none;
+  transition: all 0.3s;
+  text-align: right;
+  & div{
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    // &::before{
+    //   position: absolute;
+    //   content: "";
+    //   left: -10px;
+    //   top: 15px;
+    //   width: 0;
+    //   height: 0;
+    //   border-style: solid;
+    //   border-width: 20px 15px 20px 0;
+    //   border-color: transparent #c4b6d9 transparent transparent;
+    // }
+    &::after{
+      position: absolute;
+      content: "";
+      right: -10px;
+      top: 15px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 20px 0 20px 15px;
+      border-color: transparent transparent transparent #c4b6d9;
+    }
+    & a{
+      text-decoration: none;
+      display: inline-block;
+    }
+    & .patch-icon-image{
+      display: inline-block;
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border: solid 3px $cPatch;
+      border-radius: 50%;
+      transition: all 0.3s;
+      &:hover{
+        box-shadow: 0 0px 10px 5px  rgba(200, 200, 250, 0.5);
+      }
+    }
+    & .plus-btn{
+      display: inline-block;
+      height: 50px;
+      width: 50px;
+      transition: all 0.3s;
+      object-fit: cover;
+      border: solid 3px $cLightPatch;
+      border-radius: 50px;
+      &:hover{
+         box-shadow: 0 0px 10px 5px  rgba(200, 200, 250, 0.5);
+      }
+    }
+
+  }
+}
+
+.patch-main{
+  margin-left: 0px;
+  margin-top: 80px;
+  padding: 12px 30px;
+  padding-left: 1rem;
+  color: #fff;
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, left top, right top, from($cLightPatch), to(#298dc7));
+  background-image: -webkit-linear-gradient(left, $cPatch 0%, #1c886d 100%);
+  background-image: linear-gradient(to right, $cLightPatch, #3777d6 100%);
+  font-size: 2rem;
+  position:  relative;
+  &>.bookmark_area{
+    font-size: 1rem;
+    color: white;
+    position: absolute;
+    right: 1rem;
+    & a{
+      text-decoration: none;
+      line-height: 2rem;
+      color: white;
+      &:hover{
+        color: skyblue;
+      }
+    }
+  }
+  &>.section{
+    position:  absolute;
+    font-size: 3rem;
+    left:  150px;
+    top: -60px;
+    z-index:  -1;
+  	font-style: italic;
+    &::before{
+      content:  '';               /* 空白の要素を作る */
+      background-color: $cPatch;  /* 背景色指定 */
+      height: 70px;               /* 高さ指定 */
+      width: 70px;                /* 幅指定 */
+      border-radius:  50%;
+      position:  absolute;        /* 位置調整 */
+      left: -20px;
+      top: -5px;                     /* 位置調整 */
+      z-index:  -1;
+      opacity: 0.2;
+    }
+  }
+  &>.chapter-bar{
+  	position: absolute;
+  	top: -155px;
+  	left: 80px;
+  	transform: translateX(-50%);
+  	color: $cPatch;
+  	font-size: 180px;
+  	font-style: italic;
+  	opacity: 0.2;
+    z-index:  -1;
+  }
+  &>.chapter{
+  	position: absolute;
+  	top: -130px;
+  	left: -1rem;
+  	transform: translateX(-50%);
+  	color: $cPatch;
+  	font-size: 180px;
+  	font-style: italic;
+  	opacity: 0.2;
+    z-index:  -1;
+  }
+}
+
+
+
+.patch-view{
+  background-color: white;
+  box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.05);
+  padding: 0.5rem;
+  & hr{
+    border-top: 1px dashed $cDarkPatch;
+	  border-bottom: 1px dashed #ffffff;
+  }
+  & strong{
+    color: $cDarkPatch;
+  }
+  & p{
+    margin-left: 1rem;
+  }
+  & h1{
+    padding: 10px 20px;
+    border-left: 4px solid $cPatch;
+    border-bottom: 1px solid $cPatch;
+    box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    font-size: 1.6rem;
+  }
+  & h2{
+    position: relative;
+    padding: 0 .5em .2em 1.5em;
+    border-bottom: 3px solid $cPatch;
+    font-size: 1.5rem;
+    // box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    &::before{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .1em;
+      left: .1em;
+      z-index: 2;
+      width: 18px;
+      height: 18px;
+      background: $cPatch;
+    }
+    &::after{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .6em;
+      left: .6em;
+      width: 13px;
+      height: 13px;
+      background: $cLightPatch;
+    }
+  }
+  & h3{
+    padding: 0.5rem 1rem;
+    border-left: 4px solid $cPatch;
+    font-size: 1.2rem;
+  }
+  & h4{
+    color: $cDarkPatch;
+    font-size: 1.2rem;
+  }
+  & h5{
+    position: relative;
+    padding: 0.7rem 1rem;
+    border: 2px solid $cPatch;
+    color: #0d1316;
+    border-radius: 10px 10px 10px 10px;
+    background: #ffffff;
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+  & h6{
+    font-size: 1rem;
+    font-weight: normal;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: $cLightPatch;
+    box-shadow: 0 0px 1px 1px  white;
+    box-shadow: inset 0 0px 0px 1px  white;
+  }
+  & >ul{
+    border: solid 2px $cPatch;
+    border-radius: 5px;
+    padding: 0.5em 1em 0.5em 2.3em;
+    position: relative;
+    &>li{
+      line-height: 1.5;
+      padding: 0.5em 0;
+      list-style-type: none!important;
+      &::before{
+        font-family: "Font Awesome 5 Free";
+        content: "○";/*アイコンの種類*/
+        position: absolute;
+        left : 1em;/*左端からのアイコンまでの距離*/
+        color: $cPatch;/*アイコン色*/
+      }
+    }
+    &>ul>li{
+    line-height: 1.5;
+    padding: 0.5em 0;
+    list-style-type: none!important;
+    &::before{
+      font-family: "Font Awesome 5 Free";
+      content: "●";/*アイコンの種類*/
+      position: absolute;
+      left : 3.5em;/*左端からのアイコンまでの距離*/
+      color: $cPatch;/*アイコン色*/
+      }
+    }
+  }
+  &>div{
+    overflow-x: auto;
+    &>table {
+      border-collapse: collapse;
+      border: solid 1px $cPatch;/*表全体を線で囲う*/
+      border-right: solid 2px $cPatch;/*表全体を線で囲う*/
+      border-left: solid 2px $cPatch;/*表全体を線で囲う*/
+      margin-left: 0.5rem;
+      &>thead{
+        &>tr{
+          border-bottom: solid 1px $cPatch;/*表全体を線で囲う*/
+          &>th{
+            font-weight: normal;
+            padding: 0.5rem 1rem;
+            border-right: solid 1px $cPatch;/*表全体を線で囲う*/
+          }
+        }
+      }
+      &>tbody{
+        &>tr{
+          border-bottom: solid 1px $cPatch;/*表全体を線で囲う*/
+          &>td{
+            border-right: solid 1px $cPatch;/*表全体を線で囲う*/
+            padding: 0.5rem 1rem;
+          }
+        }
+      }
+    }
+  }
+  & blockquote {
+    margin: 10px 20px;
+    position: relative;
+    padding: 35px 15px 10px 15px;
+    box-sizing: border-box;
+    font-style: italic;
+    background-image: url("linedpaper.png");
+    color: #777777;
+    border-left: 4px solid $cPatch;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    &::before{
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      content: "\f10d";
+      font-family: FontAwesome;
+      color: $cPatch;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+      & p{
+        padding: 0;
+        margin: 7px 0;
+        line-height: 1.7;
+      }
+      & cite {
+        display: block;
+        text-align: right;
+        color: #888888;
+        font-size: 0.9em;
+      }
+    }
+  }
+  & ol{
+    counter-reset:number; /*数字をリセット*/
+    list-style-type: none!important; /*数字を一旦消す*/
+    padding:0.5em;
+    &>li{
+      position: relative;
+      padding-left: 30px;
+      line-height: 1.5em;
+      padding: 0.5em 0.5em 0.5em 30px;
+      &::before{
+        position: absolute;
+        counter-increment: number;
+        content: counter(number);
+        /*以下数字のデザイン変える*/
+        display:inline-block;
+        background: $cPatch;
+        color: white;
+        font-family: 'Avenir','Arial Black','Arial',sans-serif;
+        font-weight:bold;
+        font-size: 15px;
+        border-radius: 50%;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        /*以下 上下中央寄せのため*/
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+// コラム
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+
+// コラムボックスview
+.column-back{
+  position: relative;
+  margin-top: 100px;
+  &::before{
+    content: 'column';
+  	position: absolute;
+  	top: -30vw;
+  	left: -15vw;
+  	font-size: 30vw;
+  	color: #fff6f6;
+  	font-style: italic;
+  	z-index: -1;
+  }
+}
+.column-main{
+  margin: 2em 0;
+  background: #fffdfd;
+  position: relative;
+  border: 1px solid $cColumn;
+  border-radius: 15px 15px 5px 5px;
+  &>.column-title{
+    font-weight: normal;
+    font-size: 1.7rem;
+    background: $cColumn;
+    padding: 10px;
+    padding-left: 2rem;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    border-radius: 15px 15px 0 0;
+  }
+}
+
+
+// コラム用のview
+.column-view{
+  padding: 10px;
+  & hr{
+    border-top: 1px dashed $cDarkColumn;
+	  border-bottom: 1px dashed #ffffff;
+  }
+  & strong{
+    color: $cDarkColumn;
+  }
+  & p{
+    margin-left: 1rem;
+  }
+  & h1{
+    padding: 10px 20px;
+    border-left: 4px solid $cColumn;
+    border-bottom: 1px solid $cColumn;
+    box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.05);
+    font-size: 1.6rem;
+  }
+  & h2{
+    position: relative;
+    padding: 0 .5em .2em 1.5em;
+    border-bottom: 3px solid $cColumn;
+    font-size: 1.5rem;
+    // box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    &::before{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .1em;
+      left: .1em;
+      z-index: 2;
+      width: 18px;
+      height: 18px;
+      background: $cColumn;
+    }
+    &::after{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .6em;
+      left: .6em;
+      width: 13px;
+      height: 13px;
+      background: $cLightColumn;
+    }
+  }
+  & h3{
+    padding: 0.5rem 1rem;
+    border-left: 4px solid $cColumn;
+    font-size: 1.2rem;
+  }
+  & h4{
+    color: $cDarkColumn;
+    font-size: 1.2rem;
+  }
+  & h5{
+    position: relative;
+    padding: 0.7rem 1rem;
+    border: 2px solid $cColumn;
+    color: #0d1316;
+    border-radius: 10px 10px 10px 10px;
+    background: #ffffff;
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+  & h6{
+    font-size: 1rem;
+    font-weight: normal;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: $cLightColumn;
+    box-shadow: 0 0px 1px 1px  white;
+    box-shadow: inset 0 0px 0px 1px  white;
+  }
+  & >ul{
+    // border: solid 2px $cColumn;
+    border-radius: 5px;
+    padding: 0.5em 1em 0.5em 2.3em;
+    position: relative;
+    &>li{
+      line-height: 1.5;
+      padding: 0.5em 0;
+      list-style-type: none!important;
+      &::before{
+        font-family: "Font Awesome 5 Free";
+        content: "○";/*アイコンの種類*/
+        position: absolute;
+        left : 0.5em;/*左端からのアイコンまでの距離*/
+        color: $cColumn;/*アイコン色*/
+      }
+    }
+    &>ul>li{
+    line-height: 1.5;
+    padding: 0.5em 0;
+    list-style-type: none!important;
+    &::before{
+      font-family: "Font Awesome 5 Free";
+      content: "●";/*アイコンの種類*/
+      position: absolute;
+      left : 3.5em;/*左端からのアイコンまでの距離*/
+      color: $cColumn;/*アイコン色*/
+      }
+    }
+  }
+  &>div{
+    overflow-x: auto;
+    &>table {
+      border-collapse: collapse;
+      border: solid 1px $cColumn;/*表全体を線で囲う*/
+      border-right: solid 2px $cColumn;/*表全体を線で囲う*/
+      border-left: solid 2px $cColumn;/*表全体を線で囲う*/
+      margin-left: 0.5rem;
+      &>thead{
+        &>tr{
+          border-bottom: solid 1px $cColumn;/*表全体を線で囲う*/
+          &>th{
+            font-weight: normal;
+            padding: 0.5rem 1rem;
+            border-right: solid 1px $cColumn;/*表全体を線で囲う*/
+          }
+        }
+      }
+      &>tbody{
+        &>tr{
+          border-bottom: solid 1px $cColumn;/*表全体を線で囲う*/
+          &>td{
+            border-right: solid 1px $cColumn;/*表全体を線で囲う*/
+            padding: 0.5rem 1rem;
+          }
+        }
+      }
+    }
+  }
+  & blockquote {
+    margin: 10px 20px;
+    position: relative;
+    padding: 35px 15px 10px 15px;
+    box-sizing: border-box;
+    font-style: italic;
+    background-image: url("linedpaper.png");
+    color: #777777;
+    border-left: 4px solid $cColumn;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    &::before{
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      content: "\f10d";
+      font-family: FontAwesome;
+      color: $cColumn;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+      & p{
+        padding: 0;
+        margin: 7px 0;
+        line-height: 1.7;
+      }
+      & cite {
+        display: block;
+        text-align: right;
+        color: #888888;
+        font-size: 0.9em;
+      }
+    }
+  }
+  & ol{
+    counter-reset:number; /*数字をリセット*/
+    list-style-type: none!important; /*数字を一旦消す*/
+    padding:0.5em;
+    &>li{
+      position: relative;
+      padding-left: 30px;
+      line-height: 1.5em;
+      padding: 0.5em 0.5em 0.5em 30px;
+      &::before{
+        position: absolute;
+        counter-increment: number;
+        content: counter(number);
+        /*以下数字のデザイン変える*/
+        display:inline-block;
+        background: $cColumn;
+        color: white;
+        font-family: 'Avenir','Arial Black','Arial',sans-serif;
+        font-weight:bold;
+        font-size: 15px;
+        border-radius: 50%;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        /*以下 上下中央寄せのため*/
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+//問題
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+
+// 問題ボックスview
+.problem-back{
+  position: relative;
+  margin-top: 100px;
+  &::before{
+    content: 'problem';
+  	position: absolute;
+  	top: -30vw;
+  	left: -12vw;
+  	font-size: 27vw;
+  	color: #ecf9ff;
+
+  	font-style: italic;
+  	z-index: -1;
+  }
+}
+.problem-main{
+  margin: 2em 0;
+  padding: 10px;
+  background: white;
+  position: relative;
+  border: 1px solid #f1fbff;
+  box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.05);
+  &::before{
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgb(184, 235, 255) 30%, rgba(149, 201, 250, 0) 31%), radial-gradient(rgb(138, 200, 241) 30%, rgba(145, 196, 238, 0) 31%);
+    background-size: 6px 6px;
+    background-position: 0 0, 3px 3px;
+    z-index: -1;
+  }
+}
+
+.commentary-main{
+  position: relative;
+  margin: 4px;
+  background: #e4f8ff;
+  box-shadow: 0px 0px 0px 5px #e4f8ff;;
+  border: dashed 2px white;
+  padding: 1rem;
+  color: #454545;
+  &::after{
+    position: absolute;
+    content: '';
+    right: -7px;
+    top: -7px;
+    border-width: 0 15px 15px 0;
+    border-style: solid;
+    border-color: $cDarkProblem #fff $cDarkProblem;
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// 問題用のview
+.problem-view{
+  & hr{
+    border-top: 1px dashed $cDarkProblem;
+	  border-bottom: 1px dashed #ffffff;
+  }
+  & strong{
+    color: $cDarkProblem;
+  }
+  & p{
+    margin-left: 1rem;
+  }
+  & h1{
+    position: relative;
+    padding: 0 .5em .2em 1.5em;
+    border-bottom: 3px solid $cProblem;
+    font-size: 1.5rem;
+    // box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    &::before{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .1em;
+      left: .1em;
+      z-index: 2;
+      width: 18px;
+      height: 18px;
+      background: $cProblem;
+    }
+    &::after{
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      top: .6em;
+      left: .6em;
+      width: 13px;
+      height: 13px;
+      background: $cLightProblem;
+    }
+  }
+  & h2{
+    margin:  0;
+    margin-left: 0.5rem;/* デフォルトCSS打ち消し */   /* 位置調整 */
+    font-weight:  normal;       /* 文字の太さ調整 */
+    margin-bottom: 15px;        /* 周りの余白指定 */
+    font-size:  1.1rem;
+    line-height: 1.9rem;
+    padding-left: 0.5rem;
+    &::first-letter{
+      display: block;
+      color: white;
+      border-radius:  5px;        /* 角丸指定 */
+      background-color:  $cProblem;
+      padding: 0.5rem 1rem;
+      margin-left: -1rem;
+      margin-right: 0.5rem;
+      font-size:  1.5rem;
+    }
+  }
+  &>.h3-div{
+    text-align: right;
+    & h3{
+      display: inline-block;
+      width: auto;
+      margin-left:  auto;                 /* デフォルトCSS打ち消し */
+      margin-bottom: 15px;        /* 周りの余白指定 */
+      margin-right: 10%;
+      padding: 0 5%;
+      position:  relative;        /* 位置調整 */
+      font-weight:  normal;       /* 文字の太さ調整 */
+      font-size:  1.1rem;
+
+      border-bottom: solid 1px $cProblem ;
+    }
+  }
+  & h4{
+    color: $cDarkProblem;
+    font-size: 1.2rem;
+  }
+  & h5{
+    position: relative;
+    padding: 0.7rem 1rem;
+    border: 2px solid $cProblem;
+    color: #0d1316;
+    border-radius: 10px 10px 10px 10px;
+    background: #ffffff;
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+  & h6{
+    font-size: 1rem;
+    font-weight: normal;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: $cLightProblem;
+    box-shadow: 0 0px 1px 1px  white;
+    box-shadow: inset 0 0px 0px 1px  white;
+  }
+  & >ul{
+    // border: solid 2px $cProblem;
+    border-radius: 5px;
+    padding: 0.5em 1em 0.5em 1rem;
+    position: relative;
+    margin-left: 1rem;
+    &>li{
+      line-height: 1.5;
+      padding: 0.5em 0;
+      padding-left: 1rem;
+      list-style-type: none!important;
+      &::before{
+        font-family: "Font Awesome 5 Free";
+        content: "○";/*アイコンの種類*/
+        position: absolute;
+        left : 0.5em;/*左端からのアイコンまでの距離*/
+        color: $cProblem;/*アイコン色*/
+      }
+    }
+    &>ul>li{
+    line-height: 1.5;
+    padding: 0.5em 0;
+    list-style-type: none!important;
+    &::before{
+      font-family: "Font Awesome 5 Free";
+      content: "●";/*アイコンの種類*/
+      position: absolute;
+      left : 3.5em;/*左端からのアイコンまでの距離*/
+      color: $cProblem;/*アイコン色*/
+      }
+    }
+  }
+  &>div{
+    overflow-x: auto;
+    &>table {
+      border-collapse: collapse;
+      border: solid 1px $cProblem;/*表全体を線で囲う*/
+      border-right: solid 2px $cProblem;/*表全体を線で囲う*/
+      border-left: solid 2px $cProblem;/*表全体を線で囲う*/
+      margin-left: 0.5rem;
+      &>thead{
+        &>tr{
+          border-bottom: solid 1px $cProblem;/*表全体を線で囲う*/
+          &>th{
+            font-weight: normal;
+            padding: 0.5rem 1rem;
+            border-right: solid 1px $cProblem;/*表全体を線で囲う*/
+          }
+        }
+      }
+      &>tbody{
+        &>tr{
+          border-bottom: solid 1px $cProblem;/*表全体を線で囲う*/
+          &>td{
+            border-right: solid 1px $cProblem;/*表全体を線で囲う*/
+            padding: 0.5rem 1rem;
+          }
+        }
+      }
+    }
+  }
+  & blockquote {
+    margin: 10px 20px;
+    position: relative;
+    padding: 35px 15px 10px 15px;
+    box-sizing: border-box;
+    font-style: italic;
+    background-image: url("linedpaper.png");
+    color: #777777;
+    border-left: 4px solid $cProblem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    &::before{
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      content: "\f10d";
+      font-family: FontAwesome;
+      color: $cProblem;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+      & p{
+        padding: 0;
+        margin: 7px 0;
+        line-height: 1.7;
+      }
+      & cite {
+        display: block;
+        text-align: right;
+        color: #888888;
+        font-size: 0.9em;
+      }
+    }
+  }
+  & ol{
+    counter-reset:number; /*数字をリセット*/
+    list-style-type: none!important; /*数字を一旦消す*/
+    padding: 0.5em;
+    padding-left: 1rem;
+    &>li{
+      position: relative;
+      padding-left: 30px;
+      line-height: 1.5em;
+      padding: 0.5em 0.5em 0.5em 30px;
+      &::before{
+        position: absolute;
+        counter-increment: number;
+        content: counter(number);
+        /*以下数字のデザイン変える*/
+        display:inline-block;
+        background: $cProblem;
+        color: white;
+        font-family: 'Avenir','Arial Black','Arial',sans-serif;
+        font-weight:bold;
+        font-size: 15px;
+        border-radius: 50%;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        /*以下 上下中央寄せのため*/
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+// いいねボタン
+
+$cBtn1-1: #f17384;
+$cBtn1-2: #f3aab4;
+$cBtn1-3: #f3cfd3;
+$cBtn2-1: #7cd1ad;
+$cBtn2-2: #a7e4ca;
+$cBtn2-3: #d7f1e7;
+$cBtn3-1: #eec46b;
+$cBtn3-2: #f7dea8;
+$cBtn3-3: #fcf3df;
+$cBtn4-1: #283f7c;
+$cBtn4-2: #5f70a0;
+$cBtn4-3: #d0d2d8;
+$cBtn5-1: #8092e2;
+$cBtn5-2: #a9b5ee;
+$cBtn5-3: #d7dcf3;
+.like_area{
+  display:flex;
+  width: 100%;
+  justify-content: flex-end;
+  & a{
+    text-decoration: none;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+.sbtn{
+  margin: 0.4rem 0.5rem;
+  display: block;
+  background-color: white;
+  text-align: center;
+  padding: 3px 5px;
+  border-radius: 2rem;
+  width: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 15px;
+}
+.btn-1{
+  color: rgb(255, 255, 255);
+  border: solid 1px $cBtn1-2;
+  background-color: $cBtn1-1;
+  &:hover{
+    background-color: $cBtn1-2;
+  }
+}
+.btn-2{
+  color: white;
+  border: solid 1px $cBtn2-2;
+  background-color: $cBtn2-1;
+  &:hover{
+    background-color: $cBtn2-2;
+  }
+}
+.btn-3{
+  color: white;
+  border: solid 1px $cBtn3-2;
+  background-color: $cBtn3-1;
+  &:hover{
+    background-color: $cBtn3-2;
+  }
+}
+.btn-4{
+  color: white;
+  border: solid 1px $cBtn4-2;
+  background-color: $cBtn4-1;
+  &:hover{
+    background-color: $cBtn4-2;
+  }
+}
+.btn-5{
+  color: white;
+  border: solid 1px $cBtn5-2;
+  background-color: $cBtn5-1;
+  &:hover{
+    background-color: $cBtn5-2;
+  }
+}
+.btn-6{
+  color: $cBtn1-1;
+  border: solid 1px $cBtn1-2;
+  &:hover{
+    background-color: $cBtn1-3;
+  }
+}
+.btn-7{
+  color: $cBtn2-1;
+  border: solid 1px $cBtn2-2;
+  &:hover{
+    background-color: $cBtn2-3;
+  }
+}
+.btn-8{
+  color: $cBtn3-1;
+  border: solid 1px $cBtn3-2;
+  &:hover{
+    background-color: $cBtn3-3;
+  }
+}
+.btn-9{
+  color: $cBtn4-1;
+  border: solid 1px $cBtn4-2;
+  &:hover{
+    background-color: $cBtn4-3;
+  }
+}
+.btn-10{
+  color: $cBtn5-1;
+  border: solid 1px $cBtn5-2;
+  &:hover{
+    background-color: $cBtn5-3;
+  }
+}
+
+.comment-view{
+  width: 100%;
+  margin: 1.5em 0;
+  overflow: hidden;
+  & .faceicon{
+    float: left;
+    margin-right: -90px;
+    text-align: center;
+    & .faceicon-image{
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+      border: solid 3px #d7ebfe;
+      border-radius: 50%;
+    }
+  }
+  & .comment{
+    width: 100%;
+    font-size: 0.9rem;
+    & .time{
+
+    }
+  }
+  & .says{
+    display: inline-block;
+    position: relative;
+    margin: 5px 0 0 85px;
+    padding: 17px 13px;
+    border-radius: 12px;
+    background: #d7ebfe;
+    font-size: 1rem;
+    text-align: left;
+    &::after{
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 18px;
+      left: -24px;
+      border: 12px solid transparent;
+      border-right: 12px solid #d7ebfe;
+    }
+    & p{
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.sidebar-problem{
+  margin: 0;
+  padding: 0.5rem 0rem 0.5rem 1rem;
+  line-height: 2rem;
+  width: 100%;
+  font-size: 0.8rem;
+  text-decoration: none;
+  & a{
+    display: block;
+  }
+  & .author{
+    display: inline-block;
+    text-align: right;
+    margin-right: 0;
+    margin-left: auto;
+  }
+  & p span{
+    margin:  0rem;
+    font-size: 0.8rem;
+  }
+  & h1,h2,h3,h4,h5,h6{
+    font-size: 0.8rem;
+  }
+  border-bottom: 1px solid $cLightGreen;
+  & .icon-image{
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+    border: solid 1px $cPatch;
+    border-radius: 50%;
+  }
+}
+.sidebar-index{
+  position: sticky;
+  top: 5vh;
+  height: 90vh;
+  overflow-y: auto;
+  & a{
+    text-decoration: none;
+    color: #585858;
+    width: 100%;
+    &:hover{
+      background-color: rgba(135, 201, 185, 0.2);
     }
   }
 }

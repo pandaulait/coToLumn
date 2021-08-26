@@ -1,0 +1,38 @@
+
+  <% posts.each do |c|%>
+    <p>
+      <% if c.parent_id.present? %>
+        <a href ="#reply-<%=c.parent.number%>" style ="color: green;">>><%= c.parent.number%></a>
+      <% end %>
+      <%= c.number %>.<%=c.user.name%>　<br /><%= c.body %>
+    </p>
+    <div class ="btn-reply">reply
+      <div  style ="display: none;">
+        <% if current_user.present?  %>
+          <%= form_with model: new_post, url: topic_posts_path(topic) , local:true do |f| %>
+            <%= f.label :body , c.number.to_s + 'へ返信'%>
+            <%= f.text_field :body %>
+            <%= f.hidden_field :topic_id , value: topic.id %>
+            <%= f.hidden_field :parent_id , value: c.id %>
+            <%= f.submit '投稿' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <hr class="cp_hr08" />
+    <% if c.children.present? %>
+      <div class="ml-3">
+        <div>
+           <%= render 'public/posts/post2', {posts: c.children, topic: topic, new_post: new_post} %>
+        </div>
+      </div>
+    <%end %>
+  <% end %>
+
+
+
+<script>
+  $('.btn-reply').on('click',function(){
+     $(this).children().slideDown();
+  });
+</script>

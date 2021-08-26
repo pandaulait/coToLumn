@@ -1,0 +1,20 @@
+
+<div>
+  <h2><%= @topic.title %></h2>
+
+  <%= render 'public/posts/post', {posts: @posts, topic: @topic, new_post: @new_post} %>
+
+  <div class="post-area">
+    <% if current_user.present?  %>
+    <span class="reply-form">
+      <%= form_with model: @new_post, url: topic_posts_path(@topic) , local:true do |f| %>
+        <%= f.label :body , 'コメント欄'%><br />
+        <%= f.text_area :body, autofocus: true, class: "form-control" %>
+        <%= f.hidden_field :topic_id , value: @topic.id %>
+        <%= f.submit '投稿' %>
+      <% end %>
+    </span>
+    <% end %>
+  </div>
+</div>
+

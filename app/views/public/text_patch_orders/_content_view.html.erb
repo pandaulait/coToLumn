@@ -1,33 +1,77 @@
-<%= order.order %>
+
 <% if order.content_type == "Problem" %>
-  <div class="bg-info">
-    <p>教科：<%= order.content.subject_status %></p>
-    <p>問題文：<%= markdown(order.content.body) %></p>
-    <p>回答：<%= markdown(order.content.answer) %></p>
-    <p>解説：<%= markdown(order.content.commentary) %></p>
-    <p>ユーザーネーム：<%=order.content.author.name%></p>
-    <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+  <div class="problem-back">
+    <div class="problem-main">
+      <p>教科：<%= order.content.subject_status %></p>
+      <div class="problem-view">
+        <%= markdown(order.content.body) %>
+      </div>
+      <div class="answer-btn">　模範解答▼
+        <div  style="display: none;" class="problem-view commentary-main">
+          <%= markdown(order.content.answer) %>
+        </div>
+      </div>
+      <% unless order.content.commentary.blank?  %>
+        <div class="commentary-btn">　解説▼
+          <div  style="display: none;" class="problem-view commentary-main">
+            <%= markdown(order.content.commentary) %>
+          </div>
+        </div>
+      <% end %>
+      <p>ユーザーネーム：<%=order.content.author.name%></p>
+      <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+    </div>
   </div>
 <% elsif order.content_type == "Comment" %>
-  <div class="bg-primary">
-     <p><%= order.content.speaker.name %>| <%= order.content.body %> | <%= order.content.created_at %></p>
-     <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
-  </div>
+    <div class="comment-view">
+      <div class="faceicon">
+        <% if order.content.speaker_type =="User"%>
+          <%= attachment_image_tag order.content.speaker.profile_image, :image, fallback: "logo2.png", class: "faceicon-image" %>
+        <% else %>
+
+        <% end %>
+        <br />
+        <%= order.content.speaker.name %>
+      </div>
+      <div class= "comment">
+        <div class="says">
+          <p><%= order.content.body %></p>
+        </div>
+        <span class="time">
+          （<%=l order.content.created_at , format: :short%>, <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>）
+        </span>
+      </div>
+    </div>
 <% elsif order.content_type == "Text" %>
-  <div class="bg-warning">
-    <%= attachment_image_tag order.content, :image, :fill, 60, 60 %>
-    <p>単元名：<%= order.content.title %></p>
-    <p>本文：<%= markdown(order.content.body) %></p>
+  <h1 class="text-main">
+    <% if order.content.chapters.first.present? %>
+      <span class="chapter"><%= order.content.chapters.first.body %></span>
+      <span class="chapter-bar">-</span>
+      <span class="section"><%= order.content.chapters.first.section %></span>
+    <% end %>
+    <%= order.content.title %>
+    <% if current_user.present? %>
+      <span class="bookmark_area">
+        <%= render "public/bookmarks/bookmark_area" ,{content: order.content} %>
+      </span></br>
+    <% end %>
+  </h1>
+  <div class="text-view">
+    <%= attachment_image_tag order.content,:image,  class: "content-thumbnail" %>
+    <%= markdown(order.content.body) %>
     <p>ユーザーネーム：<%= order.content.admin.name %></p>
     <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
   </div>
 <% elsif order.content_type == "Column" %>
-  <% content = Column.find(order.content_id) %>
-  <div class="bg-secondary">
-    <%= attachment_image_tag order.content, :image, :fill, 60, 60 %>
-    <p>コラムタイトル：<%= order.content.title %></p>
-    <p>本文：<%= markdown(order.content.body) %></p>
-    <p>ユーザーネーム：<%= order.content.user.name %></p>
-    <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+  <div class="column-back">
+    <div class="column-main">
+      <div class="column-title"><%= order.content.title %></div>
+      <div class="column-view">
+        <%= attachment_image_tag order.content, :image, class: "content-thumbnail" %>
+        <%= markdown(order.content.body) %>
+        <p>ユーザーネーム：<%= order.content.user.name %></p>
+        <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>
+      </div>
+    </div>
   </div>
 <% end %>

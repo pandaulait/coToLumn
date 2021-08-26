@@ -13,6 +13,7 @@ class Admin::TextsController < ApplicationController
 
   def new
     @text = Text.new
+    @chapter = Chapter.new
   end
 
   def create
@@ -20,6 +21,7 @@ class Admin::TextsController < ApplicationController
     @text.admin_id = current_admin.id
     if @text.save
       redirect_to admin_text_path(@text)
+      flash[:alert] = "記事の保存に成功しました。"
     else
       flash[:alert] = "記事の保存に失敗しました。"
       render :new
@@ -29,7 +31,8 @@ class Admin::TextsController < ApplicationController
   def edit
     @text = Text.find(params[:id])
     @literature = Literature.new
-    
+    @chapter = Chapter.new
+    @chapters = @text.chapters
   end
 
   def update

@@ -1,3 +1,11 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    showProcessingMessages: false,
+    tex2jax: { inlineMath: [['$','$'],['\(','\)']] }
+  });
+</script>
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 <% if order.content_type == "Problem" %>
   <p>教科：<%= content.subject_status %></p>
   <p>問題文：<%= markdown(content.body) %></p>

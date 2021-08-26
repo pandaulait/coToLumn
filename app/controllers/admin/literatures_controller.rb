@@ -1,7 +1,7 @@
 class Admin::LiteraturesController < ApplicationController
   def text_create
     @text = Text.find(params[:text_id])
-    @text.literatures.new(literature_params)
+    @literature = @text.literatures.new(literature_params)
     if @literature.save
       flash[:notice] = "記事の保存に成功しました。"
     else

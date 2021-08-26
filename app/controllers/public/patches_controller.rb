@@ -10,6 +10,7 @@ class Public::PatchesController < ApplicationController
     @literature = Literature.new
     @comments = @patch.comments
     @comment = @patch.comments.new
+    @orders = @patch.text_patch_orders.order(order: "ASC")
   end
 
   def new

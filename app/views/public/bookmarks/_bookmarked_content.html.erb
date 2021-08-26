@@ -1,0 +1,22 @@
+<% if bookmark.marked_content_type == "Column" %>
+  <div>
+    <%= link_to column_path(bookmark.marked_content), local:true do %>
+      <%= bookmark.marked_content.title %><br />
+    <% end %>
+    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
+  </div>
+<% elsif bookmark.marked_content_type == "Text"%>
+  <div>
+    <%= link_to text_path(bookmark.marked_content), local:true do %>
+      <%= bookmark.marked_content.title %><br />
+    <% end %>
+    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
+  </div>
+<% elsif bookmark.marked_content_type == "Patch"%>
+  <div>
+    <%= link_to text_patch_path(bookmark.marked_content.text, bookmark.marked_content), local:true do %>
+      <%= bookmark.marked_content.title %><br />
+    <% end %>
+    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
+  </div>
+<% end %>

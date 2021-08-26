@@ -28,7 +28,12 @@ class Public::UsersController < ApplicationController
       redirect_to root_path
     end
   end
+  def followings
 
+  end
+  def followers
+
+  end
 
 
   private

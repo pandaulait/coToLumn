@@ -1,0 +1,3 @@
+<%= link_to transition_path(activity) do %>
+  <p class="m-0"><%= activity.target.user.name %>があなたのテキストにいいねしました<%= l activity.created_at, format: :short %></p>
+<% end %>

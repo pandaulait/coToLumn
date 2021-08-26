@@ -3,9 +3,11 @@ Rails.application.routes.draw do
 
 
 
-  namespace :public do
-    get 'literatures/text_patch_index'
-  end
+
+
+
+
+
   root to: 'homes#top'
   devise_scope :user do
     post '/users/guest_sign_in',to: 'public/devise/sessions#guest_sign_in'
@@ -25,8 +27,23 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'users/:id/confirm' => 'users#confirm', as: 'users_confirm'
     patch 'users/destroy/:id' => 'users#destroy' , as: 'user_destroy'
+    resources :topics ,only: [:create, :show, :index, :destroy] do
+      resources :posts ,only: [:create] do
+        get 'ajax',         to: 'posts#ajax'
+        get 'ajax2',         to: 'posts#ajax2'
+      end
+
+    end
+    resources :bookmarks ,only: [:index]
+    resources :activities ,only: [:index]
+    resources :likes ,only: [:create, :destroy]
     resources :comments ,only: [:create, :destroy]
-    resources :users ,only: [:show,:edit,:update]
+    resources :bookmarks ,only: [:create, :destroy]
+    resources :users ,only: [:show,:edit,:update] do
+      resource :relationships ,only: [:create, :destroy]
+      get 'followers' => 'users#followers'
+      get 'followings' => 'users#followings'
+    end
     resources :texts ,only: [:show, :index] do
       resources :patches ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
         get 'literatures' => 'literatures#text_patch_index'
@@ -36,6 +53,7 @@ Rails.application.routes.draw do
         get 'order/ajax1',         to: 'text_patch_orders#ajax1'
         get 'order/ajax2',         to: 'text_patch_orders#ajax2'
       end
+      resources :chapters ,only: [:create, :destroy]
     end
     resources :columns ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       post 'literatures' => 'literatures#column_create'
@@ -54,6 +72,8 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
+    resources :activities ,only: [:index]
+
     resources :texts ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       post 'literatures' => 'literatures#text_create'
       delete 'literature/:id' => 'literatures#text_destroy',as: 'literature'

@@ -6,6 +6,7 @@ class Public::ColumnsController < ApplicationController
   def show
     @column = Column.find(params[:id])
     @comments = @column.comments
+    @liked_content = @column
     if current_user.present? || current_admin.present?
       @comment = @column.comments.new
     end

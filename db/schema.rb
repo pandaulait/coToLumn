@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_15_144021) do
+ActiveRecord::Schema.define(version: 2021_08_22_074629) do
+
+  create_table "activities", force: :cascade do |t|
+    t.string "target_type"
+    t.integer "target_id"
+    t.string "receiver_type"
+    t.integer "receiver_id"
+    t.integer "action_type", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_type", "receiver_id"], name: "index_activities_on_receiver_type_and_receiver_id"
+    t.index ["target_type", "target_id"], name: "index_activities_on_target_type_and_target_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -18,11 +31,32 @@ ActiveRecord::Schema.define(version: 2021_08_15_144021) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "profile_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.string "marked_content_type"
+    t.integer "marked_content_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marked_content_type", "marked_content_id"], name: "index_bookmarks_on_marked_content_type_and_marked_content_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "chapters", force: :cascade do |t|
+    t.integer "text_id"
+    t.integer "body", null: false
+    t.integer "section", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["text_id"], name: "index_chapters_on_text_id"
   end
 
   create_table "columns", force: :cascade do |t|
@@ -46,6 +80,17 @@ ActiveRecord::Schema.define(version: 2021_08_15_144021) do
     t.datetime "updated_at", null: false
     t.index ["article_type", "article_id"], name: "index_comments_on_article_type_and_article_id"
     t.index ["speaker_type", "speaker_id"], name: "index_comments_on_speaker_type_and_speaker_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "liked_content_type"
+    t.integer "liked_content_id"
+    t.integer "category", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["liked_content_type", "liked_content_id"], name: "index_likes_on_liked_content_type_and_liked_content_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "links", force: :cascade do |t|
@@ -80,6 +125,18 @@ ActiveRecord::Schema.define(version: 2021_08_15_144021) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.integer "topic_id"
+    t.integer "user_id"
+    t.integer "parent_id"
+    t.integer "number"
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "problems", force: :cascade do |t|
     t.string "author_type"
     t.integer "author_id"
@@ -91,6 +148,13 @@ ActiveRecord::Schema.define(version: 2021_08_15_144021) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_problems_on_author_type_and_author_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "followed_id", null: false
+    t.integer "follower_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -121,6 +185,14 @@ ActiveRecord::Schema.define(version: 2021_08_15_144021) do
     t.boolean "is_draft", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
