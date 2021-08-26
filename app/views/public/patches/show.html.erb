@@ -1,37 +1,47 @@
-<h1>Public::Patches#show</h1>
-<p>Find me in app/views/public/patches/show.html.erb</p>
-<div style="background-color: white;">
-  <div>
-    <%= attachment_image_tag @patch, :image, :fill, 60, 60 %>
 
-    <p>
-      単元名：<%= @patch.title %>
-      <% if current_user.present? %>
-        <span class="bookmark_area">
-          <%= render "public/bookmarks/bookmark_area" ,{content: @patch} %>
-        </span>
-      <% end %>
-    </p>
-    <p>本文：<%= markdown(@patch.body) %></p>
-    <p>ユーザーネーム：<%= @patch.user.name %></p>
-    <% if @patch.user == current_user %>
-      <%= link_to "編集", edit_text_patch_path(@patch.text, @patch) %>
-      <%= link_to "削除", text_patch_path(@patch), method: :delete %>
-    <% end %>
+<div class="row">
+  <div class="col-lg-9">
+    <div class="patch-back">
+      <h1 class="patch-main">
+        <% if @patch.text.chapters.find_by(status: 0).present? %>
+          <span class="chapter"><%= @patch.text.chapters.find_by(status: 0).body %></span>
+          <span class="chapter-bar">-</span>
+          <span class="section"><%= @patch.text.chapters.find_by(status: 0).section %></span>
+        <% end %>
+        <%= @patch.title %>
+        <% if current_user.present? %>
+          <span class="bookmark_area">
+            <%= render "public/bookmarks/bookmark_area" ,{content: @patch} %>
+          </span></br>
+        <% end %>
+      </h1>
+      <div class="patch-view">
+        <%= attachment_image_tag @patch, :image, class: "content-thumbnail" %>
+        <%= markdown(@patch.body) %>
+        <p>ユーザーネーム：<%= @patch.user.name %></p>
+        <% if @patch.user == current_user %>
+          <%= link_to "編集", edit_text_patch_path(@patch.text, @patch) %>
+          <%= link_to "削除", text_patch_path(@patch.text, @patch), method: :delete %>
+        <% end %>
+        <% if @patch.literatures.present? %>
+          <%= render 'public/literatures/text_patch_index', {literature: @literature, text: @text, patch: @patch} %>
+        <% end %>
+        <div class="like_area">
+          <%= render "public/likes/like_area" ,{content: @patch} %>
+        </div>
+      </div>
+      <div>
+        <% @orders.each do |order| %>
+          <%= render 'public/text_patch_orders/content_view', {order: order} %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <%= render 'public/literatures/text_patch_index', {literature: @literature, text: @text, patch: @patch} %>
-  <div>
-    <% @orders.each do |order| %>
-      <%= render 'public/text_patch_orders/content_view', {order: order} %>
-    <% end %>
-  </div>
-  <div class="d-felx like_area" style ="display:flex;">
-    <%= render "public/likes/like_area" ,{content: @patch} %>
+  <div class = "comment_area">
+    <%= render "public/comments/comment_area" ,{comment: @comment, comments: @comments} %>
   </div>
 </div>
-<div class = "comment_area">
-  <%= render "public/comments/comment_area" ,{comment: @comment, comments: @comments} %>
-</div>
+
 
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_134108) do
+ActiveRecord::Schema.define(version: 2021_08_22_074629) do
 
   create_table "activities", force: :cascade do |t|
     t.string "target_type"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_08_19_134108) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "profile_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
@@ -46,6 +47,16 @@ ActiveRecord::Schema.define(version: 2021_08_19_134108) do
     t.datetime "updated_at", null: false
     t.index ["marked_content_type", "marked_content_id"], name: "index_bookmarks_on_marked_content_type_and_marked_content_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "chapters", force: :cascade do |t|
+    t.integer "text_id"
+    t.integer "body", null: false
+    t.integer "section", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["text_id"], name: "index_chapters_on_text_id"
   end
 
   create_table "columns", force: :cascade do |t|

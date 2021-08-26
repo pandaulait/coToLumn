@@ -1,25 +1,22 @@
 <% if bookmark.marked_content_type == "Column" %>
-  <% content = Column.find(bookmark.marked_content_id) %>
   <div>
-    <%= link_to column_path(content), local:true do %>
-      <%= content.title %><br />
+    <%= link_to column_path(bookmark.marked_content), local:true do %>
+      <%= bookmark.marked_content.title %><br />
     <% end %>
-    <%= markdown(content.body.truncate(80, separator: '.')) %>
+    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
   </div>
 <% elsif bookmark.marked_content_type == "Text"%>
-  <% content = Text.find(bookmark.marked_content_id) %>
   <div>
-    <%= link_to text_path(content), local:true do %>
-      <%= content.title %><br />
+    <%= link_to text_path(bookmark.marked_content), local:true do %>
+      <%= bookmark.marked_content.title %><br />
     <% end %>
-    <%= markdown(content.body.truncate(80, separator: '.')) %>
+    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
   </div>
 <% elsif bookmark.marked_content_type == "Patch"%>
-  <% content = Patch.find(bookmark.marked_content_id) %>
   <div>
-    <%= link_to text_patch_path(content.text, content), local:true do %>
-      <%= content.title %><br />
+    <%= link_to text_patch_path(bookmark.marked_content.text, bookmark.marked_content), local:true do %>
+      <%= bookmark.marked_content.title %><br />
     <% end %>
-    <%= markdown(content.body.truncate(80, separator: '.')) %>
+    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
   </div>
 <% end %>

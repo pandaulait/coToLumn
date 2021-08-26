@@ -1,9 +1,17 @@
 class Text < ApplicationRecord
+  validates :title, presence: true
+  validates :body, presence: true, length: { minimum: 10 }
+
+
+
+
+
   belongs_to :admin
   attachment :image
   has_many :links, dependent: :destroy
   has_many :patches, dependent: :destroy
   has_many :literatures , as: :subject, dependent: :destroy
+  has_many :chapters, dependent: :destroy
 
   has_many :subjects
   has_many :problems ,through: :subjects
