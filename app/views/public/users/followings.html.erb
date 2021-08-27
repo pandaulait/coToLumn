@@ -1,0 +1,44 @@
+<div class="row loose-leaf">
+  <div class ="col-xl-3">
+    <%= render "public/users/sidebar_profile",{user: @user} %>
+  </div>
+  <div class ="col-xl-9">
+    <div class="follow">
+      <div class="text-center my-2 menu-item">
+        <h2 class="heading01"><%= link_to "followers", user_followers_path(@user) %> <span class="px-3">|</span><%= link_to "followings", user_followings_path(@user) %></h2>
+      </div>
+      <% if @user.followings.present? %>
+        <% @user.followings.each do |user| %>
+          <div class="follow-box">
+            <div class="icon bg-light"><%= attachment_image_tag user, :profile_image, fallback: "logo2.png", class: "icon-image" %></div>
+            <div class="user">
+              <div class="user-top">
+                <div class="user-top-left">
+                  <span class="user-name"><%= user.name %></span><br />
+
+                  <% if user.following?(current_user) %>
+                    <span class="status">あなたをフォローしています。</span>
+                  <% end %>
+
+                </div>
+                <div class="follow-btn">
+                  <% unless user == current_user %>
+                    <% if current_user.following?(user) %>
+                      <%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: "mbtn unfollow" %>
+                    <% else %>
+                      <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "mbtn follow" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="user-introduction"><%= user.introduction %></div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+      　フォローしている人はいません。
+      <% end %>
+    </div>
+  </div>
+</div>
+

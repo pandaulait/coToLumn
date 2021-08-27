@@ -1,9 +1,23 @@
-<h1>Public::Activities#index</h1>
-<p>Find me in app/views/public/activities/index.html.erb</p>
-<% if @activities.present? %>
-  <% @activities.each do |activity| %>
-    <%= render "#{activity.action_type}" ,{activity: activity} %>
-  <% end %>
-<% else %>
-  <p>お知らせはありません。</p>
-<% end %>
+<div class="row loose-leaf">
+  <div class ="col-xl-3">
+    <%= render "public/users/sidebar_profile",{user: @user} %>
+  </div>
+  <div class="col-xl-9">
+    <div class="activities-box">
+      <div class="text-center my-2 menu-item">
+        <h2 class="heading01">notification</h2>
+      </div>
+      <% if @activities.present? %>
+        <% @activities.each do |activity| %>
+          <div class="activity-box">
+            <%= render "#{activity.action_type}" ,{activity: activity} %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>お知らせはありません。</p>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>

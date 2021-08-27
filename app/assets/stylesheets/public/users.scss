@@ -1,12 +1,317 @@
 // Place all the styles related to the public/users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+$cBtn5-1: #8092e2;
+$cBtn5-2: #a9b5ee;
+$cBtn5-3: #d7dcf3;
+
+$cPencil: #707070;
+
 
 .sidebar-user{
-  .icon-image{
+  position: sticky;
+  top: 10px;
+  max-width: 600px;
+  margin: 5px auto;
+  padding: 1rem;
+  & .profile_image_box{
+    text-align: center;
+  }
+  & .icon-image{
+    background: white;
     height: 200px;
     width: 200px;
     object-fit: cover;
+    border:  3px solid rgba(161, 161, 161, 0.5);
+    box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
     border-radius: 50%;
   }
+  & a{
+    text-decoration: none;
+    color: $cPencil;
+  }
+  & .btn-not{
+  	background: none;
+  	border: none;
+  	outline: none;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
+    color: #707070;
+  }
+  .menu-item{
+    display: block;
+    margin: 2px;
+    font-size: 1.1rem;
+    padding-top: 10px;
+    & a:hover{
+      text-decoration:  none;
+      color: $cGreen;
+    }
+  }
+  & .follow{
+    color: white;
+    border: solid 1px $cGreen;
+    background-color: $cGreen;
+    &:hover{
+      background-color: $cLightGreen;
+      text-decoration: none;
+    }
+  }
+  & .unfollow{
+    color: $cGreen;
+    border: solid 1px $cGreen;
+    &:hover{
+      background-color: $cLightGreen;
+      text-decoration: none
+  }
 }
+}
+
+.user-edit{
+  & .profile_image_box{
+    max-width: 600px;
+    margin: 2px auto;
+  }
+  & .icon-image{
+    background: white;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border:  3px solid rgba(161, 161, 161, 0.5);
+    box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    border-radius: 50%;
+    display: block;
+    margin: 5px auto;
+  }
+  & .introduction{
+    min-height: 160px;
+  }
+}
+.heading01{
+  color: $cPencil;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 26px;
+	text-align: center;
+	&::before{
+	  margin-right: 20px;
+  	content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cGreen;
+	}
+	&::after{
+	  margin-left: 20px;
+	  content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cGreen;
+	}
+}
+.heading02{
+  color: $cPencil;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 26px;
+	text-align: center;
+	&::before{
+	  margin-right: 20px;
+  	content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cColumn;
+	}
+	&::after{
+	  margin-left: 20px;
+	  content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cColumn;
+	}
+}
+.heading03{
+  color: $cPencil;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 26px;
+	text-align: center;
+	&::before{
+	  margin-right: 20px;
+  	content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cProblem;
+	}
+	&::after{
+	  margin-left: 20px;
+	  content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cProblem;
+	}
+}
+
+.heading04{
+  color: $cPencil;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 26px;
+	text-align: center;
+	&::before{
+	  margin-right: 20px;
+  	content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cPatch;
+	}
+	&::after{
+	  margin-left: 20px;
+	  content: '';
+  	width: 70px;
+  	height: 3px;
+  	background-color: $cPatch;
+	}
+}
+.user-sign{
+  max-width: 500px;
+  margin: 5px auto;
+  color: $cPencil;
+  min-height: 50vh;
+}
+.user-log{
+  max-width: 500px;
+  margin: 5px auto;
+  color: $cPencil;
+  min-height: 50vh;
+}
+
+.follow{
+  & a{
+    text-decoration: none;
+    color: $cPencil;
+    &:hover{
+      text-decoration: none;
+      color: $cGreen;
+    }
+  }
+  & .follow-box{
+    display: flex;
+    width: 100%;
+    border-bottom: solid 1px $cGreen;
+    & .icon{
+      height: 100%;
+      width: 80px;
+      padding: 10px;
+      & .icon-image{
+        margin: 0 auto auto auto;
+        background: white;
+        height: 60px;
+        width: 60px;
+        object-fit: cover;
+        border:  3px solid rgba(161, 161, 161, 0.5);
+        box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+        border-radius: 50%;
+      }
+    }
+    & .user{
+      width: 80%;
+      & .user-top{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        & .user-top-left{
+          margin-right: auto;
+          white-space: nowrap;
+          overflow: hidden;
+          & .status{
+              color: $cGreen;
+              margin: 0.2rem;
+              font-size: 0.7rem;
+              padding: 0.1rem 0.6rem;
+              background-color: white;
+              border: solid 1px $cGreen;
+              border-radius: 1rem;
+            }
+          & .user-name{
+            height: 1.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 60%;
+          }
+          & .follow-status{
+            height: 1.3rem;
+
+            margin-bottom: 0.3rem;
+
+          }
+        }
+        & .follow-btn{
+          width: 120px;
+          & .unfollow{
+            color: white;
+            border: solid 1px $cGreen;
+            background-color: $cGreen;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.6rem;
+            width: 100px;
+            &:hover{
+              background-color: $cLightGreen;
+            }
+          }
+          & .follow{
+            color: $cGreen;
+            border: solid 1px $cGreen;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.6rem;
+            width: 100px;
+            &:hover{
+              background-color: $cLightGreen;
+            }
+          }
+        }
+        & .user-introduction{
+
+        }
+      }
+    }
+  }
+}
+
+.activities-box{
+  & a{
+    text-decoration: none;
+    color: $cPencil;
+    &:hover{
+      text-decoration: none;
+      color: $cGreen;
+    }
+  }
+  width: 100%;
+  & .activity-box{
+    width: 100%;
+    padding: 10px 20px;
+    border-bottom: solid 2px $cGreen;
+  }
+}
+

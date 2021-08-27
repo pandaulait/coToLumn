@@ -1,6 +1,8 @@
 class Public::BookmarksController < ApplicationController
   def index
     @bookmarks = current_user.bookmarks
+    @user = current_user
+    
   end
 
 
@@ -20,6 +22,8 @@ class Public::BookmarksController < ApplicationController
       @marked_content = Patch.find(bookmark.marked_content_id)
     elsif bookmark.marked_content_type == "Topic" # patch
       @marked_content = Topic.find(bookmark.marked_content_id)
+    elsif bookmark.marked_content_type == "Problem" # patch
+      @marked_content = Problem.find(bookmark.marked_content_id)
     end
   end
 
@@ -33,6 +37,8 @@ class Public::BookmarksController < ApplicationController
       @marked_content = Patch.find(bookmark.marked_content_id)
     elsif bookmark.marked_content_type == "Topic" # patch
       @marked_content = Topic.find(bookmark.marked_content_id)
+    elsif bookmark.marked_content_type == "Problem" # patch
+      @marked_content = Problem.find(bookmark.marked_content_id)
     end
     bookmark.destroy
   end

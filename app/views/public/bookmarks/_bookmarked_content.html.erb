@@ -1,12 +1,9 @@
 <% if bookmark.marked_content_type == "Column" %>
-  <div>
-    <%= link_to column_path(bookmark.marked_content), local:true do %>
-      <%= bookmark.marked_content.title %><br />
-    <% end %>
-    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
-  </div>
+  <h2 class="heading02">Column</h2>
+  <%= render "public/columns/mini_show",{column: bookmark.marked_content} %>
 <% elsif bookmark.marked_content_type == "Text"%>
   <div>
+    テキスト
     <%= link_to text_path(bookmark.marked_content), local:true do %>
       <%= bookmark.marked_content.title %><br />
     <% end %>
@@ -14,9 +11,11 @@
   </div>
 <% elsif bookmark.marked_content_type == "Patch"%>
   <div>
-    <%= link_to text_patch_path(bookmark.marked_content.text, bookmark.marked_content), local:true do %>
-      <%= bookmark.marked_content.title %><br />
-    <% end %>
-    <%= markdown(bookmark.marked_content.body.truncate(80, separator: '.')) %>
+    パッチ
+  <h2 class="heading03">Problem</h2>
+  <%= render "public/patches/mini_show",{patch: bookmark.marked_content} %>
   </div>
+<% elsif bookmark.marked_content_type == "Problem"%>
+  <h2 class="heading03">Problem</h2>
+  <%= render "public/problems/mini_show",{problem: bookmark.marked_content} %>
 <% end %>

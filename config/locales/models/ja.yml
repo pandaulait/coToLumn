@@ -1,0 +1,33 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        email: メールアドレス
+        name: 名前
+        introduction: 紹介文
+        profile_image_id: プロフィール画像
+      admin:
+        email: メールアドレス
+        name: 名前
+        profile_image_id: プロフィール画像
+      text:
+        title: タイトル
+        body: 本文
+        image_id: サムネイル
+        is_draft: 下書き
+      column:
+        title: タイトル
+        body: 本文
+        image_id: サムネイル
+        status: ステータス
+      problem:
+        answer: タイトル
+        body: 本文
+        commentary: 本文
+        subject_status: 教科
+        status: ステータス
+      patch:
+        title: タイトル
+        body: 本文
+        image_id: サムネイル
+        status: ステータス

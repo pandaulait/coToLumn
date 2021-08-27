@@ -1,2 +1,22 @@
 <h1>Public::Users#edit</h1>
 <p>Find me in app/views/public/users/edit.html.erb</p>
+<div class="row user-edit loose-leaf">
+  <div class ="col-xl-4">
+    <div class="profile_image_box">
+      <%= form_with model: @user, local:true do |f| %>
+      <%= attachment_image_tag @user, :profile_image, fallback: "logo2.png" , class: "icon-image" %>
+      <label for="inputImage">ProfileImage</label>
+      <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+    </div>
+  </div>
+  <div class ="col-xl-8">
+    <h4>your name</h4>
+      <%= f.text_field :name  ,class: "form-control"%>
+      <%= render 'layouts/error_messages', obj: @user, column: :name %>
+      <h4>your introduction</h4>
+      <%= f.text_area :introduction ,class: "form-control introduction" %>
+      <%= render 'layouts/error_messages', obj: @user, column: :introduction %>
+      <%= f.submit '投稿' %>
+    <% end %>
+  </div>
+</div>

@@ -34,16 +34,16 @@ Rails.application.routes.draw do
       end
 
     end
+    resources :users ,only: [:show,:edit,:update,:index] do
+      resource :relationships ,only: [:create, :destroy]
+      get 'followers' => 'users#followers'
+      get 'followings' => 'users#followings'
+    end
     resources :bookmarks ,only: [:index]
     resources :activities ,only: [:index]
     resources :likes ,only: [:create, :destroy]
     resources :comments ,only: [:create, :destroy]
     resources :bookmarks ,only: [:create, :destroy]
-    resources :users ,only: [:show,:edit,:update] do
-      resource :relationships ,only: [:create, :destroy]
-      get 'followers' => 'users#followers'
-      get 'followings' => 'users#followings'
-    end
     resources :texts ,only: [:show, :index] do
       resources :patches ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
         get 'literatures' => 'literatures#text_patch_index'
