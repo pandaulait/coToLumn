@@ -101,7 +101,7 @@
           <%= link_to  text_patch_path(@text, patch)  do %>
             <%= patch.title %>
             <div class="author">
-              <%= attachment_image_tag patch.user.profile_image, :image, fallback: "logo2.png", class: "icon-image" %>
+              <%= attachment_image_tag patch.user, :profile_image, fallback: "logo2.png", class: "icon-image" %>
               <%= patch.user.name %>
             </div>
           <% end %>

@@ -24,7 +24,7 @@
           <%= link_to "削除", text_patch_path(@patch.text, @patch), method: :delete %>
         <% end %>
         <% if @patch.literatures.present? %>
-          <%= render 'public/literatures/text_patch_index', {literature: @literature, text: @text, patch: @patch} %>
+          <%= render 'public/literatures/text_patch_index', { patch: @patch} %>
         <% end %>
         <div class="like_area">
           <%= render "public/likes/like_area" ,{content: @patch} %>

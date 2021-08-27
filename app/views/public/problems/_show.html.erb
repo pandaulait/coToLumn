@@ -1,0 +1,47 @@
+<div class="problem-main" id ="index-problem-<%=problem.id%>">
+  <span class="bookmark_area">
+    <%= render "public/bookmarks/bookmark_area" ,{content: problem} %>
+  </span></br>
+  <div class="problem-view">
+    <%= markdown(problem.body) %>
+  </div>
+  <div class="answer-btn">　模範解答▼
+    <div  style="display: none;" class="problem-view commentary-main">
+      <%= markdown(problem.answer) %>
+    </div>
+  </div>
+  <% unless problem.commentary.blank?  %>
+    <div class="commentary-btn">　解説▼
+      <div  style="display: none;" class="problem-view commentary-main">
+        <%= markdown(problem.commentary) %>
+      </div>
+    </div>
+  <% end %>
+  <div class="content-show-link">
+    <%= link_to '詳細ページへ', problem_path(problem), local:true  %>
+  </div>
+  <div class="content-bottom">
+    <div class="author-icon">
+      <% if problem.author_type ="User" %>
+        <%= link_to user_path(problem.author), local:true do %>
+          <%= attachment_image_tag problem.author, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+          <%= problem.author.name %>
+        <% end %>
+      <% else %>
+        <%= attachment_image_tag problem.author, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+        <%= problem.author.name %>
+      <% end %>
+      <div class="dropdown">
+        <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%= link_to "編集", edit_problem_path(problem) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+          <%= link_to "削除", edit_problem_path(problem) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+        </div>
+      </div>
+    </div>
+    <div class="like_area">
+      <%= render "public/likes/like_area" ,{content: problem} %>
+    </div>
+  </div>
+</div>

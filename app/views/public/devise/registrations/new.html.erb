@@ -1,34 +1,45 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/devise/shared/error_messages", resource: resource %>
-  <!--nameの登録-->
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-  <!--emailの登録-->
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  <!--passwordの登録-->
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+<div class="row loose-leaf">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6 user-sign">
+    <h2>Sign up</h2>
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+      <%#= render "public/devise/shared/error_messages", resource: resource %>
+      <!--nameの登録-->
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true ,class: "form-control"%>
+        <%= render 'layouts/error_messages', obj: @user, column: :name %>
+      </div>
+      <!--emailの登録-->
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control"%>
+        <%= render 'layouts/error_messages', obj: @user, column: :email %>
+      </div>
+      <!--passwordの登録-->
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        （<%= @minimum_password_length %> 文字以上,英数字のみ）
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        <%= render 'layouts/error_messages', obj: @user, column: :password %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "form-control"%>
+        <%= render 'layouts/error_messages', obj: @user, column: :password_confirmation %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+      <div class="actions">
+        <%= f.submit "Sign up" , class: "tbtn btn-11"%>
+      </div>
+    <% end %>
+    <%= render "public/devise/shared/links" %>
   </div>
-<% end %>
+  <div class="col-lg-3"></div>
+</div>
 
-<%= render "public/devise/shared/links" %>
+

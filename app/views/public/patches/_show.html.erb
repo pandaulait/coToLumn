@@ -1,0 +1,54 @@
+
+<% if patch.text.chapters.find_by(status: 0).present? %>
+<h1 class="patch-main" style="margin-top: 80px;">
+  <div class="chapter-box" >
+    <span class="chapter"><%= patch.text.chapters.find_by(status: 0).body %></span>
+    <span class="chapter-bar">-</span>
+    <span class="section"><%= patch.text.chapters.find_by(status: 0).section %></span>
+  </div>
+<% else %>
+<h1 class="patch-main mt-5">
+<% end %>
+  <span class="patch-title">
+    <%= link_to  text_patch_path(patch.text, patch), local:true do  %>
+      <%= patch.title %>
+    <% end %>
+  </span>
+  <% if current_user.present? %>
+  <span class="bookmark_area">
+    <%= render "public/bookmarks/bookmark_area" ,{content: patch} %>
+  </span>
+  <% end %>
+</h1>
+<div class="patch-view">
+  <%= link_to  text_patch_path(patch.text, patch), local:true do  %>
+    <%= attachment_image_tag patch, :image, fallback: "logo2.png", class: "content-thumbnail" %>
+  <% end %>
+  <%= markdown(patch.body) %>
+  <p>ユーザーネーム：<%= patch.user.name %></p>
+  <% if patch.literatures.present? %>
+    <%= render 'public/literatures/text_patch_index', {patch: patch } %>
+  <% end %>
+  <div class="content-show-link">
+    <%= link_to '詳細ページへ', text_patch_path(patch.text, patch), local:true  %>
+  </div>
+  <div class="content-bottom">
+    <div class="author-icon">
+      <%= link_to user_path(patch.user), local:true do %>
+        <%= attachment_image_tag patch.user, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+        <%= patch.user.name %>
+      <% end %>
+      <div class="dropdown">
+        <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%= link_to "編集", edit_text_patch_path(patch.text, patch) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+          <%= link_to "削除", edit_text_patch_path(patch.text, patch) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+        </div>
+      </div>
+    </div>
+    <div class="like_area">
+      <%= render "public/likes/like_area" ,{content: patch} %>
+    </div>
+  </div>
+</div>

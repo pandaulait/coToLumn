@@ -13,6 +13,8 @@ class Public::LikesController < ApplicationController
       @liked_content = Column.find(like.liked_content_id)
     elsif like.liked_content_type == "Patch" # patch
       @liked_content = Patch.find(like.liked_content_id)
+    elsif like.liked_content_type == "Problem" # patch
+      @liked_content = Problem.find(like.liked_content_id)
     end
 
   end
@@ -25,6 +27,8 @@ class Public::LikesController < ApplicationController
       @liked_content = Column.find(like.liked_content_id)
     elsif like.liked_content_type == "Patch" # patch
       @liked_content = Patch.find(like.liked_content_id)
+    elsif like.liked_content_type == "Problem" # patch
+      @liked_content = Problem.find(like.liked_content_id)
     end
     like.destroy
   end
