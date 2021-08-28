@@ -30,8 +30,8 @@
 
   <%= f.submit '投稿' %>
 <% end %>
-<% if column.user == current_user %>
-  <%= link_to "削除", column_path(column), method: :delete %>
+<% if @column.user == current_user %>
+  <%= link_to "削除", column_path(@column), method: :delete %>
 <% end %>
 
 <div class="column_literature">

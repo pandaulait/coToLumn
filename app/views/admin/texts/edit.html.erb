@@ -1,49 +1,89 @@
-<h1>Admin::Texts#edit</h1>
-<p>Find me in app/views/admin/texts/edit.html.erb</p>
 <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-<% if @text.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-       <% @text.errors.full_messages.each do |message| %>
-         <li><%= message %></li>
-       <% end %>
-      </ul>
+<div class="row">
+  <div class="col-xl-9 box5">
+    <h2 class="main">テキスト編集フォーム</h2>
+    <!--テキストにチャプターの紐付け-->
+    <%= form_with model: @chapter, url: text_chapters_path(@text,@chapter) , local:true do |f| %>
+      <h4>教科書</h4>
+      <%= f.select :status, {'デフォルト': 0,'学校図書 「みんなで学ぶ算数」': 1, '啓林観 「わくわく算数」': 2}, { include_blank: 'どれでもない'}, { class: 'form-control' , required: true } %>
+      <h4>チャプター （5-2など）</h4>
+      <%= f.text_field :body %>
+      <span>-</span>
+      <%= f.text_field :section %>
+      <%= render 'layouts/error_messages', obj: @chapter, column: :body %>
+      <%= render 'layouts/error_messages', obj: @chapter, column: :section %>
+      <%= f.submit '選択' ,class: "btn-11 p-1"%>
+    <% end %>
+    <!--紐づけられたチャプターの表示-->
+
+    <table>
+      <tbody>
+        <% @chapters.each do |chapter|%>
+          <% if chapter.id.present? %>
+            <tr>
+              <% if chapter.status == 0 %>
+                <td class="p-1">デフォルト</td>
+              <% elsif chapter.status == 1 %>
+                <td class="p-1">学校図書 「みんなで学ぶ算数」</td>
+              <% elsif chapter.status == 2 %>
+                <td class="p-1">啓林観 「わくわく算数」</td>
+              <% end %>
+              <td class="p-1"><%= chapter.body %></td>
+              <td class="p-1">-</td>
+              <td class="p-1"><%= chapter.section %></td>
+              <td class="p-1"><%= link_to "削除", text_chapter_path(@text,chapter), method: :delete ,class: "btn-16 p-1"%></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <hr class="cp_hr08" />
+    <!--テキスト編集画面-->
+    <%= form_with model: @text,  url: admin_text_path(@text) ,local:true do |f| %>
+      <h4>画像</h4>
+      <%= f.attachment_field :image %>
+      <h4>タイトル</h4>
+      <%= f.text_field :title ,class: "form-control"%>
+      <%= render 'layouts/error_messages', obj: @text, column: :title %>
+      <h4>本文</h4>
+      <%= f.text_area :body ,id: "my-text-area"%>
+      <%= render 'layouts/error_messages', obj: @text, column: :body %>
+      <%= f.submit '投稿', class: "mbtn btn-11 ml-auto" %>
+    <% end %>
+    <hr class="cp_hr08" />
+    <!--参考文献-->
+    <div class="text_literature">
+      <%= render 'admin/literatures/text_new', {literature: @literature, text: @text} %>
     </div>
-  <% end %>
-<h1>テキスト編集フォーム</h1>
-<%= form_with model: @chapter, url: text_chapters_path(@text,@chapter) , local:true do |f| %>
-  <h4>教科書</h4>
-  <%= f.select :status, {'デフォルト': 0,'学校図書 「みんなで学ぶ算数」': 1, '啓林観 「わくわく算数」': 2}, { include_blank: 'どれでもない'}, { class: 'form-control' , required: true } %>
-  <h4>チャプター （5-2など）</h4>
-  <%= f.text_field :body , required: true%>
-  <%= f.text_field :section , required: true%>
-  <%= f.submit '選択' %>
+  </div>
+  <div class="col-xl-3">
+    <%= render "admin/texts/sample_text"%>
+  </div>
+</div>
+<% if @text.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+     <% @text.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+     <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<% @chapters.each do |chapter|%>
-  <%= chapter.status %>|<%= chapter.body %>-<%= chapter.section %>|<%= link_to "削除", text_chapter_path(@text,chapter), method: :delete %><br />
-<% end %>
-<%= form_with model: @text,  url: admin_text_path(@text) ,local:true do |f| %>
-  <h4>画像</h4>
-  <%= f.attachment_field :image %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>本文</h4>
-  <%= f.text_area :body ,id: "my-text-area"%>
-  <script>
-    $(document).on('page:restore', function () {
-      location.reload();    });
-    $(document).on('turbolinks:load', function () {
-      var easyMDE = new EasyMDE({
-          autoDownloadFontAwesome: false,
-          showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
-          element: document.getElementById('my-text-area'),
-      });
+
+
+<script>
+  $(document).on('page:restore', function () {
+    location.reload();    });
+  $(document).on('turbolinks:load', function () {
+    var easyMDE = new EasyMDE({
+        autoDownloadFontAwesome: false,
+        minHeight: "250px",
+        showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
+        element: document.getElementById('my-text-area'),
+        // initialValue: '# EasyMDE \n Go ahead, play around with the editor! Be sure to check out **bold**, *italic* and ~~strikethrough~~ styling, [links](https://google.com) and all the other features. You can type the Markdown syntax, use the toolbar, or use shortcuts like `ctrl-b` or `cmd-b`.'
     });
-  </script>
-  <%= f.submit '投稿' %>
-<% end %>
-<div class="text_literature">
-  <%= render 'admin/literatures/text_new', {literature: @literature, text: @text} %>
-</div>
+  });
+  $('.text-view').children('table').wrap('<div class="table-scroll">');
+</script>

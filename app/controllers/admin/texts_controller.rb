@@ -1,4 +1,6 @@
 class Admin::TextsController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :ensure_correct_user, only: [:edit,:update,:destroy]
   def index
     @texts = Text.all
   end
@@ -23,7 +25,6 @@ class Admin::TextsController < ApplicationController
       redirect_to admin_text_path(@text)
       flash[:alert] = "記事の保存に成功しました。"
     else
-      flash[:alert] = "記事の保存に失敗しました。"
       render :new
     end
   end
@@ -37,8 +38,15 @@ class Admin::TextsController < ApplicationController
 
   def update
     text = Text.find(params[:id])
-    text.update(text_params)
-    redirect_to admin_text_path(text)
+    if text.update(text_params)
+      redirect_to text_path(text)
+    else
+      @text = text
+      @literature = Literature.new
+      @chapter = Chapter.new
+      @chapters = @text.chapters
+      render :edit
+    end
   end
 
   def destroy
@@ -48,7 +56,16 @@ class Admin::TextsController < ApplicationController
   end
 
   private
+
   def text_params
     params.require(:text).permit(:title, :body, :image, :is_draft)
+  end
+
+  def ensure_correct_user
+    admin = Text.find(params[:id]).admin
+    unless admin == current_admin
+      redirect_to request.referer
+      flash[:alert] = "他人の記事の編集はできません。"
+    end
   end
 end

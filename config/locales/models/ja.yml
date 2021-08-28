@@ -31,3 +31,9 @@ ja:
         body: 本文
         image_id: サムネイル
         status: ステータス
+      chapter:
+        body: チャプター
+        section: セクション
+        status: 教科書
+      literature:
+        document: 参考文献

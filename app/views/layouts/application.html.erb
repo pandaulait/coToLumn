@@ -34,9 +34,6 @@
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
              <% if user_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to '記事一覧', texts_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
-                </li>
-                <li class="nav-item">
                   <%= link_to 'トピック一覧', topics_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
                 </li>
               <% else %>
@@ -90,6 +87,7 @@
 
     <div class="nav-scroller py-1 mb-2 mx-auto" style="width: 90vw; overflow-x: auto;     white-space: nowrap;">
       <nav class="blog-nav d-flex justify-content-between">
+        <%= link_to '記事一覧', texts_path,class: "text-muted p-2" ,data: {"turbolinks"=>false}%>
         <%= link_to '問題一覧', problems_path, class: "text-muted p-2" %>
         <% if user_signed_in? %>
           <%= link_to '新規問題投稿', new_problem_path,class: "text-muted p-2" ,data: {"turbolinks"=>false}%>
@@ -113,7 +111,7 @@
       </nav>
     </div>
     </header>
-    <main>
+    <main style="width: 100vw; overflow-x: hidden;">
       <div class="container mb-5 pl-3">
         <%= render 'layouts/flash' %>
         <%= yield %>
