@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_074629) do
     t.string "title", null: false
     t.text "body", null: false
     t.string "image_id"
-    t.boolean "is_draft", default: false, null: false
+    t.boolean "published", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

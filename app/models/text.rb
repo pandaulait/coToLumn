@@ -1,19 +1,19 @@
 class Text < ApplicationRecord
+
   validates :title, presence: true
   validates :body, presence: true, length: { minimum: 10 }
-
-
-
 
 
   belongs_to :admin
   attachment :image
   has_many :links, dependent: :destroy
+  has_many :columns ,through: :links
+
   has_many :patches, dependent: :destroy
   has_many :literatures , as: :subject, dependent: :destroy
   has_many :chapters, dependent: :destroy
 
-  has_many :subjects
+  has_many :subjects , dependent: :destroy
   has_many :problems ,through: :subjects
 
   has_many :mathmatical_problems, -> { where "subject_status = 1" }, :through => :subjects, :source => "problem"

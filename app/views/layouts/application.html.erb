@@ -21,69 +21,9 @@
     </script>
     <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <header>
-<!--ヘッダ-->
-    <nav class="navbar navbar-expand-md navbar-light ">
-      <div class="container-fluid">
-        <%= link_to root_path do %>
-           <%= image_tag "logo2.png" ,class: "logo mx-2"%>
-        <% end %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="Navbar">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-             <% if user_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to 'トピック一覧', topics_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
-                </li>
-              <% else %>
-                <li class="nav-item">
-                  <%= link_to "新規登録", new_user_registration_path,class: "nav-link active"%>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "ログイン", new_user_session_path ,class: "nav-link active"%>
-                </li>
-                <li class="nav-item">
-                  <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post ,class: "nav-link active"%>
-                </li>
-              <% end %>
-              <% if admin_signed_in? %>
-                <li class="nav-item bg-secondary">
-                  <%= link_to 'テキスト', new_admin_text_path,class: "nav-link active" ,data: {"turbolinks"=>false}%>
-                </li>
-                <li class="nav-item bg-secondary">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete  ,class: "nav-link active"%>
-                </li>
-              <% else %>
-                <li class="nav-item  bg-secondary">
-                  <%= link_to "新規登録", new_admin_registration_path,class: "nav-link active"%>
-                </li>
-                <li class="nav-item  bg-secondary">
-                  <%= link_to "ログイン", new_admin_session_path ,class: "nav-link active"%>
-                </li>
-              <% end %>
-            <% if user_signed_in? %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <%= attachment_image_tag current_user, :profile_image, fallback: "logo2.png", class: "profile-icon" %>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                  <%= link_to "マイページ", user_path(current_user) ,class: "dropdown-item"%>
-                  <%= link_to "通知欄", activities_path ,class: "dropdown-item"%>
-                  <%= link_to 'ブックマーク', bookmarks_path,class: "dropdown-item"%>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete  ,class: "dropdown-item"%>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-         <form class="d-flex ml-auto mr-0">
-            <input class="form-control me-2" type="search" placeholder="検索..." aria-label="検索...">
-            <button class="btn btn-outline-success flex-shrink-0" type="submit">検索</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-<!--ヘッダー-->
+    <!--ヘッダ-->
+    <%= render "layouts/header"%>
+    <!--ヘッダー-->
 
     <div class="nav-scroller py-1 mb-2 mx-auto" style="width: 90vw; overflow-x: auto;     white-space: nowrap;">
       <nav class="blog-nav d-flex justify-content-between">
@@ -111,7 +51,7 @@
       </nav>
     </div>
     </header>
-    <main style="width: 100vw; overflow-x: hidden;">
+    <main style="width: 100vw;">
       <div class="container mb-5 pl-3">
         <%= render 'layouts/flash' %>
         <%= yield %>

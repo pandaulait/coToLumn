@@ -1,4 +1,4 @@
-<div style="position: relative;">
+<div style="position: relative;" id="index-text-<%=text.id%>">
   <div class="patch-icon-area">
     <div>
       <%= link_to  new_text_patch_path(text) do %>
@@ -41,6 +41,7 @@
         <%= markdown(text.body) %>
       </div>
     </div>
+        <%= text.published %>
       <div class="content-show-link">
       <%= link_to '続きを読む', text_path(text), local:true  %>
     </div>

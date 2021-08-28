@@ -11,12 +11,13 @@
     <%= link_to column_path(column), local:true do %>
       <%= attachment_image_tag column, :image , fallback: "logo2.png", class: "content-thumbnail" %>
     <% end %>
-    <p>単元名：<%= column.title %></p>
-    <p>本文：<%= markdown(column.body) %></p>
+    <%= column.title %>
+    <%= markdown(column.body) %>
   </div>
   <div class="content-show-link">
     <%= link_to '詳細ページへ', column_path(column), local:true  %>
   </div>
+  <%= render 'public/literatures/column_index', {column: column} %>
   <div class="content-bottom">
     <div class="author-icon">
       <%= link_to user_path(column.user), local:true do %>

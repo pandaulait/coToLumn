@@ -2,7 +2,15 @@
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 <div class="row">
   <div class="col-xl-9 box5">
-    <h2 class="main">テキスト編集フォーム</h2>
+    <div class="dropdown" id="text-edit-cog">
+      <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-cog"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <%= link_to "削除", admin_text_path(@text), method: :delete ,class: "dropdown-item"%>
+      </div>
+    </div>
+    <h2 class="main text-main">テキスト編集フォーム</h2>
     <!--テキストにチャプターの紐付け-->
     <%= form_with model: @chapter, url: text_chapters_path(@text,@chapter) , local:true do |f| %>
       <h4>教科書</h4>
@@ -13,10 +21,9 @@
       <%= f.text_field :section %>
       <%= render 'layouts/error_messages', obj: @chapter, column: :body %>
       <%= render 'layouts/error_messages', obj: @chapter, column: :section %>
-      <%= f.submit '選択' ,class: "btn-11 p-1"%>
+      <%= f.submit '選択' ,class: "tsbtn btn-11 p-1"%>
     <% end %>
     <!--紐づけられたチャプターの表示-->
-
     <table>
       <tbody>
         <% @chapters.each do |chapter|%>
@@ -32,7 +39,7 @@
               <td class="p-1"><%= chapter.body %></td>
               <td class="p-1">-</td>
               <td class="p-1"><%= chapter.section %></td>
-              <td class="p-1"><%= link_to "削除", text_chapter_path(@text,chapter), method: :delete ,class: "btn-16 p-1"%></td>
+              <td class="p-1"><%= link_to "削除", text_chapter_path(@text,chapter), method: :delete ,class: "tsbtn btn-16 p-1"%></td>
             </tr>
           <% end %>
         <% end %>
@@ -49,7 +56,13 @@
       <h4>本文</h4>
       <%= f.text_area :body ,id: "my-text-area"%>
       <%= render 'layouts/error_messages', obj: @text, column: :body %>
-      <%= f.submit '投稿', class: "mbtn btn-11 ml-auto" %>
+      <div class="d-flex">
+        <%= f.radio_button :published, 0 %>
+        <%= f.label :published, '非公開', value: false %>
+        <%= f.radio_button :published, 1 %>
+        <%= f.label :published, '公開', value: true %>
+      </div>
+      <%= f.submit '更新', class: "mbtn btn-11 ml-auto mr-4" %>
     <% end %>
     <hr class="cp_hr08" />
     <!--参考文献-->

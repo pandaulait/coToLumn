@@ -14,7 +14,7 @@ ja:
         title: タイトル
         body: 本文
         image_id: サムネイル
-        is_draft: 下書き
+        is_draft: 公開ステータス
       column:
         title: タイトル
         body: 本文

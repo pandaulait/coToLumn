@@ -1,6 +1,8 @@
-  <h4 class="pl-2">参考文献</h4>
-  <% column.literatures.each do |f| %>
-    <span class="pl-3"><%= f.document %></br></span>
+  <% if column.literatures.present? %>
+    <h4 class="pl-4">参考文献</h4>
+    <% column.literatures.each do |f| %>
+      <span class="pl-5"><%= f.document %></br></span>
+    <%end%>
   <%end%>
 
 

@@ -11,6 +11,7 @@ $cLightGreen: #cdebe4;
   margin: 30px 10px;
   border-radius: 1rem;
   border: solid 0.5rem $cGreen;
+  background-color: white;
   &::before{
     content: 'このような\A見た目に\Aなります。';
     padding: 1rem;
@@ -24,5 +25,62 @@ $cLightGreen: #cdebe4;
     background-color: $cGreen;
     color: white;
     border-radius: 3rem;
+  }
+}
+#text-edit-cog{
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: all 0.5s;
+  & .btn-not{
+    display: inline;
+  	background: none;
+  	border: none;
+  	outline: none;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
+    color: #707070;
+  }
+  & button:hover{
+    color: $cGreen;
+  }
+}
+.next-btn{
+  margin: 60px 0.5rem;
+  display: block;
+  background-color: white;
+  padding: 3px 5px;
+  border-radius: 5px;
+  width: 150px;
+  height: 100px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  border: solid 1px $cGreen;
+  background-color: $cGreen;
+  white-space: pre;
+  &:hover{
+    text-decoration: none;
+    background-color: $cLightGreen;
+    color: white;
+    &::before{
+      border-left:100px solid $cLightGreen;
+    }
+  }
+  &::before {
+    position:absolute;
+    content:"";
+    width:0;
+    height:0;
+    border:100px solid transparent;
+    border-left:100px solid $cGreen;
+    left:160px;
+    top: 10px;
+  }
+  & span{
+    display: inline-block;
   }
 }

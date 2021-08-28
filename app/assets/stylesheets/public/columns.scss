@@ -1,3 +1,63 @@
 // Place all the styles related to the public/columns controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the public/Texts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+
+.sample-column{
+  width: 100%;
+  box-shadow: none;
+  padding: 2rem 1rem;
+  margin: 30px 10px;
+  border-radius: 1rem;
+  border: solid 0.5rem $cColumn;
+  background-color: white;
+  &::before{
+    content: 'このような\A見た目に\Aなります。';
+    padding: 1rem;
+    position: absolute;
+    font-size: 0.9rem;
+    top: 20px;
+    transform: rotate(20deg);
+    right: -20px;
+    white-space: pre;
+    text-align: center;
+    background-color: $cColumn;
+    color: white;
+    border-radius: 3rem;
+  }
+}
+#text-edit-cog{
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: all 0.5s;
+  & .btn-not{
+    display: inline;
+  	background: none;
+  	border: none;
+  	outline: none;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
+    color: #707070;
+  }
+  & button:hover{
+    color: $cColumn;
+  }
+}
+
+.confirm-box{
+  margin: 10px -20px 20px -20px;
+  background: $cLightGreen;
+  padding: 13px;
+}
