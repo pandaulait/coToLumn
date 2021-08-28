@@ -1,5 +1,3 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
 <div class="row user-edit loose-leaf">
   <div class ="col-xl-4">
     <div class="profile_image_box">
@@ -16,7 +14,7 @@
       <h4>your introduction</h4>
       <%= f.text_area :introduction ,class: "form-control introduction" %>
       <%= render 'layouts/error_messages', obj: @user, column: :introduction %>
-      <%= f.submit '投稿' %>
+      <%= f.submit '更新' ,class: "tbtn btn-11 "%>
     <% end %>
   </div>
 </div>

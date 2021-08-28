@@ -3,7 +3,7 @@
     <%= link_to column_path(column), local:true do %>
       <%= column.title %>
     <% end %>
-    <span class="bookmark_area">
+    <span class="bookmark_area bookmark-<%=column.class%><%=column.id%>">
       <%= render "public/bookmarks/bookmark_area" ,{content: column} %>
     </span></br>
   </div>
@@ -28,16 +28,18 @@
         <%= attachment_image_tag column.user, :profile_image , fallback: "logo2.png", class: "icon-image" %>
         <%= column.user.name %>
       <% end %>
-      <div class="dropdown">
-        <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <%= link_to "編集", edit_column_path(column) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
-          <%= link_to "削除", edit_column_path(column) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+      <% if column.user == current_user %>
+        <div class="dropdown">
+          <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "編集", edit_column_path(column) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+            <%= link_to "削除", edit_column_path(column) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
-    <div class="like_area">
+    <div class="like_area like-<%=column.class%><%=column.id%>">
       <%= render "public/likes/like_area" ,{content: column} %>
     </div>
   </div>

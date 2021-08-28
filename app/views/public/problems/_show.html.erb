@@ -1,5 +1,5 @@
 <div class="problem-main" id ="index-problem-<%=problem.id%>">
-  <span class="bookmark_area">
+  <span class="bookmark_area bookmark-<%=problem.class%><%=problem.id%>">
     <%= render "public/bookmarks/bookmark_area" ,{content: problem} %>
   </span></br>
   <div class="problem-view">
@@ -31,16 +31,18 @@
         <%= attachment_image_tag problem.author, :profile_image , fallback: "logo2.png", class: "icon-image" %>
         <%= problem.author.name %>
       <% end %>
-      <div class="dropdown">
-        <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <%= link_to "編集", edit_problem_path(problem) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
-          <%= link_to "削除", edit_problem_path(problem) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+      <% if problem.author == current_user ||problem.author == current_admin %>
+        <div class="dropdown">
+          <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "編集", edit_problem_path(problem) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+            <%= link_to "削除", edit_problem_path(problem) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
-    <div class="like_area">
+    <div class="like_area like-<%=problem.class%><%=problem.id%>">
       <%= render "public/likes/like_area" ,{content: problem} %>
     </div>
   </div>
