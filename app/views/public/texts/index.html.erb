@@ -1,17 +1,12 @@
-<h1>Public::Texts#index</h1>
-<p>Find me in app/views/public/texts/index.html.erb</p>
-<% @texts.each do |text| %>
-  <div class ="box1">
-    <%= attachment_image_tag text, :image, :fill, 60, 60 %>
-    <p><%if text.image_id == nil%>
-          nil
-      <%end%></p>
-    <p>単元名：<%= text.title %></p>
-    <p>本文：<%= markdown(text.body) %></p>
-    <p>ユーザーネーム：<%= text.admin.name %></p>
-    <%= link_to "詳細", text_path(text) %>
-    <% if text.admin == current_admin %>
-      <%= link_to "削除", admin_text_path(text), method: :delete %>
+<div class="row">
+  <div class="col-lg-9">
+    <% @texts.each do |text| %>
+      <%= render "public/texts/show",{text: text} %>
     <% end %>
   </div>
-<% end %>
+  <div class="col-lg-3">
+
+  </div>
+</div>
+
+

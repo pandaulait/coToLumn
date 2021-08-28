@@ -1,3 +1,28 @@
 // Place all the styles related to the public/Texts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+.sample-text{
+  width: 100%;
+  box-shadow: none;
+  padding: 2rem 1rem;
+  margin: 30px 10px;
+  border-radius: 1rem;
+  border: solid 0.5rem $cGreen;
+  &::before{
+    content: 'このような\A見た目に\Aなります。';
+    padding: 1rem;
+    position: absolute;
+    font-size: 0.9rem;
+    top: 20px;
+    transform: rotate(20deg);
+    right: -20px;
+    white-space: pre;
+    text-align: center;
+    background-color: $cGreen;
+    color: white;
+    border-radius: 3rem;
+  }
+}

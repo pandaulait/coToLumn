@@ -25,22 +25,20 @@
 <% elsif order.content_type == "Comment" %>
     <div class="comment-view">
       <div class="faceicon">
-        <% if order.content.speaker_type =="User"%>
-          <%= attachment_image_tag order.content.speaker.profile_image, :image, fallback: "logo2.png", class: "faceicon-image" %>
-        <% else %>
-
-        <% end %>
+        <%= attachment_image_tag order.content.speaker, :profile_image, fallback: "logo2.png", class: "faceicon-image" %>
         <br />
         <%= order.content.speaker.name %>
       </div>
       <div class= "comment">
         <div class="says">
           <p><%= order.content.body %></p>
+          <span class="time">
+            <%=l order.content.created_at , format: :short%>
+          </span>
         </div>
-        <span class="time">
-          （<%=l order.content.created_at , format: :short%>, <%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %>）
-        </span>
       </div>
+      <div class="mt-4"><%= link_to "結びつきを解除", text_patch_order_path(order.patch.text,order.patch,order), method: :delete %></div>
+
     </div>
 <% elsif order.content_type == "Text" %>
   <h1 class="text-main">

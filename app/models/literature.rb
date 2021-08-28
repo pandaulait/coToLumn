@@ -1,4 +1,5 @@
 class Literature < ApplicationRecord
+
   belongs_to :subject, polymorphic: true
 
   validates :subject_id, presence: true

@@ -1,0 +1,69 @@
+<div style="position: relative;">
+  <div class="patch-icon-area">
+    <div>
+      <%= link_to  new_text_patch_path(text) do %>
+        <%= image_tag "plus.png" , class: "plus-btn"%>
+      <% end %>
+      <% text.patches.each do |patch| %>
+        <%= link_to  text_patch_path(text, patch) do %>
+          <%= attachment_image_tag patch, :image, fallback: "logo2.png", class: "patch-icon-image" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <h1 class="text-main" style="margin-top: 80px;">
+    <% if text.chapters.first.present? %>
+      <div class="chapter-box" >
+        <span class="chapter"><%= text.chapters.first.body %></span>
+        <span class="chapter-bar">-</span>
+        <span class="section"><%= text.chapters.first.section %></span>
+      </div>
+    <% end %>
+    <span class="text-title">
+      <%= link_to  text_path(text) do %>
+        <%= text.title %>
+      <% end %>
+    </span>
+    <% if current_user.present? %>
+      <span class="bookmark_area bookmark-<%=text.class%><%=text.id%>">
+        <%= render "public/bookmarks/bookmark_area" ,{content: text} %>
+      </span></br>
+    <% end %>
+  </h1>
+  <div class="text-view">
+    <div class="mini-content row">
+      <div class="thumbnail col-lg-4">
+        <%= link_to  text_path(text), local:true do  %>
+          <%= attachment_image_tag text, :image, fallback: "logo2.png", class: "mini-content-thumbnail" %>
+        <% end %>
+      </div>
+      <div class="mini-content-box col-lg-8">
+        <%= markdown(text.body) %>
+      </div>
+    </div>
+      <div class="content-show-link">
+      <%= link_to '続きを読む', text_path(text), local:true  %>
+    </div>
+    <div class="content-bottom">
+      <div class="author-icon">
+        <%#= link_to admin_path(text.admin), local:true do %>
+          <%= attachment_image_tag text.admin, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+          <%= text.admin.name %>
+        <!--<%# end %>-->
+        <% if text.admin == current_admin %>
+          <div class="dropdown">
+            <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "編集", edit_admin_text_path(text) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+              <%= link_to "削除", edit_admin_text_path(text) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="like_area like-<%=text.class%><%=text.id%>">
+        <%= render "public/likes/like_area" ,{content: text} %>
+      </div>
+    </div>
+  </div>
+</div>

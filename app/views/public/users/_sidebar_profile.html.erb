@@ -7,7 +7,7 @@
   <h5 class="ml-1"><%= user.name %></h5>
   <span style="word-break: break-word;"><%= user.introduction %></span>
   <div>
-    <% unless @user == current_user %>
+    <% unless @user == current_user || current_user.nil? %>
       <% if current_user.following?(@user) %>
         <%= link_to "フォロー中", user_relationships_path(@user.id), method: :delete, class: "mbtn ml-auto mr-0 follow" %>
       <% else %>

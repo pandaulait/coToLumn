@@ -1,49 +1,68 @@
-<% if patch.text.chapters.find_by(status: 0).present? %>
-<h1 class="patch-main" style="margin-top: 80px;">
-  <div class="chapter-box" >
-    <span class="chapter"><%= patch.text.chapters.find_by(status: 0).body %></span>
-    <span class="chapter-bar">-</span>
-    <span class="section"><%= patch.text.chapters.find_by(status: 0).section %></span>
-  </div>
-<% else %>
-<h1 class="patch-main mt-5">
-<% end %>
-  <span>
-    <%= patch.title %>
-  </span>
-  <% if current_user.present? %>
-  <span class="bookmark_area">
-    <%= render "public/bookmarks/bookmark_area" ,{content: patch} %>
-  </span>
-  <% end %>
-</h1>
-<div class="patch-view">
-  <%= attachment_image_tag patch, :image, class: "content-thumbnail" %>
-  <%= markdown(patch.body) %>
-  <p>ユーザーネーム：<%= patch.user.name %></p>
-  <% if patch.literatures.present? %>
-    <%= render 'public/literatures/text_patch_index', {patch: patch } %>
-  <% end %>
-  <div class="content-show-link">
-    <%= link_to '詳細ページへ', text_patch_path(patch.text, patch), local:true  %>
-  </div>
-  <div class="content-bottom">
-    <div class="author-icon">
-      <%= link_to user_path(patch.user), local:true do %>
-        <%= attachment_image_tag patch.user, :profile_image , fallback: "logo2.png", class: "icon-image" %>
-        <%= patch.user.name %>
+<div style="position: relative;">
+  <div class="patch-icon-area">
+    <div>
+      <%= link_to  new_text_patch_path(patch.text) do %>
+        <%= image_tag "plus.png" , class: "plus-btn"%>
       <% end %>
-      <div class="dropdown">
-        <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <%= link_to "編集", edit_text_patch_path(patch.text, patch) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
-          <%= link_to "削除", edit_text_patch_path(patch.text, patch) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
-        </div>
+      <% patch.text.patches.each do |patch1| %>
+        <%= link_to  text_patch_path(patch1.text, patch1) do %>
+          <%= attachment_image_tag patch1, :image, fallback: "logo2.png", class: "patch-icon-image" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <h1 class="patch-main" style="margin-top: 80px;">
+    <% if patch.text.chapters.first.present? %>
+      <div class="chapter-box" >
+        <span class="chapter"><%= patch.text.chapters.first.body %></span>
+        <span class="chapter-bar">-</span>
+        <span class="section"><%= patch.text.chapters.first.section %></span>
+      </div>
+    <% end %>
+    <%= patch.title %>
+    <% if current_user.present? %>
+    <span class="bookmark_area bookmark-<%=patch.class%><%=patch.id%>">
+      <%= render "public/bookmarks/bookmark_area" ,{content: patch} %>
+    </span>
+    <% end %>
+  </h1>
+  <div class="patch-view">
+    <div class="mini-content row">
+      <div class="thumbnail col-lg-4">
+        <%= link_to  text_patch_path(patch.text, patch), local:true do  %>
+          <%= attachment_image_tag patch, :image, fallback: "logo2.png", class: "mini-content-thumbnail" %>
+        <% end %>
+      </div>
+      <div class="mini-content-box col-lg-8">
+        <%= markdown(patch.body) %>
+        <% if patch.literatures.present? %>
+          <%= render 'public/literatures/text_patch_index', {patch: patch } %>
+        <% end %>
       </div>
     </div>
-    <div class="like_area">
-      <%= render "public/likes/like_area" ,{content: patch} %>
+    <div class="content-show-link">
+      <%= link_to '詳細ページへ', text_patch_path(patch.text, patch), local:true  %>
+    </div>
+    <div class="content-bottom">
+      <div class="author-icon">
+        <%= link_to user_path(patch.user), local:true do %>
+          <%= attachment_image_tag patch.user, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+          <%= patch.user.name %>
+        <% end %>
+        <% if patch.user == current_user %>
+          <div class="dropdown">
+            <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "編集", edit_text_patch_path(patch.text, patch) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+              <%= link_to "削除", edit_text_patch_path(patch.text, patch) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="like_area like-<%=patch.class%><%=patch.id%>">
+        <%= render "public/likes/like_area" ,{content: patch} %>
+      </div>
     </div>
   </div>
 </div>

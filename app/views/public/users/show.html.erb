@@ -19,7 +19,7 @@
     <% end %>
     <!--このユーザーが作成した問題一覧-->
     <% if @patches.present? %>
-      <h2 class="heading04">Patches</h2>
+      <h2 class="heading04">Patch</h2>
       <% @patches.each do |patch| %>
         <%= render "public/patches/show",{patch: patch} %>
       <% end %>
@@ -31,6 +31,9 @@
 
 
 <script>
+  $(document).on('page:restore', function () {
+    location.reload();
+  });
   $('table').wrap('<div class="table-scroll">');
   $('.problem-view').children('h3').wrap('<div class="h3-div">');
   $('.commentary-btn').on('click',function(){

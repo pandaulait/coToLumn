@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :ensure_normal_user, only: [:destroy, :update]
-
-
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :confirm]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :confirm]
   def edit
     @user = User.find(params[:id])
   end
@@ -40,13 +40,8 @@ class Public::UsersController < ApplicationController
     else
       flash[:notice] = "保存に失敗しました"
       render :edit
-
     end
-
   end
-
-
-
 
   def followings
     @user = User.find(params[:user_id])
@@ -66,6 +61,13 @@ class Public::UsersController < ApplicationController
       redirect_to root_path, alert: 'ゲストユーザーの更新はできません。'
     end
   end
+
+  def ensure_correct_user
+    unless User.find(params[:id]) == current_user
+      redirect_to user_path(current_user)
+    end
+  end
+
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)

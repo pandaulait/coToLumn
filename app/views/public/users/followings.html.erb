@@ -15,14 +15,12 @@
               <div class="user-top">
                 <div class="user-top-left">
                   <span class="user-name"><%= user.name %></span><br />
-
                   <% if user.following?(current_user) %>
                     <span class="status">あなたをフォローしています。</span>
                   <% end %>
-
                 </div>
                 <div class="follow-btn">
-                  <% unless user == current_user %>
+                  <% unless user == current_user || current_user.nil? %>
                     <% if current_user.following?(user) %>
                       <%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: "mbtn unfollow" %>
                     <% else %>

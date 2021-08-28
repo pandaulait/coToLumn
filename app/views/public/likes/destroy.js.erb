@@ -1,1 +1,1 @@
-$('.like_area').html('<%= escape_javascript(render partial: 'public/likes/like_area', locals:{ content: @liked_content}) %>')
+$('.like-<%=@liked_content.class%><%=@liked_content.id%>').html('<%= escape_javascript(render partial: 'public/likes/like_area', locals:{ content: @liked_content}) %>')

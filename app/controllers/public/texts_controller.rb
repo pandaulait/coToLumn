@@ -13,4 +13,8 @@ class Public::TextsController < ApplicationController
       @comment = @text.comments.new
     end
   end
+
+  private
+
+
 end

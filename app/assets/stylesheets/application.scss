@@ -27,7 +27,7 @@ $cPencil: #707070;
 .loose-leaf{
   background-image: url("linedpaper.png");
   border-left: 20px dotted rgba(0,0,0,.1);
-  padding: 1rem;
+  padding: 1rem 0;
   margin: 1rem 0.5rem;
   margin-left: -25px;
   margin-top: 2rem;
@@ -152,13 +152,18 @@ $cPurple: #a03c8b;
 
 }
 .box5{
-  background: $cWhite;
+  background: -moz-linear-gradient(left, #FFF 90%, #EBEBEB);
+  background: -webkit-linear-gradient(left, #FFF 90%, #EBEBEB);
+  background: linear-gradient(to right, #FFF 90%, #EBEBEB);
+  box-shadow: 0 2px 10px 5px  rgba(161, 161, 161, 0.2);
+  margin-top: 10px;
   & h2{
     &.main{
+      font-size: 1.5rem;
       position: relative;
       display: inline-block;
-      margin: 1rem 0 1rem -10px;
-      padding: 1rem 3rem;
+      margin: 1rem 0 1rem -25px;
+      padding: 0.9rem 3rem;
       color: #FFF;
       border-radius: 0 100vh 100vh 0;
       background: $cGreen;
@@ -175,6 +180,17 @@ $cPurple: #a03c8b;
       border-top: 10px solid $cGreen;
       border-left: 10px solid transparent;
     }
+  }
+  &::after{
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: white;
+    box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
+    z-index: -1;
   }
 }
 
@@ -213,7 +229,7 @@ $cPurple: #a03c8b;
 
 .text-main{
   margin-left: 0px;
-  margin-top: 80px;
+  // margin-top: 80px;
   padding: 12px 30px;
   padding-left: 1rem;
   color: #fff;
@@ -223,6 +239,19 @@ $cPurple: #a03c8b;
   background-image: linear-gradient(to right, $cGreen, #37a4d6 100%);
   font-size: 2rem;
   position:  relative;
+  & .text-title{
+    z-index: 10;
+    padding-left: 10px;
+    position:  relative;
+    & a{
+      text-decoration: none;
+      color: #FFF;
+      &:hover{
+        text-decoration: none;
+        color: $cLightGreen;
+      }
+    }
+  }
   &>.bookmark_area{
     font-size: 1rem;
     color: white;
@@ -237,16 +266,19 @@ $cPurple: #a03c8b;
       }
     }
   }
-  &>.section{
+  & .chapter-box{
+    z-index : auto;
+  }
+  & .section{
     position:  absolute;
     font-size: 3rem;
     left:  150px;
     top: -60px;
-    z-index:  -1;
+    z-index:  1;
   	font-style: italic;
     &::before{
       content:  '';               /* 空白の要素を作る */
-      background-color: $cLightGreen;  /* 背景色指定 */
+      background-color: $cGreen;  /* 背景色指定 */
       height: 70px;               /* 高さ指定 */
       width: 70px;                /* 幅指定 */
       border-radius:  50%;
@@ -254,9 +286,10 @@ $cPurple: #a03c8b;
       left: -20px;
       top: -5px;                     /* 位置調整 */
       z-index:  -1;
+      opacity: 0.6;
     }
   }
-  &>.chapter-bar{
+  & .chapter-bar{
   	position: absolute;
   	top: -155px;
   	left: 80px;
@@ -264,10 +297,10 @@ $cPurple: #a03c8b;
   	color: $cGreen;
   	font-size: 180px;
   	font-style: italic;
-  	opacity: 0.2;
-    z-index:  -1;
+    opacity: 0.6;
+    z-index:  1;
   }
-  &>.chapter{
+  & .chapter{
   	position: absolute;
   	top: -130px;
   	left: -1rem;
@@ -275,14 +308,14 @@ $cPurple: #a03c8b;
   	color: $cGreen;
   	font-size: 180px;
   	font-style: italic;
-  	opacity: 0.2;
-    z-index:  -1;
+    opacity: 0.6;
+    z-index:  1;
   }
 }
 
 .text-view{
   background-color: white;
-  box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.05);
+  box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
   padding: 0.5rem;
   & hr{
     border-top: 1px dashed $cDarkGreen;
@@ -407,7 +440,9 @@ $cPurple: #a03c8b;
       &>tbody{
         &>tr{
           border-bottom: solid 1px $cGreen;/*表全体を線で囲う*/
+          white-space: nowrap;
           &>td{
+            white-space: nowrap;
             border-right: solid 1px $cGreen;/*表全体を線で囲う*/
             padding: 0.5rem 1rem;
           }
@@ -512,14 +547,15 @@ $cLightPatch: #b8bbf3;
 }
 .patch-icon-area{
   position: absolute;
-  top: 15px;
+  top: -65px;
   right: 30px;
   padding: 10px;
-  width: 50%;
+  max-width: 50%;
   height: 70px;
   text-decoration: none;
   transition: all 0.3s;
   text-align: right;
+  display: inline-block;
   & div{
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
@@ -591,6 +627,20 @@ $cLightPatch: #b8bbf3;
   font-size: 2rem;
   position:  relative;
   // z-index: auto;
+  & .patch-title{
+    z-index: 10;
+    position:  relative;
+    padding-left: 10px;
+    & a{
+      display: inline-block;
+      text-decoration: none;
+      color: #FFF;
+      &:hover{
+        text-decoration: none;
+        color: #DFE0F8;
+      }
+    }
+  }
   &>.bookmark_area{
     font-size: 1rem;
     color: white;
@@ -606,7 +656,7 @@ $cLightPatch: #b8bbf3;
     }
   }
   & .chapter-box{
-    z-index : -1;
+    z-index : 1;
   }
   & .section{
     position:  absolute;
@@ -637,7 +687,7 @@ $cLightPatch: #b8bbf3;
   	font-size: 180px;
   	font-style: italic;
   	opacity: 0.6;
-    // z-index:  -1;
+    z-index:  auto;
   }
   & .chapter{
   	position: absolute;
@@ -655,6 +705,7 @@ $cLightPatch: #b8bbf3;
 
 
 .patch-view{
+  margin-bottom: 15px;
   background-color: white;
   box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.05);
   padding: 0.5rem;
@@ -1147,7 +1198,7 @@ $cLightProblem: #a0d8f1;
   }
 }
 .problem-main{
-  margin: 2em 0;
+  margin-bottom: 15px;
   padding: 10px;
   background: white;
   position: relative;
@@ -1471,6 +1522,18 @@ $cBtn5-3: #d7dcf3;
   transition: all 0.3s;
   font-size: 15px;
 }
+.sbtn{
+  margin: 0.4rem 0.5rem;
+  display: block;
+  background-color: white;
+  text-align: center;
+  padding: 3px 5px;
+  border-radius: 4px;
+  width: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 15px;
+}
 .tbtn{
   margin: 2rem 0;
   display: block;
@@ -1574,46 +1637,112 @@ $cBtn5-3: #d7dcf3;
   }
 }
 
-.comment-view{
+$cComment: #EAC779;
+$cLightComment: #FFFDFA;
+.comment-area{
   width: 100%;
-  margin: 1.5em 0;
+}
+.l-comment-view{
+  width: 100%;
+  margin: 5px 0;
   overflow: hidden;
   & .faceicon{
     float: left;
     margin-right: -90px;
     text-align: center;
+    font-size: 0.8rem;
     & .faceicon-image{
-      height: 60px;
-      width: 60px;
+      height: 50px;
+      width: 50px;
       object-fit: cover;
-      border: solid 3px #d7ebfe;
+      border: solid 3px $cLightComment;
       border-radius: 50%;
     }
   }
   & .comment{
-    width: 100%;
     font-size: 0.9rem;
-    & .time{
-
-    }
+    position: relative;
   }
   & .says{
     display: inline-block;
     position: relative;
-    margin: 5px 0 0 85px;
-    padding: 17px 13px;
+    margin: 5px 60px 20px 60px;
+    min-width: 80px;
+    padding: 10px 10px;
     border-radius: 12px;
-    background: #d7ebfe;
+    border:  solid 2px $cComment;
+    background: $cLightComment;
     font-size: 1rem;
     text-align: left;
+    & .time{
+      position: absolute;
+      font-size: 0.7rem;
+      color: $cPencil;
+      bottom: -20px;
+      right: 5px;
+    }
     &::after{
       content: "";
       display: inline-block;
       position: absolute;
-      top: 18px;
+      top: 13px;
       left: -24px;
       border: 12px solid transparent;
-      border-right: 12px solid #d7ebfe;
+      border-right: 12px solid $cComment;
+    }
+    & p{
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+.r-comment-view{
+  width: 100%;
+  margin: 5px 0;
+  overflow: visible;
+  & .faceicon{
+    float: right;
+    margin-left: -90px;
+    text-align: center;
+    font-size: 0.8rem;
+    & .faceicon-image{
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border: solid 3px $cLightComment;
+      border-radius: 50%;
+    }
+  }
+  & .comment{
+    font-size: 0.9rem;
+    position: relative;
+    text-align: right;
+  }
+  & .says{
+    display: inline-block;
+    position: relative;
+    margin: 5px 60px 20px 60px;
+    min-width: 80px;
+    padding: 10px 10px;
+    border-radius: 12px;
+    border:  solid 2px $cComment;
+    background: $cLightComment;
+    font-size: 1rem;
+    & .time{
+      position: absolute;
+      font-size: 0.7rem;
+      color: $cPencil;
+      bottom: -20px;
+      right: 5px;
+    }
+    &::after{
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 13px;
+      right: -24px;
+      border: 12px solid transparent;
+      border-left: 12px solid $cComment;
     }
     & p{
       margin: 0;
@@ -1704,7 +1833,7 @@ main {
   & .thumbnail{
     & .mini-content-thumbnail{
       width: 100%;
-      height: 250px;
+      height: 150px;
       object-fit: cover;
       transition: .3s;
       &:hover{
@@ -1713,11 +1842,11 @@ main {
     }
   }
   & .mini-content-box{
-    max-height: 250px;
+    max-height: 150px;
     overflow-y: clip;
   }
   & .mini-problem-box{
-    max-height: 250px;
+    max-height: 160px;
     overflow-y: clip;
   }
 }
