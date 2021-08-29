@@ -1,2 +1,22 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+
+<div class="main-visual">
+
+      <%= image_tag "logo2.png" ,class: "main-logo"%>
+
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 py-4">
+      <h2 class="main-heading column-heading">コラム一覧</h2>
+      <% @columns.each do |column| %>
+        <%= render "public/columns/mini_show",{column: column} %>
+      <% end %>
+    </div>
+    <div class="col-lg-4 py-4">
+      <h2 class="main-heading patch-heading">新規記事</h2>
+      <div class="main-sidebar-index">
+        <%= render "layouts/top_sidebar",{texts: nil,problems: @problems, columns: @columns, patches: @patches, topics: @topics} %>
+      </div>
+    </div>
+  </div>
+</div>

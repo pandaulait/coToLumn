@@ -1,8 +1,152 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+
+$cPencil: #707070;
+$cLightPencil: #D9D9D9;
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+$cComment: #EAC779;
+$cLightComment: #FFFDFA;
+
 .top-main{
   width: 100vw;
   height: 25vw;
   object-fit: cover;
 }
+
+.main-visual{
+  background-image: image-url("home.jpg");
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  & .main-logo{
+    margin: auto;
+    haigh: 20vh;
+    max-width: 1000px;
+    padding: 3vh 10vw 3vh 8vw;
+    object-fit: contain;
+    background-color: white;
+  }
+
+}
+ .main-heading{
+    margin: 10px 0;
+    color: $cPencil;
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	font-size: 1.6rem;
+  	text-align: center;
+  	white-space: nowrap;
+  	&::before{
+  	  margin-right: 5%;
+    	content: '';
+    	width: 20%;
+    	height: 3px;
+  	}
+  	&::after{
+  	  margin-left: 5%;
+  	  content: '';
+    	width: 20%;
+    	height: 3px;
+  	}
+  }
+  .column-heading{
+  	&:before,&::after{
+    	background-color: $cColumn;
+  	}
+  }
+  .text-heading{
+  	&:before,&::after{
+    	background-color: $cGreen;
+  	}
+  }
+  .patch-heading{
+  	&:before,&::after{
+    	background-color: $cPatch;
+  	}
+  }
+
+
+
+.main-sidebar-index{
+  padding-top: 20px;
+  top: 5vh;
+  & .index{
+    font-size: 1.3rem;
+    color: $cPencil;
+    text-align: center;
+  }
+  .heading{
+    margin-top: 5px;
+    color: $cPencil;
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	font-size: 1rem;
+  	text-align: center;
+  	white-space: nowrap;
+  	&::before{
+  	  margin-right: 5%;
+    	content: '';
+    	width: 20%;
+    	height: 3px;
+  	}
+  	&::after{
+  	  margin-left: 5%;
+  	  content: '';
+    	width: 20%;
+    	height: 3px;
+  	}
+  }
+  .text-heading{
+  	&:before,&::after{
+    	background-color: $cGreen;
+  	}
+  }
+  .problem-heading{
+  	&:before,&::after{
+    	background-color: $cProblem;
+  	}
+  }
+  .patch-heading{
+  	&::before,&::after{
+    	background-color: $cPatch;
+  	}
+  }
+  .column-heading{
+  	&::before,&::after{
+    	background-color: $cColumn;
+  	}
+  }
+  .comment-heading{
+  	&::before,&::after{
+    	background-color: $cComment;
+  	}
+  }
+  & a{
+    text-decoration: none;
+    color: #585858;
+    width: 100%;
+    &:hover{
+      background-color: rgba(135, 201, 185, 0.2);
+    }
+  }
+}
+
