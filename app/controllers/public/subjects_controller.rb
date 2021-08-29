@@ -1,4 +1,6 @@
 class Public::SubjectsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user
   #subjectをAjaxで作成
   def create
     @problem = Problem.find(params[:problem_id])
@@ -34,5 +36,13 @@ class Public::SubjectsController < ApplicationController
   private
   def subject_params
     params.require(:subject).permit(:text_id, :problem_id, :kind)
+  end
+
+  def ensure_correct_user
+    author = Problem.find(params[:problem_id]).author
+    unless author == current_user || author == current_admin
+      redirect_to request.referer
+      flash[:alert] = "他人のコラムは編集できません。"
+    end
   end
 end

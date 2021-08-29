@@ -9,9 +9,9 @@
     <h3>すでに結びつけたテキスト</h3>
     <div>
       <% @links.each do |link| %>
-        <div class="bg-light m-3">
+        <div class="my-5">
           <%= render "public/texts/mini_show",{text: link.text} %>
-          <%= link_to "結びつきを解除",column_link_path(link.column,link) ,method: :delete%>
+          <%= link_to "結びつきを解除",column_link_path(link.column,link) , class: "mbtn btn-18 ml-auto mr-4",method: :delete%>
         </div>
       <% end %>
     </div>
@@ -20,7 +20,10 @@
     <%= link_to column_path(@column) ,class: "next-btn" do%>
       <span>コラム設定を</br>　　完了する</span>
     <% end %>
-    <%= render "layouts/content_sidebar",{texts: @column.texts ,problems: nil, columns: nil, patches: nil} %>
+    <div class="sidebar-index">
+      <%= render "layouts/main_content_sidebar",{text: nil ,problem: nil, column: @column, patch: nil} %>
+      <%= render "layouts/content_sidebar",{texts: @column.texts ,problems: nil, columns: nil, patches: nil} %>
+    </div>
   </div>
 </div>
 

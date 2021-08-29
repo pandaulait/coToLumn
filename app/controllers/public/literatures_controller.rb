@@ -1,5 +1,7 @@
 class Public::LiteraturesController < ApplicationController
-
+  before_action :authenticate_user!
+  before_action :column_ensure_correct_user, only: [:column_create,:column_destroy]
+  before_action :patch_ensure_correct_user, only: [:text_patch_create,:text_patch_destroy]
   def index
   end
 
@@ -37,6 +39,7 @@ class Public::LiteraturesController < ApplicationController
   def column_create
     @column = Column.find(params[:column_id])
     literature = @column.literatures.new(literature_params)
+    byebug
     if literature.save
       flash[:notice] = "記事の保存に成功しました。"
     else
@@ -44,9 +47,9 @@ class Public::LiteraturesController < ApplicationController
     end
     @literature = Literature.new
   end
-  
- 
-  
+
+
+
 
   def column_destroy
     @column = Column.find(params[:column_id])
@@ -62,6 +65,22 @@ class Public::LiteraturesController < ApplicationController
   private
   def literature_params
     params.require(:literature).permit(:document)
+  end
+
+  def column_ensure_correct_user
+    user = Column.find(params[:column_id]).user
+    unless user == current_user
+      redirect_to request.referer
+      flash[:alert] = "他人の記事の編集はできません。"
+    end
+  end
+
+  def patch_ensure_correct_user
+    user = Patch.find(params[:patch_id]).user
+    unless user == current_user
+      redirect_to request.referer
+      flash[:alert] = "他人の記事の編集はできません。"
+    end
   end
 end
 

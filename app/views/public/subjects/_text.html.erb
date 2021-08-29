@@ -1,25 +1,22 @@
 <span class="quick-drop">
   <%= form_with url: ajax_subjects_path, method: :get, remote: true do |f| %>
-    <%= f.collection_select(:text_id, texts , :id, :title, selected: text.id) %>
-    <%= f.hidden_field :problem_id ,value: problem.id%>
-    <%= f.submit '表示'%>
+    <div class="d-flex">
+      <%= f.collection_select(:text_id, texts , :id, :title, selected: text.id) %>
+      <%= f.hidden_field :problem_id ,value: problem.id%>
+      <%= f.submit '表示', class: "tsbtn btn-11"%>
+    </div>
   <% end %>
 </span>
-<div class="variation_image">
-  <div class="bg-secondary">
-    <%= attachment_image_tag text, :image, :fill, 60, 60 %>
-    <p>単元名：<%= text.title %></p>
-    <p>本文：<%= markdown(text.body) %></p>
-    <p>ユーザーネーム：<%= text.admin.name %></p>
-  </div>
-</div>
-
-<% if Subject.exists?(text_id: text.id, problem_id: problem.id) %>
-  <spam>すでに結びついています。</spam>
-<% else %>
-  <%= form_with model: subject ,url: problem_subjects_path(problem) ,local:true do |f| %>
-    <%= f.collection_select(:text_id, texts , :id, :title, selected: text.id) %>
-    <%= f.hidden_field :problem_id ,value: problem.id%>
-    <%= f.submit 'このテキストに紐づける。' %>
+<div class="confirm-box">
+  <% if Subject.exists?(text_id: text.id, problem_id: problem.id) %>
+    <spam>すでに結びついています。</spam>
+  <% else %>
+    <%= form_with model: subject ,url: problem_subjects_path(problem) ,local:true do |f| %>
+      <%#= f.collection_select(:text_id, texts , :id, :title, selected: text.id) %>
+      <%= f.hidden_field :text_id ,value: text.id%>
+      <%= f.hidden_field :problem_id ,value: problem.id%>
+      <%= f.submit 'このテキストに紐づける。' , class: "tbtn btn-11 my-2"%>
+    <% end %>
   <% end %>
-<% end %>
+  <%= render "public/texts/show",{text: text} %>
+</div>

@@ -5,6 +5,9 @@
     <% end %>
   </div>
   <div class="col-lg-3">
-    <%= render "layouts/content_sidebar",{texts: nil, patches: nil, columns: @columns, problems: nil} %>
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "layouts/content_sidebar",{texts: nil, patches: nil, columns: @columns, problems: nil} %>
+    <div class="sidebar-index">
   </div>
 </div>

@@ -1,9 +1,11 @@
 class Problem < ApplicationRecord
   validates :subject_status, presence: true
+  validates :commentary, presence: true, length: { minimum: 5 }
   validates :answer, presence: true
-  validates :body, length: { minimum: 5 }
+  validates :body, length: { minimum: 5 }, presence: true
   belongs_to :author, polymorphic: true
-  has_many :subjects
+  has_many :subjects, dependent: :destroy
+  has_many :texts ,through: :subjects
   has_many :bookmarks, as: :marked_content, dependent: :destroy
 
   #いいね機能

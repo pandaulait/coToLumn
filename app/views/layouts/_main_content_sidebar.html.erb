@@ -1,0 +1,43 @@
+<!--テキスト-->
+<% if text.present? %>
+  <h5 class="heading text-heading">テキスト</h5>
+  <div class="sidebar-problem">
+    <a href ="#index-text-<%= text.id %>" >
+      <%= text.title %>
+      <div class="author">
+        <%= attachment_image_tag text.admin, :profile_image, fallback: "logo2.png", class: "icon-image" %>
+        <%= text.admin.name %>
+      </div>
+    </a>
+  </div>
+<% end %>
+<!--パッチテキスト一覧-->
+<% if patch.present? %>
+  <h5 class="heading patch-heading">パッチテキスト</h5>
+  <div class="sidebar-problem">
+    <%= link_to  text_patch_path(patch.text, patch)  do %>
+      <%= patch.title %>
+      <div class="author">
+        <%= attachment_image_tag patch.user, :profile_image, fallback: "logo2.png", class: "icon-image" %>
+        <%= patch.user.name %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<!--コラム一覧-->
+<% if column.present? %>
+  <h5 class="heading column-heading">コラム</h5>
+  <div class="sidebar-problem">
+    <a href ="#index-column-<%= column.id %>" ><%= column.title %></a>
+  </div>
+<% end %>
+<!--問題一覧-->
+<% if problem.present? %>
+  <h5 class="heading problem-heading">問題</h5>
+  <div class="sidebar-problem">
+    <a href ="#index-problem-<%=problem.id%>" >
+      <%=markdown(problem.body.truncate(20, separator: '.'))%>
+    </a>
+  </div>
+<% end %>
+

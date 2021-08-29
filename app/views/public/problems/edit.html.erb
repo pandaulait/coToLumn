@@ -1,31 +1,68 @@
-<h1>Public::Problems#edit</h1>
-<p>Find me in app/views/public/problems/edit.html.erb</p>
 <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-<% if @problem.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-       <% @problem.errors.full_messages.each do |message| %>
-         <li><%= message %></li>
-       <% end %>
-      </ul>
+<div class="row">
+  <div class="col-xl-9 box5">
+    <div class="dropdown" id="text-edit-cog">
+      <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-cog"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% if @problem.author == current_user || @problem.author == current_admin %>
+          <%= link_to "削除", problem_path(@problem), method: :delete ,class: "dropdown-item"%>
+          <%= link_to "テキストリンクの編集", subject_problem_path(@problem) ,class: "dropdown-item"%>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-<h1>画像投稿フォーム</h1>
-<%= form_with model: @problem , local:true do |f| %>
-  <h4>本文</h4>
-  <%= f.text_area :body ,id: "my-text-area"%>
-  <script>
+    <h2 class="main problem-main">問題編集フォーム</h2>
+    <%= form_with model: @problem , local:true do |f| %>
+      <h4>ステータス</h4>
+      <%= f.radio_button :status, '0' %>
+      <%= f.label :status, '非公開', value: 0 %>
+      <%= f.radio_button :status, '1' %>
+      <%= f.label :status, '公開', value: 1 %>
+      <h4>本文</h4>
+      <%= f.text_area :body ,id: "my-text-area"%>
+      <%= render 'layouts/error_messages', obj: @problem, column: :body %>
+      <h4>答え</h4>
+      <%= f.text_area :answer ,class: "form-control"%>
+      <%= render 'layouts/error_messages', obj: @problem, column: :answer %>
+      <h4>解説</h4>
+      <%= f.text_area :commentary ,id: "my-commentary-area"%>
+      <%= render 'layouts/error_messages', obj: @problem, column: :commentary %>
+      <%= f.submit '更新' , class: "mbtn btn-13 ml-auto mr-4" %>
+    <% end %>
+  </div>
+  <div class="col-xl-3">
+    <%= render "public/problems/sample_problem"%>
+  </div>
+</div>
+
+
+
+
+<script>
+  $(document).on('page:restore', function () {
+    location.reload();    });
+  $(document).on('turbolinks:load', function () {
     var easyMDE = new EasyMDE({
         autoDownloadFontAwesome: false,
+        minHeight: "250px",
         showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
         element: document.getElementById('my-text-area'),
         // initialValue: '# EasyMDE \n Go ahead, play around with the editor! Be sure to check out **bold**, *italic* and ~~strikethrough~~ styling, [links](https://google.com) and all the other features. You can type the Markdown syntax, use the toolbar, or use shortcuts like `ctrl-b` or `cmd-b`.'
     });
-  </script>
-  <h4>答え</h4>
-  <%= f.text_area :answer %>
-  <h4>解説</h4>
-  <%= f.text_area :commentary %>
-  <%= f.submit '投稿' %>
-<% end %>
+  });
+</script>
+<script>
+  $(document).on('turbolinks:load', function () {
+    var easyMDE = new EasyMDE({
+        autoDownloadFontAwesome: false,
+        minHeight: "250px",
+        showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
+        element: document.getElementById('my-commentary-area'),
+        // initialValue: '# EasyMDE \n Go ahead, play around with the editor! Be sure to check out **bold**, *italic* and ~~strikethrough~~ styling, [links](https://google.com) and all the other features. You can type the Markdown syntax, use the toolbar, or use shortcuts like `ctrl-b` or `cmd-b`.'
+    });
+  });
+  $('.problem-view').children('h3').wrap('<div class="h3-div">');
+  $('.problem-view').children('table').wrap('<div class="table-scroll">');
+</script>

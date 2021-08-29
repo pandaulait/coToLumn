@@ -22,7 +22,11 @@
     </div>
   </div>
   <div class =" col-lg-3" >
-    <%= render "layouts/content_sidebar",{texts: nil,problems: @problems, columns: @text.columns, patches: @text.patches} %>
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "layouts/main_content_sidebar",{text: @text ,problem: nil, column: nil, patch: nil} %>
+      <%= render "layouts/content_sidebar",{texts: nil,problems: @problems, columns: @text.columns, patches: @text.patches} %>
+    </div>
   </div>
 <!--コメント欄-->
 

@@ -9,7 +9,11 @@
     </div>
   </div>
   <div class="col-lg-3">
-    <%= render "layouts/content_sidebar",{texts: @column.texts ,problems: nil, columns: nil, patches: nil} %>
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "layouts/main_content_sidebar",{text: nil ,problem: nil, column: @column, patch: nil} %>
+      <%= render "layouts/content_sidebar",{texts: @column.texts ,problems: nil, columns: nil, patches: nil} %>
+    </div>
   </div>
 </div>
 
