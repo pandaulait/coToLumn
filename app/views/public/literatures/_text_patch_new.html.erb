@@ -1,10 +1,13 @@
   <h4>参考文献</h4>
   <% patch.literatures.each do |f| %>
-    <%= f.document %> <%= link_to "削除", text_patch_literature_path(text,patch,f), remote:true, method: :delete %></br>
+    <% unless f.id == nil %>
+      span<%= f.document%> <%= link_to "削除", text_patch_literature_path(text,patch,f), remote:true, method: :delete , class: "p-2 btn-16"%></br>
+    <%end%>
   <%end%>
   <div class="m-3">
-    <%= form_with model: literature, url: text_patch_literatures_path(text,patch), remote:true do |l| %>
-      <%= l.text_field :document %>
-      <%= l.submit '投稿' %>
+    <%= form_with model: literature, url: text_patch_literatures_path(text,patch), class: "d-flex", remote:true do |l| %>
+      <%= l.text_field :document , class: "form-control", required: true%>
+      <%= render 'layouts/error_messages', obj: literature, column: :document %>
+      <%= l.submit '投稿', class: "tsbtn btn-14 my-0" %>
     <% end %>
   </div>

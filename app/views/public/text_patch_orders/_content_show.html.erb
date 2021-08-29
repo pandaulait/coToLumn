@@ -7,43 +7,23 @@
 <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <% if order.content_type == "Problem" %>
-  <p>教科：<%= content.subject_status %></p>
-  <p>問題文：<%= markdown(content.body) %></p>
-  <p>回答：<%= markdown(content.answer) %></p>
-  <p>解説：<%= markdown(content.commentary) %></p>
-  <p>ユーザーネーム：<%=content.author.name%></p>
+  <%= render "public/problems/show",{problem: order.content} %>
 <% elsif order.content_type == "Comment" %>
-  <div class="bg-secondary">
-     <p><%= content.speaker.name %>| <%= content.body %> | <%= content.created_at %></p>
-  </div>
+  <%= render "public/comments/show",{comment: order.content} %>
 <% elsif order.content_type == "Text" %>
-  <div class="bg-secondary">
-    <%= attachment_image_tag content, :image, :fill, 60, 60 %>
-    <p>単元名：<%= content.title %></p>
-    <p>本文：<%= markdown(content.body) %></p>
-    <p>ユーザーネーム：<%= content.admin.name %></p>
-  </div>
+  <%= render "public/texts/show",{text: order.content} %>
 <% elsif order.content_type == "Column" %>
-  <div class="bg-secondary">
-    <%= attachment_image_tag content, :image, :fill, 60, 60 %>
-    <p>単元名：<%= content.title %></p>
-    <p>本文：<%= markdown(content.body) %></p>
-    <p>ユーザーネーム：<%= content.user.name %></p>
-  </div>
+  <%= render "public/columns/show",{column: order.content} %>
 <% end %>
 
 <% if TextPatchOrder.exists?(patch_id: order.patch_id,content_type: order.content_type, content_id: order.id) %>
   <spam>すでに結びついています。</spam>
 <% else %>
-  <% if order.content_type == "Problem" || order.content_type == "Comment" %>
+
     <%= form_with model: order ,url: text_patch_orders_path(text,patch) ,local:true do |f| %>
-      <%= f.collection_select(:content_id, contents , :id, :body, selected: order.content_id) %>
-      <%= f.submit 'このテキストに紐づける。' %>
+      <%#= f.collection_select(:content_id, contents , :id, :body, selected: order.content_id) %>
+      <%= f.hidden_field :content_id ,value: order.content_id%>
+      <%= f.submit 'このテキストに紐づける。' , class: "tbtn btn-14 ml-auto mr-4" %>
     <% end %>
-  <% else %>
-    <%= form_with model: order ,url: text_patch_orders_path(text,patch) ,local:true do |f| %>
-      <%= f.collection_select(:content_id, contents , :id, :title, selected: order.content_id) %>
-      <%= f.submit 'このテキストに紐づける。' %>
-    <% end %>
-  <% end %>
+
 <% end %>

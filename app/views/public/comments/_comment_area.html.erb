@@ -1,7 +1,7 @@
 <% comments.each do |c| %>
   <% if c != comment %>
     <div class="l-comment-view">
-      <div class= "comment">
+      <div class= "comment"  id="index-comment-<%=comment.id%>">
         <div class="faceicon">
           <%= attachment_image_tag c.speaker, :profile_image, fallback: "logo2.png", class: "faceicon-image" %>
           <br />

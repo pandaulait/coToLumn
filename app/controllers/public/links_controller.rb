@@ -38,7 +38,7 @@ class Public::LinksController < ApplicationController
   end
 
   def ensure_correct_user
-    user = Column.find(params[:link_id]).user
+    user = Column.find(params[:column_id]).user
     unless user == current_user
       redirect_to request.referer
       flash[:alert] = "他人のコラムは編集できません。"

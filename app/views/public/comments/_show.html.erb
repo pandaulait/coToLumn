@@ -1,0 +1,15 @@
+<div class="l-comment-view">
+  <div class= "comment"  id="index-comment-<%=comment.id%>">
+    <div class="faceicon">
+      <%= attachment_image_tag comment.speaker, :profile_image, fallback: "logo2.png", class: "faceicon-image" %>
+      <br />
+      <%= comment.speaker.name %>
+    </div>
+    <div class="says">
+      <p><%= comment.body %></p>
+      <span class="time">
+        <%=l comment.created_at , format: :short%>
+      </span>
+    </div>
+  </div>
+</div>

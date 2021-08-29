@@ -15,13 +15,13 @@
 <% if patch.present? %>
   <h5 class="heading patch-heading">パッチテキスト</h5>
   <div class="sidebar-problem">
-    <%= link_to  text_patch_path(patch.text, patch)  do %>
+    <a href ="#index-patch-<%= patch.id %>" >
       <%= patch.title %>
       <div class="author">
         <%= attachment_image_tag patch.user, :profile_image, fallback: "logo2.png", class: "icon-image" %>
         <%= patch.user.name %>
       </div>
-    <% end %>
+    </a>
   </div>
 <% end %>
 <!--コラム一覧-->

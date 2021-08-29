@@ -1,4 +1,6 @@
 class Public::PatchesController < ApplicationController
+  before_action :authenticate_user!, except: [:show,:index]
+  before_action :ensure_correct_user, only: [:edit,:update,:destroy]
   def index
     @text = Text.find(params[:text_id])
     @patches = @text.patches
@@ -19,6 +21,7 @@ class Public::PatchesController < ApplicationController
     @patch.image_id = @text.image_id
     @patch.title = @text.title
     @patch.body  = @text.body
+    render :layout => 'content_form'
   end
 
   def create
@@ -27,6 +30,7 @@ class Public::PatchesController < ApplicationController
     @patch.text_id = params[:text_id]
     if @patch.save
       redirect_to text_patch_literatures_path(params[:text_id],@patch)
+      flash[:notice] = "記事の保存に成功しました。"
     else
       flash[:alert] = "記事の保存に失敗しました。"
       render :new
@@ -37,15 +41,19 @@ class Public::PatchesController < ApplicationController
     @text = Text.find(params[:text_id])
     @patch = Patch.find(params[:id])
     @literature = Literature.new
+    render :layout => 'content_form'
   end
 
   def update
     patch = Patch.find(params[:id])
     if patch.update(patch_params)
-      flash[:notice] = "記事の保存に成功しました。"
+      flash[:notice] = "記事の削除に成功しました。"
       redirect_to text_patch_path(params[:text_id],patch)
     else
       flash[:alert] = "記事の 更新に失敗しました。"
+      @text = Text.find(params[:text_id])
+      @patch = patch
+      @literature = Literature.new
       render :edit
     end
 
@@ -67,4 +75,11 @@ class Public::PatchesController < ApplicationController
     params.require(:patch).permit(:title, :body, :image, :is_draft)
   end
 
+  def ensure_correct_user
+    user = Patch.find(params[:id]).user
+    unless user == current_user
+      redirect_to request.referer
+      flash[:alert] = "他人の記事の編集はできません。"
+    end
+  end
 end

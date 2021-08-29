@@ -52,7 +52,10 @@ $cLightComment: #FFFDFA;
 }
 .bg-note{
   // background-image: url("dot-grid.png");
+}
 
+.pencil{
+  color: $cPencil;
 }
 
 body{
@@ -287,7 +290,7 @@ $cPurple: #a03c8b;
 
 .text-main{
   margin-left: 0px;
-  // margin-top: 80px;
+  margin-top: 80px;
   padding: 12px 30px;
   padding-left: 1rem;
   color: #fff;
@@ -372,6 +375,7 @@ $cPurple: #a03c8b;
 }
 
 .text-view{
+  margin-bottom: 20px;
   background-color: white;
   box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
   padding: 0.5rem;
@@ -1948,6 +1952,11 @@ $cBtn5-3: #d7dcf3;
   .column-heading{
   	&::before,&::after{
     	background-color: $cColumn;
+  	}
+  }
+  .comment-heading{
+  	&::before,&::after{
+    	background-color: $cComment;
   	}
   }
   & a{

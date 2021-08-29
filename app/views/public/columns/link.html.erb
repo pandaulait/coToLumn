@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-9">
     <%= render "public/columns/mini_show",{column: @column} %>
-    <h3>関連するテキストを選んでください。</h3>
+    <h3 class="pencil">関連するテキストを選んでください。</h3>
     <!--テキストを選択して、仮表示ようのrender-->
     <div class="varidation_texts">
       <%= render 'public/links/text', {text: @text, texts: @texts, link: @link, column: @column} %>

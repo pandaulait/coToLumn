@@ -1,7 +1,7 @@
-<div style="position: relative;">
+<div style="position: relative;" id="index-patch-<%=patch.id%>">
   <div class="patch-icon-area">
     <div>
-      <%= link_to  new_text_patch_path(patch.text) do %>
+      <%= link_to  new_text_patch_path(patch.text) , data: {"turbolinks"=>false} do %>
         <%= image_tag "plus.png" , class: "plus-btn"%>
       <% end %>
       <% patch.text.patches.each do |patch1| %>

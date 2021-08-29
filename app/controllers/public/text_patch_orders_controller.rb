@@ -1,4 +1,6 @@
 class Public::TextPatchOrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user
   def new
     @patch = Patch.find(params[:patch_id])
     @text = Text.find(params[:text_id])
@@ -84,5 +86,13 @@ class Public::TextPatchOrdersController < ApplicationController
   private
   def order_params
      params.require(:text_patch_order).permit(:content_type, :content_id, :order, :patch_id)
+  end
+
+  def ensure_correct_user
+    user = Patch.find(params[:patch_id]).user
+    unless user == current_user
+      redirect_to request.referer
+      flash[:alert] = "他人の記事の編集はできません。"
+    end
   end
 end
