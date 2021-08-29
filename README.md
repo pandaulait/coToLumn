@@ -76,8 +76,6 @@
 (https://drive.google.com/file/d/1FsBHP7i3poaVLZf6A1um3TPKIKQn-zh9/view?usp=sharing)
 - テーブル定義書</br>
 (https://docs.google.com/spreadsheets/d/1zugO_B2jcdgGZHRl3txXEgEpuu1a0fzHTvuiWs_S1Co/edit?usp=sharing)
-- アプリケーション詳細設計</br>
-(https://docs.google.com/spreadsheets/d/1oHo7wR6w-5O-JQW63uC_QEA964u23gP4bAycdl4vPZQ/edit?usp=sharing)
 - ワイヤーフレーム</br>
 (https://xd.adobe.com/view/00349dc6-d41a-4e5f-9514-410aed13b059-5567/)
 
