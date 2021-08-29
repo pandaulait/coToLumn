@@ -1,0 +1,9 @@
+<% if order.content_type == "Problem" %>
+  <%= render "layouts/main_content_sidebar",{text: nil ,problem: order.content, column: nil, patch: nil} %>
+<% elsif order.content_type == "Comment" %>
+  <%= render "public/comments/comment_content_sidebar",{comment: order.content} %>
+<% elsif order.content_type == "Text" %>
+  <%= render "layouts/main_content_sidebar",{text: order.content ,problem: nil, column: nil, patch: nil} %>
+<% elsif order.content_type == "Column" %>
+  <%= render "layouts/main_content_sidebar",{text: nil ,problem: nil, column: order.content, patch: nil} %>
+<% end %>

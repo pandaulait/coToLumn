@@ -1,13 +1,13 @@
 <h4>参考文献</h4>
 <% text.literatures.each do |f| %>
   <% unless f.id == nil %>
-    <%= f.document %> <%= link_to "削除", admin_text_literature_path(text,f), remote:true, method: :delete %></br>
+    <%= f.document %><%= link_to "削除", admin_text_literature_path(text,f), remote:true, method: :delete ,class: "tsbtn btn-16"%></br>
   <%end%>
 <%end%>
 <div class="m-3">
-  <%= form_with model: literature, url: admin_text_literatures_path(text), remote:true do |l| %>
-    <%= l.text_field :document ,class: "form-control", required: true%>
+  <%= form_with model: literature, url: admin_text_literatures_path(text),class: "d-flex", remote:true do |l| %>
+    <%= l.text_field :document ,class: "form-control", required: true %>
     <%= render 'layouts/error_messages', obj: literature, column: :document %>
-    <%= l.submit '投稿' , class: "sbtn btn-11 ml-auto"%>
+    <%= l.submit '追加' , class: "tsbtn btn-11 my-0"%>
   <% end %>
 </div>

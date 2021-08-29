@@ -1,6 +1,6 @@
 class Public::TextsController < ApplicationController
   def index
-    @texts = Text.all
+    @texts = Text.all.published
   end
 
   def show

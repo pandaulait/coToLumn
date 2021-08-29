@@ -1,17 +1,18 @@
-<h1>Public::Literatures#text_patch_index</h1>
-<p>Find me in app/views/public/literatures/text_patch_index.html.erb</p>
-<div>
-  <%= attachment_image_tag @patch, :image, :fill, 60, 60 %>
 
-  <p>単元名：<%= @patch.title %></p>
-  <p>本文：<%= markdown(@patch.body) %></p>
-  <p>ユーザーネーム：<%= @patch.user.name %></p>
-  <% if @patch.user == current_user %>
-    <%= link_to "編集", edit_text_patch_path(@patch.text, @patch) %>
-    <%= link_to "削除", text_patch_path(@text,@patch), method: :delete %>
-  <% end %>
+<div class="row">
+  <div class="col-lg-8">
+    <h4 class="pencil text-center">参考文献を登録しましょう</h4>
+    <%= render "public/patches/show",{patch: @patch} %>
+  </div>
+  <div class="col-lg-4">
+    <%= link_to new_text_patch_order_path(@patch.text, @patch) ,class: "next-btn2" do%>
+      <span>パッチテキストと</br>他コラム等を</br>結びつける</span>
+    <% end %>
+
+    <div class="sidebar-index">
+      <div class="patch_literature">
+        <%= render 'public/literatures/text_patch_new', {text: @text, literature: @literature, patch: @patch} %>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="patch_literature">
-  <%= render 'public/literatures/text_patch_new', {text: @text, literature: @literature, patch: @patch} %>
-</div>
-<%= link_to "aaa", new_text_patch_order_path(@patch.text, @patch) %>

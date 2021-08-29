@@ -1,7 +1,7 @@
-<div style="position: relative;">
+<div style="position: relative;" id="index-text-<%=text.id%>">
   <div class="patch-icon-area">
     <div>
-      <%= link_to  new_text_patch_path(text) do %>
+      <%= link_to  new_text_patch_path(text) ,data: {"turbolinks"=>false} do %>
         <%= image_tag "plus.png" , class: "plus-btn"%>
       <% end %>
       <% text.patches.each do |patch| %>
@@ -41,6 +41,7 @@
         <%= markdown(text.body) %>
       </div>
     </div>
+        <%= text.published %>
       <div class="content-show-link">
       <%= link_to '続きを読む', text_path(text), local:true  %>
     </div>
@@ -56,7 +57,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <%= link_to "編集", edit_admin_text_path(text) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
-              <%= link_to "削除", edit_admin_text_path(text) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
+              <%#= link_to "削除", edit_admin_text_path(text) ,class: "dropdown-item" ,data: {"turbolinks"=>false}%>
             </div>
           </div>
         <% end %>

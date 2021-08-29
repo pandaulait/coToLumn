@@ -1,40 +1,35 @@
-<h1>Public::Columns#new</h1>
-<p>Find me in app/views/public/columns/new.html.erb</p>
 <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-<% if @column.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-       <% @column.errors.full_messages.each do |message| %>
-         <li><%= message %></li>
-       <% end %>
-      </ul>
-    </div>
-  <% end %>
-<h1>画像投稿フォーム</h1>
-<%= form_with model: @column ,local:true do |f| %>
-  <h4>画像</h4>
-  <%= f.attachment_field :image %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>ステータス</h4>
-  <%= f.radio_button :status, '0' %>
-  <%= f.label :status, '下書き', value: 0 %>
-  <%= f.radio_button :status, '1' %>
-  <%= f.label :status, '公開', value: 1 %>
-  <h4>本文</h4>
-  <%= f.text_area :body ,id: "my-column-area"%>
-  <script>
-    $(document).on('page:restore', function () {
-      location.reload();    });
-    $(document).on('turbolinks:load', function () {
-      var easyMDE = new EasyMDE({
-          autoDownloadFontAwesome: false,
-          showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
-          element: document.getElementById('my-column-area'),
-          initialValue: '# EasyMDE \n Go ahead, play around with the editor! Be sure to check out **bold**, *italic* and ~~strikethrough~~ styling, [links](https://google.com) and all the other features. You can type the Markdown syntax, use the toolbar, or use shortcuts like `ctrl-b` or `cmd-b`.'
-      });
+<div class="row">
+  <div class="col-xl-9 box5">
+    <h2 class="main column-main">コラム投稿フォーム</h2>
+    <%= form_with model: @column ,local:true do |f| %>
+      <h4>コラムサムネイル</h4>
+      <%= f.attachment_field :image %>
+      <h4>タイトル</h4>
+      <%= f.text_field :title ,class: "form-control"%>
+      <%= render 'layouts/error_messages', obj: @column, column: :title %>
+      <h4>本文</h4>
+      <%= f.text_area :body ,id: "my-column-area"%>
+      <%= render 'layouts/error_messages', obj: @column, column: :body %>
+      <%= f.submit '投稿' , class: "mbtn btn-12 ml-auto"%>
+    <% end %>
+  </div>
+  <div class="col-xl-3">
+    <%= render "public/columns/sample_column"%>
+  </div>
+</div>
+<script>
+  $(document).on('page:restore', function () {
+    location.reload();    });
+  $(document).on('turbolinks:load', function () {
+    var easyMDE = new EasyMDE({
+        autoDownloadFontAwesome: false,
+        minHeight: "250px",
+        showIcons: ['strikethrough', 'code', 'table', 'redo', 'heading', 'undo', 'heading-bigger', 'heading-smaller', 'heading-1', 'heading-2', 'heading-3', 'clean-block', 'horizontal-rule'],
+        element: document.getElementById('my-column-area'),
+        // initialValue: '# EasyMDE \n Go ahead, play around with the editor! Be sure to check out **bold**, *italic* and ~~strikethrough~~ styling, [links](https://google.com) and all the other features. You can type the Markdown syntax, use the toolbar, or use shortcuts like `ctrl-b` or `cmd-b`.'
     });
-  </script>
-  <%= f.submit '投稿' %>
-<% end %>
+  });
+  $('.column-view').children('table').wrap('<div class="table-scroll">');
+</script>

@@ -23,6 +23,22 @@ $cDarkGreen: #60d1b7;
 $cLightGreen: #cdebe4;
 
 $cPencil: #707070;
+$cLightPencil: #D9D9D9;
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+$cComment: #EAC779;
+$cLightComment: #FFFDFA;
 
 .loose-leaf{
   background-image: image-url("linedpaper.png");
@@ -36,7 +52,10 @@ $cPencil: #707070;
 }
 .bg-note{
   // background-image: url("dot-grid.png");
+}
 
+.pencil{
+  color: $cPencil;
 }
 
 body{
@@ -157,6 +176,7 @@ $cPurple: #a03c8b;
   background: linear-gradient(to right, #FFF 90%, #EBEBEB);
   box-shadow: 0 2px 10px 5px  rgba(161, 161, 161, 0.2);
   margin-top: 10px;
+  position: relative;
   & h2{
     &.main{
       font-size: 1.5rem;
@@ -166,19 +186,60 @@ $cPurple: #a03c8b;
       padding: 0.9rem 3rem;
       color: #FFF;
       border-radius: 0 100vh 100vh 0;
-      background: $cGreen;
       -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
       box-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
     }
-    &::before{
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 0;
-      height: 0;
-      content: '';
-      border-top: 10px solid $cGreen;
-      border-left: 10px solid transparent;
+    &.text-main{
+      background: $cGreen;
+      &::before{
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 10px solid $cGreen;
+        border-left: 10px solid transparent;
+      }
+    }
+    &.column-main{
+      background: $cColumn;
+      &::before{
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 10px solid $cColumn;
+        border-left: 10px solid transparent;
+      }
+    }
+    &.patch-main{
+      background: $cPatch;
+      &::before{
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 10px solid $cPatch;
+        border-left: 10px solid transparent;
+      }
+    }
+    &.problem-main{
+      background: $cProblem;
+      &::before{
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 10px solid $cProblem;
+        border-left: 10px solid transparent;
+      }
     }
   }
   &::after{
@@ -229,7 +290,7 @@ $cPurple: #a03c8b;
 
 .text-main{
   margin-left: 0px;
-  // margin-top: 80px;
+  margin-top: 80px;
   padding: 12px 30px;
   padding-left: 1rem;
   color: #fff;
@@ -314,6 +375,7 @@ $cPurple: #a03c8b;
 }
 
 .text-view{
+  margin-bottom: 20px;
   background-color: white;
   box-shadow: 0 0px 10px 5px  rgba(161, 161, 161, 0.1);
   padding: 0.5rem;
@@ -520,9 +582,7 @@ $cPurple: #a03c8b;
 }
 
 
-$cPatch: #8185DB;
-$cDarkPatch: #555abd;
-$cLightPatch: #b8bbf3;
+
 
 .patch-back{
   background: linear-gradient(rgba(0,0,0,0),rgba(139, 143, 230, 0.1));
@@ -910,9 +970,7 @@ $cLightPatch: #b8bbf3;
 }
 
 // コラム
-$cColumn: #f396a3;
-$cDarkColumn: #da7f8b;
-$cLightColumn: #facfd4;
+
 
 
 // コラムボックスview
@@ -1177,9 +1235,6 @@ $cLightColumn: #facfd4;
 }
 
 //問題
-$cProblem: #58c1f1;
-$cDarkProblem: #3797c4;
-$cLightProblem: #a0d8f1;
 
 
 // 問題ボックスview
@@ -1509,30 +1564,39 @@ $cBtn5-3: #d7dcf3;
   text-decoration: none;
   transition: all 0.3s;
   font-size: 15px;
+  &:hover{
+    text-decoration: none;
+  }
 }
 .mbtn{
   margin: 0.4rem 0.5rem;
   display: block;
   background-color: white;
   text-align: center;
-  padding: 3px 5px;
+  padding: 5px 7px;
   border-radius: 2rem;
   width: 130px;
   text-decoration: none;
   transition: all 0.3s;
   font-size: 15px;
+  &:hover{
+    text-decoration: none;
+  }
 }
-.sbtn{
+.tsbtn{
   margin: 0.4rem 0.5rem;
-  display: block;
+  display: inline-block;
   background-color: white;
   text-align: center;
   padding: 3px 5px;
   border-radius: 4px;
-  width: 100px;
+  width: 80px;
   text-decoration: none;
   transition: all 0.3s;
   font-size: 15px;
+  &:hover{
+    text-decoration: none;
+  }
 }
 .tbtn{
   margin: 2rem 0;
@@ -1545,6 +1609,9 @@ $cBtn5-3: #d7dcf3;
   height: 2.5rem;
   text-decoration: none;
   transition: all 0.3s;
+  &:hover{
+    text-decoration: none;
+  }
 }
 .btn-1{
   color: rgb(255, 255, 255);
@@ -1629,16 +1696,65 @@ $cBtn5-3: #d7dcf3;
     background-color: $cLightGreen;
   }
 }
+.btn-12{
+  color: white;
+  border: solid 1px $cColumn;
+  background-color: $cColumn;
+  &:hover{
+    background-color: $cLightColumn;
+  }
+}
+.btn-13{
+  color: white;
+  border: solid 1px $cProblem;
+  background-color: $cProblem;
+  &:hover{
+    background-color: $cLightProblem;
+  }
+}
+.btn-14{
+  color: white;
+  border: solid 1px $cPatch;
+  background-color: $cPatch;
+  &:hover{
+    background-color: $cLightPatch;
+  }
+}
 .btn-16{
   color: $cGreen;
   border: solid 1px $cGreen;
   &:hover{
     background-color: $cLightGreen;
+    color: $cGreen;
+  }
+}
+.btn-17{
+  color: $cColumn;
+  border: solid 1px $cColumn;
+  &:hover{
+    background-color: $cLightColumn;
+    color: $cColumn;
+  }
+}
+.btn-18{
+  color: $cProblem;
+  border: solid 1px $cProblem;
+  &:hover{
+    background-color: $cLightProblem;
+    color: $cProblem;
+  }
+}
+.btn-19{
+  color: $cPatch;
+  border: solid 1px $cPatch;
+  &:hover{
+    background-color: $cLightPatch;
+    color: $cPatch;
   }
 }
 
-$cComment: #EAC779;
-$cLightComment: #FFFDFA;
+
+
 .comment-area{
   width: 100%;
 }
@@ -1774,7 +1890,7 @@ $cLightComment: #FFFDFA;
   & h1,h2,h3,h4,h5,h6{
     font-size: 0.8rem;
   }
-  border-bottom: 1px solid $cLightGreen;
+  border-bottom: 1px solid $cLightPencil;
   & .icon-image{
     display: inline-block;
     height: 25px;
@@ -1784,11 +1900,65 @@ $cLightComment: #FFFDFA;
     border-radius: 50%;
   }
 }
+
 .sidebar-index{
   position: sticky;
+  padding-top: 20px;
   top: 5vh;
-  height: 90vh;
+  max-height: 90vh;
   overflow-y: auto;
+  & .index{
+    font-size: 1.3rem;
+    color: $cPencil;
+    text-align: center;
+  }
+  .heading{
+    margin-top: 5px;
+    color: $cPencil;
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	font-size: 1rem;
+  	text-align: center;
+  	white-space: nowrap;
+  	&::before{
+  	  margin-right: 5%;
+    	content: '';
+    	width: 20%;
+    	height: 3px;
+  	}
+  	&::after{
+  	  margin-left: 5%;
+  	  content: '';
+    	width: 20%;
+    	height: 3px;
+  	}
+  }
+  .text-heading{
+  	&:before,&::after{
+    	background-color: $cGreen;
+  	}
+  }
+  .problem-heading{
+  	&:before,&::after{
+    	background-color: $cProblem;
+  	}
+  }
+  .patch-heading{
+  	&::before,&::after{
+    	background-color: $cPatch;
+  	}
+  }
+  .column-heading{
+  	&::before,&::after{
+    	background-color: $cColumn;
+  	}
+  }
+  .comment-heading{
+  	&::before,&::after{
+    	background-color: $cComment;
+  	}
+  }
   & a{
     text-decoration: none;
     color: #585858;
@@ -1801,6 +1971,7 @@ $cLightComment: #FFFDFA;
 
 footer{
    background-color: #000000;
+   color: white;
   .footer-main{
     width: 100%;
     height: 50px;
@@ -1850,7 +2021,6 @@ main {
     overflow-y: clip;
   }
 }
-
 .content-bottom{
   padding-top: 10px;
   display: flex;
@@ -1911,5 +2081,13 @@ main {
         text-decoration: none;
       }
     }
+  }
+}
+
+.nav-link-active{
+  text-decoration: none;
+  &:hover{
+   text-decoration: none;
+   background-color: $cLightGreen;
   }
 }

@@ -1,0 +1,65 @@
+
+  <!--テキスト一覧-->
+  <% if texts.present? %>
+    <h5 class="heading text-heading">テキスト一覧</h5>
+    <% texts.each do |text| %>
+      <div class="sidebar-problem">
+        <a href ="#index-text-<%= text.id %>" >
+          <%= text.title %>
+          <div class="author">
+            <%= attachment_image_tag text.admin, :profile_image, fallback: "logo2.png", class: "icon-image" %>
+            <%= text.admin.name %>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  <% end %>
+  <!--パッチテキスト一覧-->
+  <% if patches.present? %>
+    <h5 class="heading patch-heading">パッチテキスト一覧</h5>
+    <% patches.each do |patch| %>
+      <div class="sidebar-problem">
+        <%= link_to  text_patch_path(patch.text, patch)  do %>
+          <%= patch.title %>
+          <div class="author">
+            <%= attachment_image_tag patch.user, :profile_image, fallback: "logo2.png", class: "icon-image" %>
+            <%= patch.user.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <!--コラム一覧-->
+  <% if columns.present? %>
+    <h5 class="heading column-heading">コラム一覧</h5>
+    <% columns.each do |column| %>
+      <div class="sidebar-problem">
+        <%= link_to  column_path(column)  do %>
+          <%= column.title %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <!--問題一覧-->
+  <% if problems.present? %>
+    <h5 class="heading problem-heading">問題一覧</h5>
+    <% problems.each do |problem| %>
+      <div class="sidebar-problem">
+        <%= link_to  problem_path(problem)  do %>
+          <%=markdown(problem.body.truncate(20, separator: '.'))%>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+    <!--問題一覧-->
+  <% if topics.present? %>
+    <h5 class="heading text-heading">トピック一覧</h5>
+    <% topics.each do |topic| %>
+      <div class="sidebar-problem">
+        <%= link_to  topic_path(topic)  do %>
+          <%= topic.title%>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+

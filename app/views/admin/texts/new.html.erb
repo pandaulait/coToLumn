@@ -2,13 +2,15 @@
 <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 <div class="row">
   <div class="col-xl-9 box5">
-    <h2 class="main">テキスト投稿フォーム</h2>
+    <h2 class="main text-main">テキスト投稿フォーム</h2>
     <%= form_with model: @text,  url: "/admin/texts",local:true do |f| %>
       <h4>　テキストサムネイル</h4>
       <%= f.attachment_field :image %>
       <h4>　タイトル</h4>
       <%= f.text_field :title ,class: "form-control"%>
       <%= render 'layouts/error_messages', obj: @text, column: :title %>
+      <h4>ステータス</h4>
+      <%= render 'layouts/error_messages', obj: @text, column: :status %>
       <h4>　本文</h4>
       <%= f.text_area :body ,id: "my-text-area"%>
       <%= render 'layouts/error_messages', obj: @text, column: :body %>

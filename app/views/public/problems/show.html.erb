@@ -1,10 +1,29 @@
-<h1>Public::Problems#show</h1>
-<p>Find me in app/views/public/problems/show.html.erb</p>
-<div>
-  <p>教科：<%= @problem.subject_status %></p>
-  <p>問題文：<%= markdown(@problem.body) %></p>
-  <p>回答：<%= markdown(@problem.answer) %></p>
-  <p>解説：<%= markdown(@problem.commentary) %></p>
-  <p>ユーザーネーム：<%=@problem.author.name%></p>
- <%= link_to "編集", edit_problem_path(@problem) %></br>
+<div class="row">
+  <div class="col-lg-9">
+    <%= render "public/problems/show",{problem: @problem} %>
+    <% @problem.texts.each do |text| %>
+      <%= render "public/texts/show",{text: text} %>
+    <% end %>
+  </div>
+  <div class="col-lg-3">
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "layouts/main_content_sidebar",{text: nil ,problem: @problem, column: nil, patch: nil} %>
+      <%= render "layouts/content_sidebar",{texts: @problem.texts ,problems: nil, columns: nil, patches: nil} %>
+    </div>
+  </div>
 </div>
+
+<script>
+  $(document).on('page:restore', function () {
+    location.reload();
+  });
+  $('table').wrap('<div class="table-scroll">');
+  $('.problem-view').children('h3').wrap('<div class="h3-div">');
+  $('.commentary-btn').on('click',function(){
+    $(this).children().slideToggle();
+  });
+  $('.answer-btn').on('click',function(){
+   　$(this).children().slideToggle();
+  });
+</script>

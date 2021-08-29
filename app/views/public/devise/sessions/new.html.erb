@@ -1,35 +1,29 @@
 
 <div class="row loose-leaf">
-
   <div class="col-lg-3"></div>
   <div class="col-lg-6 user-log">
-
     <h2>Log in</h2>
     <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= render 'layouts/error_messages', obj: @admin, column: :email %>
       </div>
-
       <div class="field">
         <%= f.label :password %><br />
         <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-        <%= render 'layouts/error_messages', obj: @user, column: :password %>
+        <%= render 'layouts/error_messages', obj: @admin, column: :password %>
       </div>
-
       <%# if devise_mapping.rememberable? %>
         <!--<div class="field">-->
         <!--  <%#= f.check_box :remember_me %>-->
         <!--  <#%= f.label :remember_me %>-->
         <!--</div>-->
       <%# end %>
-
       <div class="actions">
         <%= f.submit "Log in" ,class: "tbtn btn-11"%>
       </div>
     <% end %>
-
     <%#= render "public/devise/shared/links" %>
   </div>
   <div class="col-lg-3"></div>

@@ -14,16 +14,16 @@ ja:
         title: タイトル
         body: 本文
         image_id: サムネイル
-        is_draft: 下書き
+        is_draft: 公開ステータス
       column:
         title: タイトル
         body: 本文
         image_id: サムネイル
         status: ステータス
       problem:
-        answer: タイトル
-        body: 本文
-        commentary: 本文
+        answer: 答え
+        body: 問題文
+        commentary: 解説
         subject_status: 教科
         status: ステータス
       patch:

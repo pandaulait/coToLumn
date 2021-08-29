@@ -1,28 +1,18 @@
-<h1>Public::Patches#index</h1>
-<p>Find me in app/views/public/patches/index.html.erb</p>
-<div class="bg-secondary">
-  <%= attachment_image_tag @text, :image, :fill, 60, 60 %>
-
-  <p>単元名：<%= @text.title %></p>
-  <p>本文：<%= markdown(@text.body) %></p>
-  <p>ユーザーネーム：<%= @text.admin.name %></p>
-  <% if @text.admin == current_admin %>
-    <%= link_to "編集", edit_admin_text_path(@text) %>
-    <%= link_to "削除", text_patch_path(@text), method: :delete %>
-  <% end %>
+<div class="row">
+  <div class="col-lg-9">
+    <%= render "public/texts/show",{text: @text} %>
+    <% @patches.each do |patch| %>
+      <%= render "public/patches/show",{patch: patch} %>
+    <% end %>
+  </div>
+  <div class="col-lg-3">
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "layouts/main_content_sidebar",{text: @text ,problem: nil, column: nil, patch: nil} %>
+      <%= render "layouts/content_sidebar",{texts: nil, patches: @patches, columns: nil, problems: nil} %>
+    </div>
+  </div>
 </div>
-<% @patches.each do |patch| %>
-<div>
-  <%= attachment_image_tag patch, :image, :fill, 60, 60 %>
-  <p><%if patch.image_id == nil%>
-        nil
-    <%end%></p>
-  <p>単元名：<%= patch.title %></p>
-  <p>本文：<%= markdown(patch.body) %></p>
-  <p>ユーザーネーム：<%= patch.user.name %></p>
-  <%= link_to "詳細", text_patch_path(@text,patch) %>
-  <% if patch.user == current_user %>
 
-  <% end %>
-</div>
-<% end %>
+
+

@@ -1,5 +1,3 @@
-<h1>Public::Topics#index</h1>
-<p>Find me in app/views/public/topics/index.html.erb</p>
 <% if current_user.present? %>
   <%= form_with model: @topic , local:true do |f| %>
     <%= f.label :title ,'トピック名'%><br />

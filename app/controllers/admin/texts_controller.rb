@@ -16,14 +16,15 @@ class Admin::TextsController < ApplicationController
   def new
     @text = Text.new
     @chapter = Chapter.new
+    render :layout => 'content_form'
   end
 
   def create
     @text = Text.new(text_params)
     @text.admin_id = current_admin.id
     if @text.save
-      redirect_to admin_text_path(@text)
-      flash[:alert] = "記事の保存に成功しました。"
+      redirect_to edit_admin_text_path(@text)
+      flash[:notice] = "記事の保存に成功しました。次はチャプターと参考文献を設定しましょう。"
     else
       render :new
     end
@@ -34,12 +35,14 @@ class Admin::TextsController < ApplicationController
     @literature = Literature.new
     @chapter = Chapter.new
     @chapters = @text.chapters
+    render :layout => 'content_form'
   end
 
   def update
     text = Text.find(params[:id])
     if text.update(text_params)
       redirect_to text_path(text)
+      flash[:notice] = "記事の保存に成功しました。"
     else
       @text = text
       @literature = Literature.new
@@ -58,7 +61,7 @@ class Admin::TextsController < ApplicationController
   private
 
   def text_params
-    params.require(:text).permit(:title, :body, :image, :is_draft)
+    params.require(:text).permit(:title, :body, :image, :published)
   end
 
   def ensure_correct_user

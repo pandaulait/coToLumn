@@ -1,0 +1,54 @@
+<% if patches.present? || columns.present? || problems.present? ||texts.present? %>
+  <h4 class="index mt-4">関連する記事一覧</h4>
+  <!--テキスト一覧-->
+  <% if texts.present? %>
+    <h5 class="heading text-heading">テキスト一覧</h5>
+    <% texts.each do |text| %>
+      <div class="sidebar-problem">
+        <a href ="#index-text-<%= text.id %>" >
+          <%= text.title %>
+          <div class="author">
+            <%= attachment_image_tag text.admin, :profile_image, fallback: "logo2.png", class: "icon-image" %>
+            <%= text.admin.name %>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  <% end %>
+  <!--パッチテキスト一覧-->
+  <% if patches.present? %>
+    <h5 class="heading patch-heading">パッチテキスト一覧</h5>
+    <% patches.each do |patch| %>
+      <div class="sidebar-problem">
+        <%= link_to  text_patch_path(patch.text, patch)  do %>
+          <%= patch.title %>
+          <div class="author">
+            <%= attachment_image_tag patch.user, :profile_image, fallback: "logo2.png", class: "icon-image" %>
+            <%= patch.user.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <!--コラム一覧-->
+  <% if columns.present? %>
+    <h5 class="heading column-heading">コラム一覧</h5>
+    <% columns.each do |column| %>
+      <div class="sidebar-problem">
+        <a href ="#index-column-<%= column.id %>" ><%= column.title %></a>
+      </div>
+    <% end %>
+  <% end %>
+  <!--問題一覧-->
+  <% if problems.present? %>
+    <h5 class="heading problem-heading">問題一覧</h5>
+    <% problems.each do |problem| %>
+      <div class="sidebar-problem">
+        <a href ="#index-problem-<%=problem.id%>" >
+          <%=markdown(problem.body.truncate(20, separator: '.'))%>
+        </a>
+      </div>
+    <% end %>
+  <% end %>
+
+<% end %>

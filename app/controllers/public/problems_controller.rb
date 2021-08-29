@@ -1,4 +1,7 @@
 class Public::ProblemsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy, :subject]
+  before_action :ensure_correct_user, only: [:edit,:update,:destroy, :subject]
+
   def index
     @problems = Problem.all
   end
@@ -28,8 +31,12 @@ class Public::ProblemsController < ApplicationController
 
   def update
     problem = Problem.find(params[:id])
-    problem.update(problem_params)
-    redirect_to problem_path(problem)
+    if problem.update(problem_params)
+      redirect_to problem_path(problem)
+    else
+      @problem = problem
+      render :edit
+    end
   end
 
   def destroy
@@ -49,5 +56,13 @@ class Public::ProblemsController < ApplicationController
   private
   def problem_params
     params.require(:problem).permit(:author_id, :author_type, :body, :answer, :commentary, :status, :subject_status)
+  end
+
+  def ensure_correct_user
+    author = Problem.find(params[:id]).author
+    unless author == current_user || author == current_admin
+      redirect_to request.referer
+      flash[:alert] = "他人のコラムは編集できません。"
+    end
   end
 end

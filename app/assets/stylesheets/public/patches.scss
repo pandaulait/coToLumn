@@ -1,3 +1,69 @@
 // Place all the styles related to the public/patches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+.sample-patch{
+  width: 100%;
+  box-shadow: none;
+  padding: 2rem 1rem;
+  margin: 30px 10px;
+  border-radius: 1rem;
+  border: solid 0.5rem $cPatch;
+  background-color: white;
+  &::before{
+    content: 'このような\A見た目に\Aなります。';
+    padding: 1rem;
+    position: absolute;
+    font-size: 0.9rem;
+    top: 20px;
+    transform: rotate(20deg);
+    right: -20px;
+    white-space: pre;
+    text-align: center;
+    background-color: $cPatch;
+    color: white;
+    border-radius: 3rem;
+  }
+}
+
+.next-btn2{
+  margin: 60px 0.5rem;
+  display: block;
+  background-color: white;
+  padding: 3px 5px;
+  border-radius: 5px;
+  width: 150px;
+  height: 120px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  border: solid 1px $cPatch;
+  background-color: $cPatch;
+  white-space: pre;
+  &:hover{
+    text-decoration: none;
+    background-color: $cLightPatch;
+    color: white;
+    &::before{
+      border-left:110px solid $cLightPatch;
+    }
+  }
+  &::before {
+    position:absolute;
+    content:"";
+    width:0;
+    height:0;
+    border:110px solid transparent;
+    border-left:110px solid $cPatch;
+    left:160px;
+    top: 10px;
+  }
+  & span{
+    display: inline-block;
+  }
+}

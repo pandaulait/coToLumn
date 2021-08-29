@@ -1,12 +1,12 @@
 <% if order.content_type == "Problem" || order.content_type == "Comment"%>
   <%= form_with model: order ,url: text_patch_order_ajax2_path(text,patch), method: :get, remote: true do |f| %>
     <%= f.collection_select(:content_id, contents , :id, :body, {prompt: 'タイトルを選んで表示'}, {class: 'form-control', required: true})%>
-    <%= f.submit '決定'%>
+    <%= f.submit '決定' , class: "tbtn btn-11 my-2"%>
   <% end %>
 <% else %>
   <%= form_with model: order ,url: text_patch_order_ajax2_path(text,patch), method: :get, remote: true do |f| %>
     <%= f.collection_select(:content_id, contents , :id, :title, {prompt: 'タイトルを選んで表示'}, {class: 'form-control', required: true})%>
-    <%= f.submit '決定'%>
+    <%= f.submit '決定' , class: "tbtn btn-11 my-2"%>
   <% end %>
 <% end %>
 <div class="content-view">

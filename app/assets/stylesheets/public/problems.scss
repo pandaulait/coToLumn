@@ -1,3 +1,31 @@
 // Place all the styles related to the public/problems controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+.sample-problem{
+  width: 100%;
+  box-shadow: none;
+  padding: 2rem 1rem;
+  margin: 30px 10px;
+  border-radius: 1rem;
+  border: solid 0.5rem $cProblem;
+  background-color: white;
+  &::before{
+    content: 'このような\A見た目に\Aなります。';
+    padding: 1rem;
+    position: absolute;
+    font-size: 0.9rem;
+    top: 20px;
+    transform: rotate(20deg);
+    right: -20px;
+    white-space: pre;
+    text-align: center;
+    background-color: $cProblem;
+    color: white;
+    border-radius: 3rem;
+  }
+}
