@@ -15,10 +15,10 @@ class Patch < ApplicationRecord
   #いいね機能
   has_many :likes, as: :liked_content, dependent: :destroy
 
-  has_many :professional_likes, -> { where "category = 1" }, as: :liked_content, class_name: "Like"
-  has_many :scientifically_likes, -> { where "category = 2" }, as: :liked_content, class_name: "Like"
-  has_many :logical_likes, -> { where "category = 3" }, as: :liked_content, class_name: "Like"
-  has_many :dislikes, -> { where "category = 4" }, as: :liked_content, class_name: "Like"
+  has_many :professional_likes, -> { where "category = 1" }, as: :liked_content, class_name: "Like", dependent: :destroy
+  has_many :scientifically_likes, -> { where "category = 2" }, as: :liked_content, class_name: "Like", dependent: :destroy
+  has_many :logical_likes, -> { where "category = 3" }, as: :liked_content, class_name: "Like", dependent: :destroy
+  has_many :dislikes, -> { where "category = 4" }, as: :liked_content, class_name: "Like", dependent: :destroy
 
   def professional_liked_by?(user)
     likes.where(user_id: user.id, category: 1).exists?

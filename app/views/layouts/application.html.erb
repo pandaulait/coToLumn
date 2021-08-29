@@ -24,32 +24,8 @@
     <!--ヘッダ-->
     <%= render "layouts/header"%>
     <!--ヘッダー-->
-
-    <div class="nav-scroller py-1 mb-2 mx-auto" style="width: 90vw; overflow-x: auto;     white-space: nowrap;">
-      <nav class="blog-nav d-flex justify-content-between">
-        <%= link_to '記事一覧', texts_path,class: "text-muted p-2" ,data: {"turbolinks"=>false}%>
-        <%= link_to '問題一覧', problems_path, class: "text-muted p-2" %>
-        <% if user_signed_in? %>
-          <%= link_to '新規問題投稿', new_problem_path,class: "text-muted p-2" ,data: {"turbolinks"=>false}%>
-        <% end %>
-        <%= link_to 'コラム一覧', columns_path,class: "text-muted p-2" %>
-        <% if user_signed_in? %>
-          <%= link_to 'コラム投稿', new_column_path,class: "text-muted p-2" ,data: {"turbolinks"=>false}%>
-        <% end %>
-        <a class="text-muted p-2" style="display: box;" href="#">算数</a>
-        <a class="text-muted p-2" style="display: box;" href="#">理科</a>
-        <a class="text-muted p-2" style="display: box;" href="#">国語</a>
-        <a class="text-muted p-2" style="display: box;" href="#">社会</a>
-        <a class="text-muted p-2" style="display: box;" href="#">英語</a>
-        <a class="text-muted p-2" style="display: box;" href="#">体育</a>
-        <a class="text-muted p-2" style="display: box;" href="#">音楽</a>
-        <a class="text-muted p-2" style="display: box;" href="#">家庭科</a>
-        <a class="text-muted p-2" style="display: box;" href="#">技術</a>
-        <a class="text-muted p-2" style="display: box;" href="#">図工</a>
-        <a class="text-muted p-2" style="display: box;" href="#">図書</a>
-        <a class="text-muted p-2" style="display: box;" href="#">総合</a>
-      </nav>
-    </div>
+    <%= render "layouts/header2"%>
+    
     </header>
     <main style="width: 100vw;">
       <div class="container mb-5 pl-3">
