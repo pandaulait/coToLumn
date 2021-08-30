@@ -1,0 +1,48 @@
+<div class="row loose-leaf">
+  <div class ="col-xl-3">
+    <%= render "public/users/sidebar_profile",{user: @user} %>
+  </div>
+  <div class ="col-xl-9">
+    <div class="text-center my-2 menu-item">
+      <h2 class="heading01">下書き一覧</h2>
+    </div>
+    <!--#このユーザーが作成したコラム一覧-->
+    <% if @columns.present? %>
+      <h2 class="heading02">Column</h2>
+      <% @columns.each do |column| %>
+        <%= render "public/columns/show",{column: column} %>
+      <% end %>
+    <% end %>
+    <!--このユーザーが作成した問題一覧-->
+    <% if @problems.present? %>
+      <h2 class="heading03">Problem</h2>
+      <% @problems.each do |problem| %>
+        <%= render "public/problems/show",{problem: problem} %>
+      <% end %>
+    <% end %>
+    <!--このユーザーが作成した問題一覧-->
+    <% if @patches.present? %>
+      <h2 class="heading04">Patch</h2>
+      <% @patches.each do |patch| %>
+        <%= render "public/patches/show",{patch: patch} %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+<script>
+  $(document).on('page:restore', function () {
+    location.reload();
+  });
+  $('table').wrap('<div class="table-scroll">');
+  $('.problem-view').children('h3').wrap('<div class="h3-div">');
+  $('.commentary-btn').on('click',function(){
+    $(this).children().slideToggle();
+  });
+  $('.answer-btn').on('click',function(){
+   　$(this).children().slideToggle();
+  });
+</script>

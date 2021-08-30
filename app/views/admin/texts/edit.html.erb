@@ -56,11 +56,11 @@
       <h4>本文</h4>
       <%= f.text_area :body ,id: "my-text-area"%>
       <%= render 'layouts/error_messages', obj: @text, column: :body %>
-      <div class="d-flex">
-        <%= f.radio_button :published, 0 %>
-        <%= f.label :published, '非公開', value: false %>
-        <%= f.radio_button :published, 1 %>
-        <%= f.label :published, '公開', value: true %>
+      <div class="">
+        <%= f.radio_button :status, false %>
+        <%= f.label :status, '非公開', value: false %>
+        <%= f.radio_button :status, true %>
+        <%= f.label :status, '公開', value: true %>
       </div>
       <%= f.submit '更新', class: "mbtn btn-11 ml-auto mr-4" %>
     <% end %>

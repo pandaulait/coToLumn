@@ -47,10 +47,23 @@
             </div>
           </li>
         <% end %>
+        <% if admin_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= attachment_image_tag current_admin, :profile_image, fallback: "logo2.png", class: "profile-icon" %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%= link_to "マイページ", admin_path(current_admin) ,class: "dropdown-item"%>
+              <%= link_to "通知欄", admin_activities_path ,class: "dropdown-item"%>
+              <%= link_to "管理者ページへ", admin_users_path ,class: "dropdown-item"%>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete  ,class: "dropdown-item"%>
+            </div>
+          </li>
+        <% end %>
       </ul>
      <form class="d-flex ml-auto mr-0">
-        <input class="form-control me-2" type="search" placeholder="検索..." aria-label="検索...">
-        <button class="btn btn-outline-success flex-shrink-0" type="submit">検索</button>
+        <input class="form-control me-2" type="search" placeholder="工事中..." aria-label="検索...">
+        <button class="btn btn-outline-success flex-shrink-0" type="submit"><s>検索</s></button>
       </form>
     </div>
   </div>

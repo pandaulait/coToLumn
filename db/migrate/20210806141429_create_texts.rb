@@ -5,7 +5,7 @@ class CreateTexts < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.text :body, null: false
       t.string :image_id
-      t.boolean :published, null: false, default: true
+      t.boolean :status, null: false, default: true
 
       t.timestamps
     end

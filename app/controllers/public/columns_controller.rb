@@ -3,7 +3,7 @@ class Public::ColumnsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit,:update,:destroy, :link]
 
   def index
-    @columns = Column.all
+    @columns = Column.all.published
   end
 
   def show

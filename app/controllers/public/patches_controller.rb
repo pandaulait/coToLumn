@@ -3,7 +3,7 @@ class Public::PatchesController < ApplicationController
   before_action :ensure_correct_user, only: [:edit,:update,:destroy]
   def index
     @text = Text.find(params[:text_id])
-    @patches = @text.patches
+    @patches = @text.patches.published
   end
 
   def show
@@ -47,7 +47,7 @@ class Public::PatchesController < ApplicationController
   def update
     patch = Patch.find(params[:id])
     if patch.update(patch_params)
-      flash[:notice] = "記事の削除に成功しました。"
+      flash[:notice] = "記事の更新に成功しました。"
       redirect_to text_patch_path(params[:text_id],patch)
     else
       flash[:alert] = "記事の 更新に失敗しました。"
@@ -72,7 +72,7 @@ class Public::PatchesController < ApplicationController
 
   private
   def patch_params
-    params.require(:patch).permit(:title, :body, :image, :is_draft)
+    params.require(:patch).permit(:title, :body, :image, :status)
   end
 
   def ensure_correct_user

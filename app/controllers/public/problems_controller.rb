@@ -1,9 +1,9 @@
 class Public::ProblemsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy, :subject]
+  before_action :authenticate_user! , only: [:create, :new, :edit, :update, :destroy, :subject]
   before_action :ensure_correct_user, only: [:edit,:update,:destroy, :subject]
 
   def index
-    @problems = Problem.all
+    @problems = Problem.all.published
   end
 
   def show

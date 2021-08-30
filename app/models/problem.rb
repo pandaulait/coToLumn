@@ -1,8 +1,13 @@
 class Problem < ApplicationRecord
   validates :subject_status, presence: true
-  validates :commentary, presence: true, length: { minimum: 5 }
+  # validates :commentary, presence: true, length: { minimum: 5 }
   validates :answer, presence: true
   validates :body, length: { minimum: 5 }, presence: true
+  enum status: { draft: 0,
+                 published: 1,
+                 unpublished: 2}
+  
+  
   belongs_to :author, polymorphic: true
   has_many :subjects, dependent: :destroy
   has_many :texts ,through: :subjects, dependent: :destroy

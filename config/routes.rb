@@ -2,12 +2,6 @@ Rails.application.routes.draw do
 
 
 
-
-
-
-
-
-
   root to: 'homes#top'
   devise_scope :user do
     post '/users/guest_sign_in',to: 'public/devise/sessions#guest_sign_in'
@@ -34,10 +28,11 @@ Rails.application.routes.draw do
       end
 
     end
-    resources :users ,only: [:show,:edit,:update,:index] do
+    resources :users ,only: [:show,:edit,:update] do
       resource :relationships ,only: [:create, :destroy]
       get 'followers' => 'users#followers'
       get 'followings' => 'users#followings'
+      get 'draft' => 'users#draft'
     end
     resources :bookmarks ,only: [:index]
     resources :activities ,only: [:index]
@@ -71,12 +66,19 @@ Rails.application.routes.draw do
   end
 
 
+  scope module: :admin do
+    resources :admins ,only: [:show]
+  end
   namespace :admin do
+    resources :users ,only: [:index, :update]
     resources :activities ,only: [:index]
-
+    resources :patches ,only: [:index, :update]
+    resources :columns ,only: [:index, :update]
+    resources :problems ,only: [:index, :update]
     resources :texts ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       post 'literatures' => 'literatures#text_create'
       delete 'literature/:id' => 'literatures#text_destroy',as: 'literature'
+      patch 'status' => 'texts#status', as: 'update_status'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

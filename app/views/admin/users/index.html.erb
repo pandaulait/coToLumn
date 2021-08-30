@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-9">
+    <table class="table">
+      <thead>
+        <th>id</th>
+        <th>name</th>
+        <th>status</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id%></td>
+            <td>
+              <%= link_to user_path(user) do %>
+                <%= user.name %>
+              <% end %>
+            </td>
+            <td>
+              <% if user.is_deleted == true %>
+                <span>退会中</span>
+              <% elsif user.is_deleted == false %>
+                <span>在籍中</span>
+              <% end %>
+            </td>
+            <td>
+              <% if user.is_deleted == true %>
+                <%= form_with model: user,  url: admin_user_path(user) ,local:true do |f| %>
+                  <%= f.hidden_field :is_deleted, :value => false %>
+                  <%= f.submit '退会取り消し', class: "sbtn btn-16 m-0" %>
+                <% end %>
+              <% elsif user.is_deleted == false %>
+                <%= form_with model: user,  url: admin_user_path(user) ,local:true do |f| %>
+                  <%= f.hidden_field :is_deleted, :value => true %>
+                  <%= f.submit '退会させる', class: "sbtn btn-11 m-0" %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-3">
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "admin/admins/admin_sidebar"%>
+    </div>
+  </div>
+</div>
+
+

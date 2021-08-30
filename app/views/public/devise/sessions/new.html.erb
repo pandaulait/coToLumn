@@ -7,12 +7,12 @@
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-        <%= render 'layouts/error_messages', obj: @admin, column: :email %>
+        <%= render 'layouts/error_messages', obj: @user, column: :email %>
       </div>
       <div class="field">
         <%= f.label :password %><br />
         <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-        <%= render 'layouts/error_messages', obj: @admin, column: :password %>
+        <%= render 'layouts/error_messages', obj: @user, column: :password %>
       </div>
       <%# if devise_mapping.rememberable? %>
         <!--<div class="field">-->

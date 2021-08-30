@@ -1,17 +1,55 @@
-<h1>Admin::Texts#index</h1>
-<p>Find me in app/views/admin/texts/index.html.erb</p>
-<% @texts.each do |text| %>
-<div>
-  <%= attachment_image_tag text, :image, :fill, 60, 60 %>
-  <p><%if text.image_id == nil%>
-        nil
-    <%end%></p>
-  <p>単元名：<%= text.title %></p>
-  <p>本文：<%= markdown(text.body) %></p>
-  <p>ユーザーネーム：<%= text.admin.name %></p>
-  <%= link_to "詳細", admin_text_path(text) %>
-  <% if text.admin == current_admin %>
-    <%= link_to "削除", text_path(text), method: :delete %>
-  <% end %>
+<div class="row">
+  <div class="col-lg-9">
+    <table class="table">
+      <thead>
+        <th>id</th>
+        <th>title</th>
+        <th>author</th>
+        <th>status</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @texts.each do |text| %>
+          <tr>
+            <td><%= text.id%></td>
+            <td>
+              <%= link_to text_path(text) do %>
+                <%= text.title%>
+              <% end %>
+            </td>
+            <td><%= text.admin.name %></td>
+            <td>
+              <% if text.status == true %>
+                <span>公開中</span>
+              <% else %>
+                <span>非公開中</span>
+              <% end %>
+            </td>
+            <td>
+              <% if text.status == true %>
+                <%= form_with model: text,  url: admin_text_update_status_path(text) ,local:true do |f| %>
+                  <%= f.hidden_field :status, :value => false %>
+                  <%= f.submit '非公開に', class: "sbtn btn-16 m-0" %>
+                <% end %>
+              <% else %>
+                <%= form_with model: text,  url: admin_text_update_status_path(text) ,local:true do |f| %>
+                  <%= f.hidden_field :status, :value => true %>
+                  <%= f.submit '公開する', class: "sbtn btn-11 m-0" %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-lg-3">
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "admin/admins/admin_sidebar"%>
+    </div>
+  </div>
 </div>
-<% end %>
+
+

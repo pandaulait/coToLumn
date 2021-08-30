@@ -4,7 +4,7 @@
       <%= link_to  new_text_patch_path(text) ,data: {"turbolinks"=>false} do %>
         <%= image_tag "plus.png" , class: "plus-btn"%>
       <% end %>
-      <% text.patches.each do |patch| %>
+      <% text.patches.published.each do |patch| %>
         <%= link_to  text_patch_path(text, patch) do %>
           <%= attachment_image_tag patch, :image, fallback: "logo2.png", class: "patch-icon-image" %>
         <% end %>
@@ -41,7 +41,7 @@
         <%= markdown(text.body) %>
       </div>
     </div>
-        <%= text.published %>
+        <%= text.status %>
       <div class="content-show-link">
       <%= link_to '続きを読む', text_path(text), local:true  %>
     </div>

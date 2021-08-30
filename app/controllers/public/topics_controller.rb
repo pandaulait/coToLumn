@@ -1,4 +1,5 @@
 class Public::TopicsController < ApplicationController
+  before_action :authenticate_user!, except: [:show,:index]
   def index
     @topic = Topic.new
     @topics = Topic.all

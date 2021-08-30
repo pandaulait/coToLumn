@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @topic = Topic.find(params[:topic_id])
     new_post =  Post.new(post_paramas)
