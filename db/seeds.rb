@@ -9,5 +9,7 @@
 Admin.find_or_create_by(id: 1) do |admin|
  admin.email = "example@example.com"
  admin.password = "example"
- admin.name = "pandaulait"
+ admin.name = "guest"
 end
+
+Admin.create(email: ENV["ADMIN_EMAIL"], password: ENV["ADMIN_PASSWORD"], name: ENV["ADMIN_NAME"])
