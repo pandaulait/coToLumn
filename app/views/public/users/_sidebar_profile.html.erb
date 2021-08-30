@@ -32,7 +32,7 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="#">Action</a>
-        <%= link_to "編集", edit_user_path(user) ,class: "dropdown-item"%>
+        <%= link_to "編集", edit_user_path(user) ,class: "dropdown-item",data: {"turbolinks"=>false}%>
         <%= link_to "退会", users_confirm_path(current_user) ,class: "dropdown-item"%>
       </div>
     </div>

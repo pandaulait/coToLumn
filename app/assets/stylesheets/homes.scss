@@ -33,17 +33,29 @@ $cLightComment: #FFFDFA;
 .main-visual{
   background-image: image-url("home.jpg");
   width: 100%;
-  height: 390px;
+  height: 395px;
   display: flex;
-  & .main-logo{
-    margin: auto;
-    haigh: 20vh;
-    max-width: 1000px;
-    padding: 3vh 10vw 3vh 8vw;
-    object-fit: contain;
-    background-color: white;
-  }
+  & .logo-box{
+    width: 100%;
+    margin: auto 0;
+    height: 180px;
+    display: flex;
+    & .logo-box2{
+      margin: auto;
+      max-width: 100%;
+      height: 160px;
+      background-color: white;
+      padding: 30px 5vw 5px 5vw;
+    }
+    & .main-logo{
+      margin: auto;
+      max-width: 100%;
+      height: 100%;
+      object-fit: contain;
 
+      padding: 0px 20px 0px 0px;
+    }
+  }
 }
  .main-heading{
     margin: 10px 0;
