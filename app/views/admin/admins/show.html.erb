@@ -1,0 +1,39 @@
+
+<div class="row loose-leaf">
+  <div class ="col-xl-3">
+    <%= render "admin/admins/sidebar_profile",{admin: @admin} %>
+  </div>
+  <div class ="col-xl-9">
+    <!--#このユーザーが作成したコラム一覧-->
+    <% if @texts.present? %>
+      <h2 class="heading01">Text</h2>
+      <% @texts.each do |text| %>
+        <%= render "public/texts/show",{text: text} %>
+      <% end %>
+    <% end %>
+    <!--このユーザーが作成した問題一覧-->
+    <% if @problems.present? %>
+      <h2 class="heading03">Problem</h2>
+      <% @problems.each do |problem| %>
+        <%= render "public/problems/show",{problem: problem} %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+<script>
+  $(document).on('page:restore', function () {
+    location.reload();
+  });
+  $('table').wrap('<div class="table-scroll">');
+  $('.problem-view').children('h3').wrap('<div class="h3-div">');
+  $('.commentary-btn').on('click',function(){
+    $(this).children().slideToggle();
+  });
+  $('.answer-btn').on('click',function(){
+   　$(this).children().slideToggle();
+  });
+</script>

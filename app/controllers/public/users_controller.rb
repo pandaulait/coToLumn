@@ -8,9 +8,9 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @columns = @user.columns
-    @problems = @user.problems
-    @patches = @user.patches
+    @columns = @user.columns.order(created_at: :desc).limit(5)
+    @problems = @user.problems.order(created_at: :desc).limit(5)
+    @patches = @user.patches.order(created_at: :desc).limit(5)
   end
 
   def confirm
@@ -51,6 +51,13 @@ class Public::UsersController < ApplicationController
   end
 
 
+  def draft
+    @user = User.find(params[:user_id])
+    @columns = @user.columns.draft.order(created_at: :desc)
+    @problems = @user.problems.draft.order(created_at: :desc)
+    @patches = @user.patches.draft.order(created_at: :desc)
+  end
+
   private
   def deleted_params
     params.require(:user).permit(:is_deleted)
@@ -67,6 +74,7 @@ class Public::UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
 
 
   def user_params

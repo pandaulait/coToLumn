@@ -28,3 +28,10 @@
 </div>
 
 
+<script>
+  $(document).on('page:restore', function () {
+    location.reload();
+  });
+  $('table').wrap('<div class="table-scroll">');
+  $('.problem-view').children('h3').wrap('<div class="h3-div">');
+</script>

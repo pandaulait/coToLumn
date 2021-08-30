@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-lg-9">
+    <table class="table">
+      <thead>
+        <th>id</th>
+        <th>title</th>
+        <th>author</th>
+        <th>status</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @problems.each do |problem| %>
+          <tr>
+            <td><%= problem.id%></td>
+            <td>
+              <%= link_to problem_path(problem) do %>
+                <%= problem.body.truncate(20, separator: '.') %>
+              <% end %>
+            </td>
+            <td><%= problem.author.name %></td>
+            <td>
+              <% if problem.status == "published" %>
+                <span>公開中</span>
+              <% elsif problem.status == "draft" %>
+                <span>非公開中</span>
+              <% elsif problem.status == "unpublished" %>
+                <span class="text-danger">非公開中</span>
+              <% end %>
+            </td>
+            <td>
+              <% if problem.status == "published" %>
+                <%= form_with model: problem,  url: admin_problem_path(problem) ,local:true do |f| %>
+                  <%= f.hidden_field :status, :value => "unpublished" %>
+                  <%= f.submit '非公開に', class: "sbtn btn-16 m-0" %>
+                <% end %>
+              <% elsif problem.status == "unpublished" %>
+                <%= form_with model: problem,  url: admin_problem_path(problem) ,local:true do |f| %>
+                  <%= f.hidden_field :status, :value => "published" %>
+                  <%= f.submit '公開する', class: "sbtn btn-11 m-0" %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-3">
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "admin/admins/admin_sidebar"%>
+    </div>
+  </div>
+</div>
+
+

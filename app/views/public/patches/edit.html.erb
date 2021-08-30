@@ -21,6 +21,13 @@
       <h4>タイトル</h4>
       <%= f.text_field :title ,class: "form-control"%>
       <%= render 'layouts/error_messages', obj: @patch, column: :title %>
+      <% unless @column.status == "unpublished" %>
+        <h4>ステータス</h4>
+        <%= f.radio_button :status, 'draft' %>
+        <%= f.label :status, '非公開', value: "draft" %>
+        <%= f.radio_button :status, 'published' %>
+        <%= f.label :status, '公開', value:"published" %>
+      <% end %>
       <h4>本文</h4>
       <%= f.text_area :body ,id: "my-text-area"%>
       <%= render 'layouts/error_messages', obj: @patch, column: :body %>

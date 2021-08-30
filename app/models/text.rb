@@ -31,6 +31,10 @@ class Text < ApplicationRecord
   has_many :logical_likes, -> { where "category = 3" }, as: :liked_content, class_name: "Like", dependent: :destroy
   has_many :dislikes, -> { where "category = 4" }, as: :liked_content, class_name: "Like", dependent: :destroy
 
+    # ブックマーク機能
+  has_many :bookmarks, as: :marked_content, dependent: :destroy
+
+  #いいね機能
   def professional_liked_by?(user)
     likes.where(user_id: user.id, category: 1).exists?
   end
@@ -44,12 +48,12 @@ class Text < ApplicationRecord
     likes.where(user_id: user.id, category: 4).exists?
   end
 
-  # ブックマーク機能
-  has_many :bookmarks, as: :marked_content, dependent: :destroy
 
+
+  # ブックマーク機能
   def bookmarked_by?(user)
     bookmarks.where(user_id: user.id).exists?
   end
 
-  scope :published, -> { where(published: true) }
+  scope :published, -> { where(status: true) }
 end

@@ -1,7 +1,9 @@
 class Column < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true, length: { minimum: 10 }
-
+  enum status: { draft: 0,
+                 published: 1,
+                 unpublished: 2}
 
   belongs_to :user
   attachment :image
@@ -41,6 +43,6 @@ class Column < ApplicationRecord
   def bookmarked_by?(user)
     bookmarks.where(user_id: user.id).exists?
   end
-  
-  
+
+  # scope :published, -> { where(status: published) }
 end

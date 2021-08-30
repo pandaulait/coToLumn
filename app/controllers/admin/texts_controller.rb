@@ -1,6 +1,7 @@
 class Admin::TextsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :ensure_correct_user, only: [:edit,:update,:destroy]
+  before_action :ensure_correct_admin, only: [:edit,:update,:destroy]
+  before_action :ensure_normal_admin, only: [:status]
   def index
     @texts = Text.all
   end
@@ -58,17 +59,34 @@ class Admin::TextsController < ApplicationController
     redirect_to admin_texts_path
   end
 
+  def status
+    text = Text.find(params[:text_id])
+    if text.update(text_params)
+      flash[:notice] = "記事の更新に成功しました。"
+    else
+      flash[:alert] = "記事の更新に失敗しました。"
+    end
+    redirect_to request.referer
+  end
+
   private
 
   def text_params
-    params.require(:text).permit(:title, :body, :image, :published)
+    params.require(:text).permit(:title, :body, :image, :status)
   end
 
-  def ensure_correct_user
+  def ensure_correct_admin
     admin = Text.find(params[:id]).admin
     unless admin == current_admin
       redirect_to request.referer
       flash[:alert] = "他人の記事の編集はできません。"
+    end
+  end
+
+  def ensure_normal_admin
+    if current_admin.email == 'example@example.com'
+      flash[:alert] = "ゲスト管理者権限では、ステータスの変更はできません。"
+      redirect_to request.referer
     end
   end
 end

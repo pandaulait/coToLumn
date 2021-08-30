@@ -6,7 +6,7 @@ class CreatePatches < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.text :body, null: false
       t.string :image_id
-      t.integer :status, null: false, default: 0
+      t.integer :status, null: false, default: 1
       t.timestamps
     end
   end

@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_074629) do
     t.string "title", null: false
     t.text "body", null: false
     t.string "image_id"
-    t.integer "status", default: 0, null: false
+    t.integer "status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_074629) do
     t.string "title", null: false
     t.text "body", null: false
     t.string "image_id"
-    t.integer "status", default: 0, null: false
+    t.integer "status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_074629) do
     t.text "answer", null: false
     t.text "commentary"
     t.integer "subject_status", null: false
-    t.integer "status", default: 0, null: false
+    t.integer "status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_problems_on_author_type_and_author_id"
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_074629) do
     t.string "title", null: false
     t.text "body", null: false
     t.string "image_id"
-    t.boolean "published", default: true, null: false
+    t.boolean "status", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

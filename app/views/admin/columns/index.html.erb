@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-lg-9">
+    <table class="table">
+      <thead>
+        <th>id</th>
+        <th>title</th>
+        <th>author</th>
+        <th>status</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @columns.each do |column| %>
+          <tr>
+            <td><%= column.id%></td>
+            <td>
+              <%= link_to column_path(column) do %>
+                <%= column.title%>
+              <% end %>
+            </td>
+            <td><%= column.user.name %></td>
+            <td>
+              <% if column.status == "published" %>
+                <span>公開中</span>
+              <% elsif column.status == "draft" %>
+                <span>非公開中</span>
+              <% elsif column.status == "unpublished" %>
+                <span class="text-danger">非公開中</span>
+              <% end %>
+            </td>
+            <td>
+              <% if column.status == "published" %>
+                <%= form_with model: column,  url: admin_column_path(column) ,local:true do |f| %>
+                  <%= f.hidden_field :status, :value => "unpublished" %>
+                  <%= f.submit '非公開に', class: "sbtn btn-16 m-0" %>
+                <% end %>
+              <% elsif column.status == "unpublished" %>
+                <%= form_with model: column,  url: admin_column_path(column) ,local:true do |f| %>
+                  <%= f.hidden_field :status, :value => "published" %>
+                  <%= f.submit '公開する', class: "sbtn btn-11 m-0" %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-3">
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%= render "admin/admins/admin_sidebar"%>
+    </div>
+  </div>
+</div>
+
+

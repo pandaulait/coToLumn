@@ -2,7 +2,9 @@ class Patch < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 20 }
   validates :body, presence: true, length: { minimum: 10 }
-
+  enum status: { draft: 0,
+                 published: 1,
+                 unpublished: 2}
 
   belongs_to :text
   attachment :image

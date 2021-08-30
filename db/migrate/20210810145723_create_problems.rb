@@ -6,7 +6,7 @@ class CreateProblems < ActiveRecord::Migration[5.2]
       t.text :answer, null: false
       t.text :commentary
       t.integer :subject_status, null: false
-      t.integer :status, null: false, default: 0
+      t.integer :status, null: false, default: 1
 
       t.timestamps
     end
