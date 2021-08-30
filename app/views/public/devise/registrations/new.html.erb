@@ -14,7 +14,7 @@
       <!--emailの登録-->
       <div class="field">
         <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control"%>
+        <%= f.email_field :email, autocomplete: "email" , class: "form-control"%>
         <%= render 'layouts/error_messages', obj: @user, column: :email %>
       </div>
       <!--passwordの登録-->
