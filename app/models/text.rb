@@ -6,7 +6,7 @@ class Text < ApplicationRecord
   # has_many :published, -> { where "published = true" }
 
   belongs_to :admin
-  attachment :image
+  has_one_attached :image
   has_many :links, dependent: :destroy
   has_many :columns ,through: :links, dependent: :destroy
 

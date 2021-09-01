@@ -4,7 +4,7 @@ class CreateColumns < ActiveRecord::Migration[5.2]
       t.integer :user_id, null: false
       t.string :title, null: false
       t.text :body, null: false
-      t.string :image_id
+      # t.string :image_id
       t.integer :status, null: false, default: 1
 
       t.timestamps

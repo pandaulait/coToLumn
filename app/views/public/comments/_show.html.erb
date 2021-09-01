@@ -1,7 +1,11 @@
 <div class="l-comment-view">
   <div class= "comment"  id="index-comment-<%=comment.id%>">
     <div class="faceicon">
-      <%= attachment_image_tag comment.speaker, :profile_image, fallback: "logo2.png", class: "faceicon-image" %>
+      <% if comment.speaker.profile_image.attached? %>
+        <%= image_tag comment.speaker.profile_image, class: "faceicon-image"%>
+      <% else %>
+       <%= image_tag "logo2.png", class: "faceicon-image" %>
+      <% end %>
       <br />
       <%= comment.speaker.name %>
     </div>

@@ -6,7 +6,11 @@
       <% end %>
       <% text.patches.published.each do |patch| %>
         <%= link_to  text_patch_path(text, patch) do %>
-          <%= attachment_image_tag patch, :image, fallback: "logo2.png", class: "patch-icon-image" %>
+          <% if patch.user.profile_image.attached? %>
+            <%= image_tag patch.user.profile_image , class: "patch-icon-image"%>
+          <% else %>
+            <%= image_tag 'logo2.png' , class: "patch-icon-image"%>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -34,7 +38,11 @@
     <div class="mini-content row">
       <div class="thumbnail col-lg-4">
         <%= link_to  text_path(text), local:true do  %>
-          <%= attachment_image_tag text, :image, fallback: "logo2.png", class: "mini-content-thumbnail" %>
+          <% if text.image.attached? %>
+            <%= image_tag text.image , class: "content-thumbnail"%>
+          <% else %>
+           <%= image_tag 'logo2.png', class: "content-thumbnail" %>
+          <% end %>
         <% end %>
       </div>
       <div class="mini-content-box col-lg-8">
@@ -48,7 +56,11 @@
     <div class="content-bottom">
       <div class="author-icon">
         <%#= link_to admin_path(text.admin), local:true do %>
-          <%= attachment_image_tag text.admin, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+          <% if text.admin.profile_image.attached? %>
+            <%= image_tag text.admin.profile_image, class: "icon-image"%>
+          <% else %>
+           <%= image_tag 'logo2.png', class: "icon-image" %>
+          <% end %>
           <%= text.admin.name %>
         <!--<%# end %>-->
         <% if text.admin == current_admin %>

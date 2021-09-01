@@ -6,7 +6,7 @@ class Column < ApplicationRecord
                  unpublished: 2}
 
   belongs_to :user
-  attachment :image
+  has_one_attached :image
   has_many :links, dependent: :destroy
   has_many :texts ,through: :links, dependent: :destroy
 

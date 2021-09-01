@@ -22,7 +22,11 @@
         <%= link_to  text_patch_path(patch.text, patch)  do %>
           <%= patch.title %>
           <div class="author">
-            <%= attachment_image_tag patch.user, :profile_image, fallback: "logo2.png", class: "icon-image" %>
+            <% if patch.user.profile_image.attached? %>
+              <%= image_tag patch.user.profile_image , class: "icon-image" %>
+            <% else %>
+             <%= image_tag 'logo2.png' , class: "icon-image" %>
+            <% end %>
             <%= patch.user.name %>
           </div>
         <% end %>

@@ -37,7 +37,11 @@
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= attachment_image_tag current_user, :profile_image, fallback: "logo2.png", class: "profile-icon" %>
+              <% if current_user.profile_image.attached? %>
+                <%= image_tag current_user.profile_image, class: "profile-icon" %>
+              <% else %>
+               <%= image_tag "logo2.png", class: "profile-icon" %>
+              <% end %>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <%= link_to "マイページ", user_path(current_user) ,class: "dropdown-item"%>
@@ -50,7 +54,11 @@
         <% if admin_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= attachment_image_tag current_admin, :profile_image, fallback: "logo2.png", class: "profile-icon" %>
+              <% if current_admin.profile_image.attached? %>
+                <%= image_tag current_admin.profile_image, class: "profile-icon"%>
+              <% else %>
+               <%= image_tag "logo2.png", class: "profile-icon" %>
+              <% end %>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <%= link_to "マイページ", admin_path(current_admin) ,class: "dropdown-item"%>

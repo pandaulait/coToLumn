@@ -49,7 +49,7 @@
     <!--テキスト編集画面-->
     <%= form_with model: @text,  url: admin_text_path(@text) ,local:true do |f| %>
       <h4>画像</h4>
-      <%= f.attachment_field :image %>
+      <%= f.file_field :image %>
       <h4>タイトル</h4>
       <%= f.text_field :title ,class: "form-control"%>
       <%= render 'layouts/error_messages', obj: @text, column: :title %>

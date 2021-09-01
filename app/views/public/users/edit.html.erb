@@ -2,9 +2,13 @@
   <div class ="col-xl-4">
     <div class="profile_image_box">
       <%= form_with model: @user, local:true do |f| %>
-      <%= attachment_image_tag @user, :profile_image, fallback: "logo2.png" , class: "icon-image" %>
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, class: "icon-image" %>
+      <% else %>
+        <%= image_tag 'logo2.png' , class: "icon-image"%>
+      <% end %>
       <label for="inputImage">ProfileImage</label>
-      <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+      <%= f.file_field  :profile_image %>
     </div>
   </div>
   <div class ="col-xl-8">

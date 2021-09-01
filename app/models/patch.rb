@@ -7,7 +7,7 @@ class Patch < ApplicationRecord
                  unpublished: 2}
 
   belongs_to :text
-  attachment :image
+  has_one_attached :image
   belongs_to :user
   has_many :literatures, as: :subject, dependent: :destroy
   has_many :comments, as: :article, dependent: :destroy

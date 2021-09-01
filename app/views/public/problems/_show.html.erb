@@ -24,11 +24,19 @@
     <div class="author-icon">
       <% if problem.author_type ="User" %>
         <%= link_to user_path(problem.author), local:true do %>
-          <%= attachment_image_tag problem.author, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+          <% if problem.author.profile_image.attached? %>
+            <%= image_tag problem.author.profile_image, class: "icon-image" %>
+          <% else %>
+           <%= image_tag 'logo2.png', class: "icon-image" %>
+          <% end %>
           <%= problem.author.name %>
         <% end %>
       <% else %>
-        <%= attachment_image_tag problem.author, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+        <% if problem.author.profile_image.attached? %>
+          <%= image_tag problem.author.profile_image, class: "icon-image" %>
+        <% else %>
+         <%= image_tag 'logo2.png', class: "icon-image" %>
+        <% end %>
         <%= problem.author.name %>
       <% end %>
       <% if problem.author == current_user ||problem.author == current_admin %>

@@ -18,7 +18,7 @@ class Public::PatchesController < ApplicationController
   def new
     @text = Text.find(params[:text_id])
     @patch = Patch.new
-    @patch.image_id = @text.image_id
+    @patch.image = @text.image
     @patch.title = @text.title
     @patch.body  = @text.body
     render :layout => 'content_form'

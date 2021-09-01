@@ -71,6 +71,7 @@ gem "refile-mini_magick"
 gem 'redcarpet'
 gem 'rouge'
 
+gem 'image_processing', '~> 1.2'
 
 gem 'dotenv-rails'
 gem 'rails-i18n'

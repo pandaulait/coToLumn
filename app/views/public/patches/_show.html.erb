@@ -6,7 +6,11 @@
       <% end %>
       <% patch.text.patches.published.each do |patch1| %>
         <%= link_to  text_patch_path(patch1.text, patch1) do %>
-          <%= attachment_image_tag patch1, :image, fallback: "logo2.png", class: "patch-icon-image" %>
+          <% if patch1.user.profile_image.attached? %>
+            <%= image_tag patch1.user.profile_image , class: "patch-icon-image"%>
+          <% else %>
+           <%= image_tag 'logo2.png' , class: "patch-icon-image"%>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -32,7 +36,11 @@
   </h1>
   <div class="patch-view">
     <%= link_to  text_patch_path(patch.text, patch), local:true do  %>
-      <%= attachment_image_tag patch, :image, fallback: "logo2.png", class: "content-thumbnail" %>
+      <% if patch.image.attached? %>
+        <%= image_tag patch.image, class: "content-thumbnail" %>
+      <% else %>
+       <%= image_tag 'logo2.png', class: "content-thumbnail" %>
+      <% end %>
     <% end %>
     <%= markdown(patch.body) %>
     <p>ユーザーネーム：<%= patch.user.name %></p>
@@ -45,7 +53,11 @@
     <div class="content-bottom">
       <div class="author-icon">
         <%= link_to user_path(patch.user), local:true do %>
-          <%= attachment_image_tag patch.user, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+          <% if patch.user.profile_image.attached? %>
+            <%= image_tag patch.user.profile_image , class: "icon-image"%>
+          <% else %>
+            <%= image_tag 'logo2.png' , class: "icon-image"%>
+          <% end %>
           <%= patch.user.name %>
         <% end %>
         <% if patch.user == current_user %>

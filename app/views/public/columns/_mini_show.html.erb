@@ -10,7 +10,11 @@
   <div class="mini-content row">
     <div class="thumbnail col-lg-4">
       <%= link_to column_path(column), local:true do %>
-        <%= attachment_image_tag column, :image , fallback: "logo2.png", class: "mini-content-thumbnail" %>
+        <% if column.image.attached? %>
+          <%= image_tag column.image, class: "mini-content-thumbnail" %>
+        <% else %>
+         <%= image_tag 'logo2.png' , class: "mini-content-thumbnail"%>
+        <% end %>
       <% end %>
     </div>
     <div class="mini-content-box col-lg-8">
@@ -25,7 +29,11 @@
   <div class="content-bottom">
     <div class="author-icon">
       <%= link_to user_path(column.user), local:true do %>
-        <%= attachment_image_tag column.user, :profile_image , fallback: "logo2.png", class: "icon-image" %>
+        <% if column.user.profile_image.attached? %>
+          <%= image_tag column.user.profile_image, class: "icon-image" %>
+        <% else %>
+         <%= image_tag 'logo2.png', class: "icon-image" %>
+        <% end %>
         <%= column.user.name %>
       <% end %>
       <% if column.user == current_user %>
