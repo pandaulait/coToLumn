@@ -69,10 +69,12 @@
           </li>
         <% end %>
       </ul>
-     <form class="d-flex ml-auto mr-0">
-        <input class="form-control me-2" type="search" placeholder="工事中..." aria-label="検索...">
-        <button class="btn btn-outline-success flex-shrink-0" type="submit"><s>検索</s></button>
-      </form>
+
+          <%= form_with url: search_path, method: :get,class: "d-flex ml-auto mr-0 ",local: true do |f| %>
+            <%= f.text_field :keyword, value: @keyword,  class: "form-control me-2"%>
+            <%= f.submit "検索", class: "btn btn-outline-success flex-shrink-0" %>
+          <% end %>
+
     </div>
   </div>
 </nav>

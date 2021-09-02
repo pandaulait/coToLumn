@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     sessions: 'admin/devise/sessions',
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
+  get 'search' => 'homes#search'
   scope module: :public do
     get 'users/:id/confirm' => 'users#confirm', as: 'users_confirm'
     patch 'users/destroy/:id' => 'users#destroy' , as: 'user_destroy'

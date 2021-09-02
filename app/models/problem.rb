@@ -42,4 +42,8 @@ class Problem < ApplicationRecord
   def bookmarked_by?(user)
     bookmarks.where(user_id: user.id).exists?
   end
+
+  def self.search(keyword)
+    where(['body like? OR commentary like?', "%#{keyword}%", "%#{keyword}%"])
+  end
 end

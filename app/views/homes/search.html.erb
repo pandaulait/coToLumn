@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-lg-9">
+    <% @mixed.each do |content| %>
+      <% if content.class == Text %>
+        <%= render "public/texts/mini_show",{text: content} %>
+      <% elsif content.class == Column %>
+        <%= render "public/columns/mini_show",{column: content} %>
+      <% elsif content.class == Problem %>
+        <%= render "public/problems/mini_show",{problem: content} %>
+      <% elsif content.class == Patch %>
+        <%= render "public/patches/mini_show",{patch: content} %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-lg-3">
+    <div class="sidebar-index">
+      <h4 class="index">目次</h4>
+      <%#= render "layouts/content_sidebar",{texts: @texts, patches: nil, columns: nil, problems: nil} %>
+    </div>
+  </div>
+</div>

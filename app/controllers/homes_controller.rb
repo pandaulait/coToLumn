@@ -7,4 +7,13 @@ class HomesController < ApplicationController
     @topics = Topic.order(created_at: :desc).limit(5)
     render layout: 'top_visual'
   end
+
+  def search
+    @texts = Text.search(params[:keyword])
+    @columns = Column.search(params[:keyword])
+    @problems = Problem.search(params[:keyword])
+    @patches = Patch.search(params[:keyword])
+    @keyword = params[:keyword]
+    @mixed = (@texts + @columns + @problems + @patches).sort_by(&:created_at).reverse!
+  end
 end
