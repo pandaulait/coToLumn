@@ -1,6 +1,6 @@
 class Public::TextsController < ApplicationController
   def index
-    @texts = Text.all.published
+    @texts = Text.all.published.page(params[:page]).reverse_order
   end
 
   def show

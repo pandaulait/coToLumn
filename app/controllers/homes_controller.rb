@@ -15,5 +15,6 @@ class HomesController < ApplicationController
     @patches = Patch.search(params[:keyword])
     @keyword = params[:keyword]
     @mixed = (@texts + @columns + @problems + @patches).sort_by(&:created_at).reverse!
+    @hoge = Kaminari.paginate_array(@mixed).page(params[:page]).per(4)
   end
 end

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-9">
-    <% @mixed.each do |content| %>
+    <% @hoge.each do |content| %>
       <% if content.class == Text %>
         <%= render "public/texts/mini_show",{text: content} %>
       <% elsif content.class == Column %>
@@ -11,6 +11,7 @@
         <%= render "public/patches/mini_show",{patch: content} %>
       <% end %>
     <% end %>
+    <%= paginate @hoge %>
   </div>
   <div class="col-lg-3">
     <div class="sidebar-index">
