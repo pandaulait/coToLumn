@@ -9,12 +9,6 @@ class Public::TextsController < ApplicationController
     @links = @text.links
     @comments = @text.comments
     @problems = @text.problems
-    if current_user.present? || current_admin.present?
-      @comment = @text.comments.new
-    end
+    @comment = @text.comments.new if current_user.present? || current_admin.present?
   end
-
-  private
-
-
 end

@@ -10,7 +10,7 @@
         <a href ="#reply-<%=child.number%>" style ="color: green;">>><%= child.number%></a>
       <% end %>
     <% end %>
-   <br /><%= c.body %>
+   <br /><%= c.body %><span class="sentiment-score">本文の感情分析スコア<%= c.score %></span>
   </p>
   <!--返信画面表示用div-->
   <div class ="btn-reply-<%= c.id%>" style ="display: none;"></div>

@@ -8,7 +8,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :introduction, length: { maximum: 140 }
 
-
   has_many :columns, dependent: :destroy
   has_many :patches, dependent: :destroy
   has_many :problems, as: :author, dependent: :destroy
@@ -18,11 +17,10 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
 
   # フォロー機能
-  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
   has_many :followings, through: :relationships, source: :followed, dependent: :destroy
-
 
   has_many :activities, as: :receiver, dependent: :destroy
 
@@ -38,16 +36,15 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-
-
   # ゲストログイン
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = "guest"
+      user.name = 'guest'
     end
   end
+
   def active_for_authentication?
-    super && (self.is_deleted == false)
+    super && (is_deleted == false)
   end
 end

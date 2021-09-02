@@ -4,63 +4,63 @@ class Public::BookmarksController < ApplicationController
   def index
     @bookmarks = current_user.bookmarks
     @user = current_user
-
   end
-
 
   def create
     bookmark = Bookmark.new(bookmark_params)
-    bookmark.user_id =current_user.id
-    unless bookmark.save
-      flash[:alert] = "記事の保存に失敗しました。"
-    end
-    if bookmark.marked_content_type == "Text" # text
+    bookmark.user_id = current_user.id
+    flash[:alert] = '記事の保存に失敗しました。' unless bookmark.save
+    case bookmark.marked_content_type
+    when 'Text'
       @marked_content = Text.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Column" # column
+    when 'Column'
       @marked_content = Column.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Patch" # patch
-      @marked_content = Patch.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Topic" # patch
+    when 'Topic'
       @marked_content = Topic.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Problem" # patch
+    when 'Patch'
+      @marked_content = Patch.find(bookmark.marked_content_id)
+    when 'Problem'
       @marked_content = Problem.find(bookmark.marked_content_id)
     end
   end
 
   def destroy
     bookmark = Bookmark.find(params[:id])
-    if bookmark.marked_content_type == "Text" # text
+    case bookmark.marked_content_type
+    when 'Text'
       @marked_content = Text.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Column" # column
+    when 'Column'
       @marked_content = Column.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Patch" # patch
-      @marked_content = Patch.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Topic" # patch
+    when 'Topic'
       @marked_content = Topic.find(bookmark.marked_content_id)
-    elsif bookmark.marked_content_type == "Problem" # patch
+    when 'Patch'
+      @marked_content = Patch.find(bookmark.marked_content_id)
+    when 'Problem'
       @marked_content = Problem.find(bookmark.marked_content_id)
     end
     bookmark.destroy
   end
 
   private
-  
+
   def ensure_not_own_user
     bookmark = Bookmark.new(bookmark_params)
-    if bookmark.marked_content_type == "Column" # column
+    case bookmark.marked_content_type
+    when 'Column'
       marked_user = Column.find(bookmark.marked_content_id).user
-    elsif bookmark.marked_content_type == "Patch" # patch
+    when 'Patch'
       marked_user = Patch.find(bookmark.marked_content_id).user
-    elsif bookmark.marked_content_type == "Topic" # patch
+    when 'Topic'
       marked_user = Topic.find(bookmark.marked_content_id).user
-    elsif bookmark.marked_content_type == "Problem" # patch
+    when 'Problem'
       marked_user = Problem.find(bookmark.marked_content_id).author
     end
-    if marked_user == current_user
-      redirect_to request.referer
-      flash[:alert] = "自分の記事はブックマークできません。"
-    end
+    return if marked_user != current_user
+
+    redirect_to request.referer
+    flash[:alert] = '自分の記事はブックマークできません。'
   end
+
   def bookmark_params
     params.permit(:marked_content_id, :marked_content_type)
   end

@@ -10,12 +10,13 @@ class Bookmark < ApplicationRecord
   private
 
   def create_activities
-    if self.marked_content_type == "Column"
-      Activity.create(target: self, receiver: self.marked_content.user, action_type: :bookmarked_to_own_column)
-    elsif self.marked_content_type == "Patch"
-      Activity.create(target: self, receiver: self.marked_content.user, action_type: :bookmarked_to_own_patch)
-    elsif self.marked_content_type == "Text"
-      Activity.create(target: self, receiver: self.marked_content.admin, action_type: :bookmarked_to_own_text)
+    case marked_content_type
+    when 'Column'
+      Activity.create(target: self, receiver: marked_content.user, action_type: :bookmarked_to_own_column)
+    when 'Patch'
+      Activity.create(target: self, receiver: marked_content.user, action_type: :bookmarked_to_own_patch)
+    when 'Text'
+      Activity.create(target: self, receiver: marked_content.admin, action_type: :bookmarked_to_own_text)
     end
   end
 end

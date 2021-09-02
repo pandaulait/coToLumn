@@ -15,14 +15,14 @@ class Public::RelationshipsController < ApplicationController
     redirect_to request.referer
   end
 
-
   private
+
   # 自分をフォローしないように
   def ensure_not_own_user
     user = User.find(params[:user_id])
-    if user == current_user
-      redirect_to request.referer
-      flash[:alert] = "自分をフォローすることはできません。"
-    end
+    return if user != current_user
+
+    redirect_to request.referer
+    flash[:alert] = '自分をフォローすることはできません。'
   end
 end

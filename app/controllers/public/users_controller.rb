@@ -15,30 +15,26 @@ class Public::UsersController < ApplicationController
 
   def confirm
     @user = User.find(params[:id])
-    unless @user == current_user
-      flash[:notice] = "ご本人様でないと、退会することはできません。"
-      redirect_to root_path
-    end
   end
 
   def destroy
     @user = User.find(params[:id])
     if @user.update(deleted_params)
       reset_session
-      flash[:notice] = "ありがとうございました。"
-      redirect_to root_path
+      flash[:notice] = 'ありがとうございました。'
     else
-      flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
-      redirect_to root_path
+      flash[:notice] = 'ありがとうございました。またのご利用を心よりお待ちしております。'
     end
+    redirect_to root_path
   end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] = "保存に成功しました"
+      flash[:notice] = '保存に成功しました'
       redirect_to user_path(@user.id)
     else
-      flash[:notice] = "保存に失敗しました"
+      flash[:notice] = '保存に失敗しました'
       render :edit
     end
   end
@@ -46,10 +42,10 @@ class Public::UsersController < ApplicationController
   def followings
     @user = User.find(params[:user_id])
   end
+
   def followers
     @user = User.find(params[:user_id])
   end
-
 
   def draft
     @user = User.find(params[:user_id])
@@ -59,23 +55,18 @@ class Public::UsersController < ApplicationController
   end
 
   private
+
   def deleted_params
     params.require(:user).permit(:is_deleted)
   end
 
   def ensure_normal_user
-    if current_user.email == 'guest@example.com'
-      redirect_to root_path, alert: 'ゲストユーザーの更新はできません。'
-    end
+    redirect_to root_path, alert: 'ゲストユーザーの更新はできません。' if current_user.email == 'guest@example.com'
   end
 
   def ensure_correct_user
-    unless User.find(params[:id]) == current_user
-      redirect_to user_path(current_user)
-    end
+    redirect_to user_path(current_user), alert: '他人の更新はできません。' unless User.find(params[:id]) == current_user
   end
-
-
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)

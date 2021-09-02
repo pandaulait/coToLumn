@@ -1,3 +1,2 @@
 module Public::LikesHelper
-
 end

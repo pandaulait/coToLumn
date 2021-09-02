@@ -1,5 +1,4 @@
 class Admin::AdminsController < ApplicationController
-
   def show
     @admin = Admin.find(params[:id])
     @texts = @admin.texts.order(created_at: :desc).limit(5)

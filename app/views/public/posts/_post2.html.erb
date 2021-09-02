@@ -4,7 +4,7 @@
       <% if c.parent_id.present? %>
         <a href ="#reply-<%=c.parent.number%>" style ="color: green;">>><%= c.parent.number%></a>
       <% end %>
-      <%= c.number %>.<%=c.user.name%>　<br /><%= c.body %>
+      <%= c.number %>.<%=c.user.name%>　<br /><%= c.body %><span class="sentiment-score">本文の感情分析スコア<%= c.score %>
     </p>
     <div class ="btn-reply">reply
       <div  style ="display: none;">

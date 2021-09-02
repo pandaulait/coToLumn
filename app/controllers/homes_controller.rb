@@ -5,8 +5,6 @@ class HomesController < ApplicationController
     @problems = Problem.order(created_at: :desc).limit(5)
     @columns = Column.order(created_at: :desc).limit(5)
     @topics = Topic.order(created_at: :desc).limit(5)
-    render :layout => 'top_visual'
+    render layout: 'top_visual'
   end
-
-
 end

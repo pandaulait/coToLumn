@@ -24,5 +24,4 @@ module ApplicationHelper
       user_path(activity.target.follower)
     end
   end
-
 end

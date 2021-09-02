@@ -1,6 +1,6 @@
 class Public::ColumnsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy, :link]
-  before_action :ensure_correct_user, only: [:edit,:update,:destroy, :link]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :link]
 
   def index
     @columns = Column.all.published
@@ -10,14 +10,12 @@ class Public::ColumnsController < ApplicationController
     @column = Column.find(params[:id])
     @comments = @column.comments
     @liked_content = @column
-    if current_user.present? || current_admin.present?
-      @comment = @column.comments.new
-    end
+    @comment = @column.comments.new if current_user.present? || current_admin.present?
   end
 
   def new
     @column = Column.new
-    render :layout => 'content_form'
+    render layout: 'content_form'
   end
 
   def create
@@ -26,7 +24,7 @@ class Public::ColumnsController < ApplicationController
     if @column.save
       redirect_to columns_link_path(@column)
     else
-      flash[:alert] = "記事の保存に失敗しました。"
+      flash[:alert] = '記事の保存に失敗しました。'
       render :new
     end
   end
@@ -34,7 +32,7 @@ class Public::ColumnsController < ApplicationController
   def edit
     @column = Column.find(params[:id])
     @literature = Literature.new
-    render :layout => 'content_form'
+    render layout: 'content_form'
   end
 
   def update
@@ -64,16 +62,16 @@ class Public::ColumnsController < ApplicationController
   end
 
   private
+
   def column_params
     params.require(:column).permit(:title, :body, :image, :status)
   end
 
   def ensure_correct_user
     user = Column.find(params[:id]).user
-    unless user == current_user
-      redirect_to request.referer
-      flash[:alert] = "他人のコラムは編集できません。"
-    end
+    return if user == current_user
+
+    redirect_to request.referer
+    flash[:alert] = '他人のコラムは編集できません。'
   end
 end
-

@@ -1,6 +1,6 @@
 class Relationship < ApplicationRecord
-  belongs_to :followed, class_name: "User"
-  belongs_to :follower, class_name: "User"
+  belongs_to :followed, class_name: 'User'
+  belongs_to :follower, class_name: 'User'
   # 通知機能
   has_one :activity, as: :target, dependent: :destroy
 
@@ -9,6 +9,6 @@ class Relationship < ApplicationRecord
   private
 
   def create_activities
-    Activity.create(target: self, receiver: self.followed, action_type: :followed_me)
+    Activity.create(target: self, receiver: followed, action_type: :followed_me)
   end
 end

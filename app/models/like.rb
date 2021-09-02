@@ -10,12 +10,13 @@ class Like < ApplicationRecord
   private
 
   def create_activities
-    if self.liked_content_type == "Column"
-      Activity.create(target: self, receiver: self.liked_content.user, action_type: :liked_to_own_column)
-    elsif self.liked_content_type == "Patch"
-      Activity.create(target: self, receiver: self.liked_content.user, action_type: :liked_to_own_patch)
-    elsif self.liked_content_type == "Text"
-      Activity.create(target: self, receiver: self.liked_content.admin, action_type: :liked_to_own_text)
+    case liked_content_type
+    when 'Column'
+      Activity.create(target: self, receiver: liked_content.user, action_type: :liked_to_own_column)
+    when 'Patch'
+      Activity.create(target: self, receiver: liked_content.user, action_type: :liked_to_own_patch)
+    when 'Text'
+      Activity.create(target: self, receiver: liked_content.admin, action_type: :liked_to_own_text)
     end
   end
 end

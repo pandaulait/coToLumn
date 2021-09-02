@@ -2,17 +2,18 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_user!
   def create
     @topic = Topic.find(params[:topic_id])
-    new_post =  Post.new(post_paramas)
+    new_post = Post.new(post_params)
     new_post.user_id = current_user.id
-    if @topic.posts.count == 0
-      new_post.number = 1
-    else
-      new_post.number = @topic.posts.count + 1
-    end
+    new_post.score = Language.get_data(post_params[:body])  # この行を追加
+    new_post.number = if @topic.posts.count.zero?
+                        1
+                      else
+                        @topic.posts.count + 1
+                      end
     if new_post.save
-      flash[:notice] = "コメントの保存に成功しました。"
+      flash[:notice] = 'コメントの保存に成功しました。'
     else
-      flash[:alert] = "コメントの保存に失敗しました。"
+      flash[:alert] = 'コメントの保存に失敗しました。'
     end
     redirect_to topic_path(@topic)
   end
@@ -27,11 +28,11 @@ class Public::PostsController < ApplicationController
     @new_post = Post.new
     @post = Post.find(params[:post_id])
     @topic = Topic.find(params[:topic_id])
-
   end
 
   private
-  def post_paramas
-    params.require(:post).permit(:body ,:user_id, :parent_id, :topic_id)
+
+  def post_params
+    params.require(:post).permit(:body, :user_id, :parent_id, :topic_id)
   end
 end
