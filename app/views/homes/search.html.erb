@@ -1,13 +1,14 @@
 <div class="row">
   <div class="col-lg-9">
     <% @hoge.each do |content| %>
-      <% if content.class == Text %>
+      <% case content.class.to_s %>
+      <% when "Text" %>
         <%= render "public/texts/mini_show",{text: content} %>
-      <% elsif content.class == Column %>
+      <% when "Column" %>
         <%= render "public/columns/mini_show",{column: content} %>
-      <% elsif content.class == Problem %>
+      <% when "Problem" %>
         <%= render "public/problems/mini_show",{problem: content} %>
-      <% elsif content.class == Patch %>
+      <% when "Patch" %>
         <%= render "public/patches/mini_show",{patch: content} %>
       <% end %>
     <% end %>

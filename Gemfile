@@ -83,3 +83,6 @@ group :development do
   gem 'rubocop', require: false
   gem 'bullet'
 end
+
+gem "jqcloud-rails"
+# gem "natto", "~> 1.2"

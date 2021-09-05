@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 2021_09_01_091656) do
     t.integer "parent_id"
     t.integer "number"
     t.text "body", null: false
+    t.text "entities_array"
+    t.boolean "answer", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "score", precision: 5, scale: 3
@@ -208,6 +210,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_091656) do
   create_table "topics", force: :cascade do |t|
     t.string "title", null: false
     t.integer "user_id"
+    t.boolean "question", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_topics_on_user_id"

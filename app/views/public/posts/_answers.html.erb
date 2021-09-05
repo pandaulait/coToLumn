@@ -1,0 +1,47 @@
+<% if answers.present? %>
+  <% answers.answered.each do |answer|%>
+    <div class="answer-box">
+      <div class="answer-top" id ="reply-<%=answer.number%>">
+        <%= answer.number %>.
+        <% if answer.user.profile_image.attached? %>
+          <%= image_tag answer.user.profile_image, class: "icon-image"%>
+        <% else %>
+          <%= image_tag 'logo2.png', class: "icon-image" %>
+        <% end %>
+        <%=answer.user.name%>
+      </div>
+      <div class="answer-body">
+        <% if answer.parent_id.present? %>
+          <a href ="#reply-<%=answer.parent_id%>" style ="color: green;"><%= answer.parent.number %>.@<%= answer.parent.user.name%></a>
+        <% end %>
+        <%=safe_join(answer.body.split("\n"),tag(:br))%>
+        <span class="sentiment-score">  <%= answer.score %></span>
+      </div>
+      <div class="answer-bottom">
+        <div class ="btn-reply-<%= answer.id%>" style ="display: none;"></div>
+        <div class="answer-bottom-function">
+          <div class="answer-bottom-function-1">
+            <%= link_to  topic_post_ajax_path(topic,answer) ,remote:true do %>
+              <i class="fas fa-reply pr-2"></i>
+            <% end %>
+            <% if answer.children.present? %>
+              <%= link_to '返信の表示', topic_post_ajax2_path(topic,answer) ,remote:true%>
+            <% end %>
+            <% if answer.children.present? %>
+              <% answer.children.each do |child| %>
+                <a href ="#reply-<%=child.number%>" style ="color: green;">>><%= child.number%></a>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="like_area like-<%=answer.class%><%=answer.id%>">
+            <%= render "public/likes/like_area2" ,{content: answer} %>
+          </div>
+        </div>
+        <% if answer.children.present? %>
+          <div class="ml-3 reply-post-<%=answer.id%>" style ="display: none;"></div>
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>

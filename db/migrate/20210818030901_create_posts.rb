@@ -6,6 +6,8 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.integer :parent_id
       t.integer :number
       t.text :body, null: false
+      t.text :entities_array
+      t.boolean :answer, null: false, default: false
 
       t.timestamps
     end

@@ -1,0 +1,20 @@
+answer
+<div class="row loose-leaf">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6  user-sign">
+    <div class="problem-view">
+      <h2><%= @topic.title %></h2>
+    </div>
+    <% if current_user.present? %>
+      <div class="reply-form text-right">
+        <%= form_with model: @new_post, url: topic_posts_path(@topic) , local:true do |f| %>
+          <%= f.text_area :body, class: "form-control mt-5 answer" %>
+          <%= f.hidden_field :topic_id , value: @topic.id %>
+          <%= f.hidden_field :answer , value: true %>
+          <%= f.submit '投稿' , class: "tsbtn btn-11 mr-0 "%>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-3"></div>
+</div>

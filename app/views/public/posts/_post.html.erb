@@ -1,31 +1,52 @@
-<% posts.each do |c|%>
+<% posts.not_answerd.each do |c|%>
   <!--掲示板コメント表示-->
-  <p id ="reply-<%=c.id%>">
-    <% if c.parent_id.present? %>
-      <a href ="#reply-<%=c.parent_id%>" style ="color: green;">>><%= c.parent.number%></a>
-    <% end %>
-    <%= c.number %>.<%=c.user.name%>
-    <% if c.children.present? %>
-      <% c.children.each do |child| %>
-        <a href ="#reply-<%=child.number%>" style ="color: green;">>><%= child.number%></a>
+  <div class="post-box" id ="reply-<%=c.number%>">
+    <div class="post-top">
+      <%= c.number %>.
+      <% if c.user.profile_image.attached? %>
+        <%= image_tag c.user.profile_image, class: "icon-image"%>
+      <% else %>
+        <%= image_tag 'logo2.png', class: "icon-image" %>
       <% end %>
-    <% end %>
-   <br /><%= c.body %><span class="sentiment-score">本文の感情分析スコア<%= c.score %></span>
-  </p>
-  <!--返信画面表示用div-->
-  <div class ="btn-reply-<%= c.id%>" style ="display: none;"></div>
-  <!--掲示板の機能一覧-->
-  <%= link_to  topic_post_ajax_path(topic,c) ,remote:true do %>
-    <i class="fas fa-reply"></i>
-  <% end %>
-  <% if c.children.present? %>
-    <%= link_to 'スレッドの表示', topic_post_ajax2_path(topic,c) ,remote:true%>
-  <% end %>
-  <hr class="cp_hr08" />
-  <!--子要素の表示画面-->
-  <% if c.children.present? %>
-    <div class="ml-3 reply-post-<%=c.id%>" style ="display: none;"></div>
-  <% end %>
+      <%=c.user.name%>
+    </div>
+    <div class="post-body">
+      <% if c.parent_id.present? %>
+        <a href ="#reply-<%=c.parent_id%>" style ="color: green;"><%= c.parent.number %>.@<%= c.parent.user.name%></a>
+      <% end %>
+      <%=safe_join(c.body.split("\n"),tag(:br))%></br>
+      <%=c.entities_array%>
+      <span class="sentiment-score">  <%= c.score %></span>
+    </div>
+    <div class="post-bottom">
+      <!--返信画面表示用div-->
+      <div class ="btn-reply-<%= c.id%>" style ="display: none;"></div>
+      <!--掲示板の機能一覧-->
+      <div class="post-bottom-function">
+        <div class="post-bottom-function-1">
+          <%= link_to  topic_post_ajax_path(topic,c) ,remote:true do %>
+            <i class="fas fa-reply pr-2"></i>
+          <% end %>
+          <% if c.children.present? %>
+            <%= link_to '返信の表示', topic_post_ajax2_path(topic,c) ,remote:true%>
+          <% end %>
+          <% if c.children.present? %>
+            <% c.children.each do |child| %>
+              <a href ="#reply-<%=child.number%>" style ="color: green;">>><%= child.number%></a>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="like_area like-<%=c.class%><%=c.id%>">
+          <%= render "public/likes/like_area2" ,{content: c} %>
+        </div>
+      </div>
+      <hr class="cp_hr08" />
+      <!--子要素の表示画面-->
+      <% if c.children.present? %>
+        <div class="ml-3 reply-post-<%=c.id%>" style ="display: none;"></div>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
 <script>

@@ -1,0 +1,1 @@
+$('.like-<%=@liked_content.class%><%=@liked_content.id%>').html('<%= escape_javascript(render partial: 'public/likes/like_area2', locals:{ content: @liked_content}) %>')

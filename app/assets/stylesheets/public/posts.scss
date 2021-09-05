@@ -1,3 +1,173 @@
 // Place all the styles related to the public/posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+
+$cPencil: #707070;
+$cLightPencil: #D9D9D9;
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+$cComment: #EAC779;
+$cLightComment: #FFFDFA;
+
+.posts-main{
+  // background-color: $cLightGreen;
+  & .question{
+    margin:  0;
+    margin-left: 0.5rem;/* デフォルトCSS打ち消し */   /* 位置調整 */
+    font-weight:  normal;       /* 文字の太さ調整 */
+    margin-bottom: 15px;        /* 周りの余白指定 */
+    font-size:  1.1rem;
+    line-height: 1.9rem;
+    padding-left: 0.5rem;
+    &::first-letter{
+      display: block;
+      color: white;
+      border-radius:  5px;        /* 角丸指定 */
+      background-color:  $cProblem;
+      padding: 0.5rem 1rem;
+      margin-left: -1rem;
+      margin-right: 0.5rem;
+      font-size:  1.5rem;
+    }
+  }
+}
+.posts-box{
+  background-color: white;
+  padding: 10px 0px;
+  border-radius: 5px;
+}
+.answers-box{
+  background-color: $cLightGreen;
+  padding: 10px 0px;
+}
+
+
+.post-box{
+  // border: solid 1px $cLightGreen;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  & .post-top{
+    // border: solid 1px $cGreen;
+    & .icon-image{
+      display: inline-block;
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+      border: solid 1px $cGreen;
+      border-radius: 50%;
+      transition: all 0.3s;
+      background-color: white;
+      &:hover{
+        box-shadow: 0 0px 10px 5px  rgba(200, 200, 250, 0.5);
+      }
+    }
+  }
+  & .post-body{
+    // border: solid 1px $cColumn;
+    word-break: break-word;
+    padding: 5px 5px 5px 20px;
+  }
+  & .post-bottom{
+    // border: solid 1px $cPatch;
+    padding: 5px 0px 5px 20px;
+    & .post-bottom-function{
+      width: 100%;
+      display: flex;
+      & .post-bottom-function-1{
+        padding: 5px;
+        margin-right: auto;
+        line-height: 30px;
+      }
+      & .like_area{
+        text-align: right;
+        & .content{
+          display: inline-block;
+        }
+        & form{
+          display: inline-block;
+        }
+        & a{
+          text-decoration: none;
+          &:hover{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+.answer-box{
+  border: solid 1px $cLightGreen;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  background: white;
+  & .answer-top{
+    // border: solid 1px $cGreen;
+    & .icon-image{
+      display: inline-block;
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+      border: solid 1px $cGreen;
+      border-radius: 50%;
+      transition: all 0.3s;
+      background-color: white;
+      &:hover{
+        box-shadow: 0 0px 10px 5px  rgba(200, 200, 250, 0.5);
+      }
+    }
+  }
+  & .answer-body{
+    // border: solid 1px $cColumn;
+    word-break: break-word;
+    padding: 5px 5px 5px 20px;
+  }
+  & .answer-bottom{
+    // border: solid 1px $cPatch;
+    padding: 5px 0px 5px 20px;
+    & .answer-bottom-function{
+      width: 100%;
+      display: flex;
+      & .answer-bottom-function-1{
+        padding: 5px;
+        margin-right: auto;
+        line-height: 30px;
+      }
+      & .like_area{
+        text-align: right;
+        & .content{
+          display: inline-block;
+        }
+        & form{
+          display: inline-block;
+        }
+        & a{
+          text-decoration: none;
+          &:hover{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.answer{
+  min-height: 160px;
+}

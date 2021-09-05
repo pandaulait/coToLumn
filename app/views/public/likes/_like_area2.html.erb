@@ -1,0 +1,22 @@
+
+<% if current_user.present? %>
+  <!--ノーマルいいねボタン-->
+  <span style="display: inline-block;">
+    <% if content.normal_liked_by?(current_user) %>
+      <%= link_to normal_like_path(content.likes.where(user_id: current_user.id, category: 11).first), method: :delete, remote: true do %>
+       <span class= "sbtn btn-1 content">♥<%= content.normal_likes.count %></span>
+      <% end %>
+    <% else %>
+      <%= form_with  url: normal_likes_path , remote:true do |f| %>
+        <%= f.hidden_field :liked_content_id ,value: content.id%>
+        <%= f.hidden_field :liked_content_type ,value: content.class%>
+        <%= f.hidden_field :category ,value: 11%>
+        <%= f.submit '♥'+content.normal_likes.count.to_s, class: "sbtn btn-6 content"%>
+      <% end %>
+    <% end %>
+  </span>
+<% end %>
+
+
+
+

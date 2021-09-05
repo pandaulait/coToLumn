@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     get 'users/:id/confirm' => 'users#confirm', as: 'users_confirm'
     patch 'users/destroy/:id' => 'users#destroy' , as: 'user_destroy'
     resources :topics ,only: [:create, :show, :index, :destroy] do
-      resources :posts ,only: [:create] do
+      get 'answer',         to: 'topics#answer'
+      post 'answer',         to: 'posts#answer_create'
+      resources :posts ,only: [:create, :update] do
         get 'ajax',         to: 'posts#ajax'
         get 'ajax2',         to: 'posts#ajax2'
       end
@@ -37,6 +39,8 @@ Rails.application.routes.draw do
     resources :bookmarks ,only: [:index]
     resources :activities ,only: [:index]
     resources :likes ,only: [:create, :destroy]
+    post 'normal_likes' => 'likes#normal_create'
+    delete 'normal_like/:id' => 'likes#normal_destroy', as: 'normal_like'
     resources :comments ,only: [:create, :destroy]
     resources :bookmarks ,only: [:create, :destroy]
     resources :texts ,only: [:show, :index] do

@@ -1,17 +1,47 @@
-<div>
-  <h2><%= @topic.title %></h2>
-  <%= render 'public/posts/post', {posts: @posts, topic: @topic, new_post: @new_post} %>
-  <div>
-    <% if current_user.present?  %>
-    <p>コメント欄</p>
-    <span class="reply-form">
-      <%= form_with model: @new_post, url: topic_posts_path(@topic) , class: "d-flex", local:true do |f| %>
-        <%= f.text_area :body, class: "form-control" %>
-        <%= f.hidden_field :topic_id , value: @topic.id %>
-        <%= f.submit '投稿' , class: "tsbtn btn-11 my-0"%>
-      <% end %>
-    </span>
-    <% end %>
+<div class="container">
+   <div class="row">
+     <div class="col-12 posts-main pr-5 pl-5">
+       <h2 class="question">1<%= @topic.title %></h2>
+     </div>
+   </div>
+</div>
+<div class="row">
+  <div id = "demo" style="width: 100%; height: 50vh;"></div>
+</div>
+<div class="container">
+  <div class="row" style="box-shadow: 0 10px 10px 5px  rgba(161, 161, 161, 0.1); background: white">
+    <div class="col-xl-7 answers-box">
+      <h2 class="main-heading column-heading">answer</h2>
+      <%= render 'public/posts/answers', {answers: @posts, topic: @topic, new_post: @new_post} %>
+    </div>
+    <div class="col-xl-5 posts-box">
+      <h2 class="main-heading text-heading">comment</h2>
+      <%= render 'public/posts/post', {posts: @posts, topic: @topic, new_post: @new_post} %>
+      <div>
+        <% if current_user.present? %>
+        <p>コメント欄</p>
+        <span class="reply-form">
+          <%= form_with model: @new_post, url: topic_posts_path(@topic) , class: "d-flex", local:true do |f| %>
+            <%= f.text_area :body, class: "form-control" %>
+            <%= f.hidden_field :topic_id , value: @topic.id %>
+            <%= f.submit '投稿' , class: "tsbtn btn-11 my-0"%>
+          <% end %>
+        </span>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
+
+<script>
+  var words = [
+    <% @words.each do |word| %>
+    {text: '<%= word[0]["content"] %>', weight: <%= word[1]["juyo"] %>},
+    <% end %>
+
+  ];
+
+  $('#demo').jQCloud(words, {
+  });
+</script>
