@@ -23,13 +23,13 @@ module Language2
       response = https.request(request, params)
       # APIレスポンス出力
       response_body = JSON.parse(response.body)
-      response_body["tokens"].delete_if{|token| token["dependencyEdge"]["label"] == "PRT"}
-      response_body["tokens"].delete_if{|token| token["dependencyEdge"]["label"] == "P"}
-      response_body["tokens"].delete_if{|token| token["dependencyEdge"]["label"] == "SUFF"}
-      response_body["tokens"].delete_if{|token| token["dependencyEdge"]["label"] == "AUX"}
+      response_body['tokens'].delete_if { |token| token['dependencyEdge']['label'] == 'PRT' }
+      response_body['tokens'].delete_if { |token| token['dependencyEdge']['label'] == 'P' }
+      response_body['tokens'].delete_if { |token| token['dependencyEdge']['label'] == 'SUFF' }
+      response_body['tokens'].delete_if { |token| token['dependencyEdge']['label'] == 'AUX' }
       array = []
-      response_body["tokens"].each do | text|
-        array << text["text"]["content"] if text["text"]
+      response_body['tokens'].each do |text|
+        array << text['text']['content'] if text['text']
       end
 
       pp array
