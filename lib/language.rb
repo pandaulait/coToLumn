@@ -29,6 +29,7 @@ module Language
         response_body['documentSentiment']['score']
       end
     end
+
     def get_data2(text)
       # APIのURL作成
       api_url = "https://language.googleapis.com/v1beta1/documents:analyzeSyntax?key=#{ENV['GOOGLE_API_KEY']}"
@@ -50,8 +51,8 @@ module Language
       response_body = JSON.parse(response.body)
 
       array = []
-      response_body["tokens"].each do | text|
-        array << text["text"]["content"] if text["text"]
+      response_body['tokens'].each do |text|
+        array << text['text']['content'] if text['text']
       end
 
       response_body = array
@@ -62,6 +63,7 @@ module Language
       #   response_body['documentSentiment']['score']
       # end
     end
+
     def get_data3(text)
       # APIのURL作成
       api_url = "https://language.googleapis.com/v1beta1/documents:analyzeEntities?key=#{ENV['GOOGLE_API_KEY']}"
@@ -81,12 +83,12 @@ module Language
       response = https.request(request, params)
       # APIレスポンス出力
       response_body = JSON.parse(response.body)
-      response_body["entities"].delete_if{|entities| entities["salience"] < 0.01}
+      response_body['entities'].delete_if { |entities| entities['salience'] < 0.01 }
       array = []
       # byebug
 
-      response_body["entities"].each do | text|
-        array << {entity: text["name"], score: text["salience"]} if text["name"]
+      response_body['entities'].each do |text|
+        array << { entity: text['name'], score: text['salience'] } if text['name']
       end
 
       pp array

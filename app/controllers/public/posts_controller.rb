@@ -19,7 +19,6 @@ class Public::PostsController < ApplicationController
     redirect_to topic_path(@topic)
   end
 
-
   def update
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])

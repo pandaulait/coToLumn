@@ -15,7 +15,7 @@
     </div>
     <h2 class="main problem-main">問題編集フォーム</h2>
     <%= form_with model: @problem , local:true do |f| %>
-      <% unless @column.status == "unpublished" %>
+      <% unless @problem.status == "unpublished" %>
         <h4>ステータス</h4>
         <%= f.radio_button :status, 'draft' %>
         <%= f.label :status, '非公開', value: "draft" %>
