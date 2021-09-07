@@ -15,6 +15,8 @@ class Post < ApplicationRecord
   # has_many :dislikes, -> { where 'category = 4' }, as: :liked_content, class_name: 'Like', dependent: :destroy
   has_many :normal_likes, -> { where 'category = 11' }, as: :liked_content, class_name: 'Like', dependent: :destroy
 
+  has_many :word_evaluations, dependent: :destroy
+
   # def professional_liked_by?(user)
   #   likes.where(user_id: user.id, category: 1).exists?
   # end

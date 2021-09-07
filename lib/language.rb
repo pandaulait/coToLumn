@@ -83,8 +83,10 @@ module Language
       response_body = JSON.parse(response.body)
       response_body["entities"].delete_if{|entities| entities["salience"] < 0.01}
       array = []
+      # byebug
+
       response_body["entities"].each do | text|
-        array << text["name"] if text["name"]
+        array << {entity: text["name"], score: text["salience"]} if text["name"]
       end
 
       pp array

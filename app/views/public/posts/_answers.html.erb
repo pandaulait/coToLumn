@@ -12,10 +12,10 @@
       </div>
       <div class="answer-body">
         <% if answer.parent_id.present? %>
-          <a href ="#reply-<%=answer.parent_id%>" style ="color: green;"><%= answer.parent.number %>.@<%= answer.parent.user.name%></a>
+          <a href ="#reply-<%=answer.parent_id%>" ><%= answer.parent.number %>.@<%= answer.parent.user.name%></a>
         <% end %>
         <%=safe_join(answer.body.split("\n"),tag(:br))%>
-        <span class="sentiment-score">  <%= answer.score %></span>
+        <!--<span class="sentiment-score">  <%#= answer.score %></span>-->
       </div>
       <div class="answer-bottom">
         <div class ="btn-reply-<%= answer.id%>" style ="display: none;"></div>
@@ -25,11 +25,13 @@
               <i class="fas fa-reply pr-2"></i>
             <% end %>
             <% if answer.children.present? %>
-              <%= link_to '返信の表示', topic_post_ajax2_path(topic,answer) ,remote:true%>
+              <%= link_to  topic_post_ajax2_path(topic,answer) ,remote:true do %>
+                <i class="fas fa-comments mx-2"></i>
+              <% end %>
             <% end %>
             <% if answer.children.present? %>
               <% answer.children.each do |child| %>
-                <a href ="#reply-<%=child.number%>" style ="color: green;">>><%= child.number%></a>
+                <a href ="#reply-<%=child.number%>" class="ml">>><%= child.number%></a>
               <% end %>
             <% end %>
           </div>

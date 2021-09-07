@@ -9,14 +9,27 @@
         <%= image_tag 'logo2.png', class: "icon-image" %>
       <% end %>
       <%=c.user.name%>
+      <% if current_user == c.user && topic.question == true%>
+        <div class="dropdown">
+          <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-thumbtack"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= form_with model: c, url: topic_post_path(topic,c) , local:true do |f| %>
+              <%= f.hidden_field :answer , value: true %>
+              <%= f.submit 'このコメントを回答に変更する。' ,class: "btn-not"%>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="post-body">
       <% if c.parent_id.present? %>
-        <a href ="#reply-<%=c.parent_id%>" style ="color: green;"><%= c.parent.number %>.@<%= c.parent.user.name%></a>
+        <a href ="#reply-<%=c.parent.number%>"><%= c.parent.number %>.@<%= c.parent.user.name%></a>
       <% end %>
       <%=safe_join(c.body.split("\n"),tag(:br))%></br>
-      <%=c.entities_array%>
-      <span class="sentiment-score">  <%= c.score %></span>
+      <%#=c.entities_array%>
+      <!--<span class="sentiment-score">  <%#= c.score %></span>-->
     </div>
     <div class="post-bottom">
       <!--返信画面表示用div-->
@@ -28,11 +41,13 @@
             <i class="fas fa-reply pr-2"></i>
           <% end %>
           <% if c.children.present? %>
-            <%= link_to '返信の表示', topic_post_ajax2_path(topic,c) ,remote:true%>
+            <%= link_to  topic_post_ajax2_path(topic,c) ,remote:true do %>
+              <i class="fas fa-comments"></i>
+            <% end %>
           <% end %>
           <% if c.children.present? %>
             <% c.children.each do |child| %>
-              <a href ="#reply-<%=child.number%>" style ="color: green;">>><%= child.number%></a>
+              <a href ="#reply-<%=child.number%>">>><%= child.number%></a>
             <% end %>
           <% end %>
         </div>

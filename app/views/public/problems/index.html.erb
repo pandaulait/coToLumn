@@ -3,6 +3,7 @@
     <% @problems.each do |problem| %>
       <%= render "public/problems/mini_show",{problem: problem} %>
     <% end %>
+    <%= paginate @problems %>
   </div>
   <div class="col-lg-3">
     <div class="sidebar-index">

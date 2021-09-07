@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-9">
-    <% @hoge.each do |content| %>
+    <% @mixed_content.each do |content| %>
       <% case content.class.to_s %>
       <% when "Text" %>
         <%= render "public/texts/mini_show",{text: content} %>
@@ -12,12 +12,7 @@
         <%= render "public/patches/mini_show",{patch: content} %>
       <% end %>
     <% end %>
-    <%= paginate @hoge %>
+    <%= paginate @mixed_content %>
   </div>
-  <div class="col-lg-3">
-    <div class="sidebar-index">
-      <h4 class="index">目次</h4>
-      <%#= render "layouts/content_sidebar",{texts: @texts, patches: nil, columns: nil, problems: nil} %>
-    </div>
-  </div>
+  <div class="col-lg-3"></div>
 </div>

@@ -3,6 +3,7 @@
     <% @columns.each do |column| %>
       <%= render "public/columns/mini_show",{column: column} %>
     <% end %>
+    <%= paginate @columns %>
   </div>
   <div class="col-lg-3">
     <div class="sidebar-index">

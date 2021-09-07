@@ -1,34 +1,64 @@
-
-  <% posts.each do |c|%>
-    <p>
-      <% if c.parent_id.present? %>
-        <a href ="#reply-<%=c.parent.number%>" style ="color: green;">>><%= c.parent.number%></a>
+<% posts.each do |c|%>
+<div class="post-box">
+  <div class="post-top">
+      <%= c.number %>.
+      <% if c.user.profile_image.attached? %>
+        <%= image_tag c.user.profile_image, class: "icon-image"%>
+      <% else %>
+        <%= image_tag 'logo2.png', class: "icon-image" %>
       <% end %>
-      <%= c.number %>.<%=c.user.name%>　<br /><%= c.body %><span class="sentiment-score">本文の感情分析スコア<%= c.score %>
-    </p>
-    <div class ="btn-reply">reply
-      <div  style ="display: none;">
-        <% if current_user.present?  %>
-          <%= form_with model: new_post, url: topic_posts_path(topic) , local:true do |f| %>
-            <%= f.label :body , c.number.to_s + 'へ返信'%>
-            <%= f.text_field :body %>
-            <%= f.hidden_field :topic_id , value: topic.id %>
-            <%= f.hidden_field :parent_id , value: c.id %>
-            <%= f.submit '投稿' %>
-          <% end %>
-        <% end %>
-      </div>
+      <%=c.user.name%>
+      <% if current_user == c.user && topic.question == true%>
+        <div class="dropdown">
+          <button class="dropdown-toggle btn-not menu-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-thumbtack"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= form_with model: c, url: topic_post_path(topic,c) , local:true do |f| %>
+              <%= f.hidden_field :answer , value: true %>
+              <%= f.submit 'このコメントを回答に変更する。' ,class: "btn-not"%>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <hr class="cp_hr08" />
-    <% if c.children.present? %>
-      <div class="ml-3">
-        <div>
-           <%= render 'public/posts/post2', {posts: c.children, topic: topic, new_post: new_post} %>
+  </div>
+  <div class="post-body">
+      <% if c.parent_id.present? %>
+        <a href ="#reply-<%=c.parent.number%>"><%= c.parent.number %>.@<%= c.parent.user.name%></a>
+      <% end %>
+      <%=safe_join(c.body.split("\n"),tag(:br))%></br>
+      <%#=c.entities_array%>
+      <!--<span class="sentiment-score">  <%#= c.score %></span>-->
+  </div>
+  <div class="post-bottom">
+    <div class ="btn-reply">
+      <div class="post-bottom-function">
+        <div class="post-bottom-function-1">
+          <i class="fas fa-reply pr-2"></i>
+        </div>
+        <div class="like_area like-<%=c.class%><%=c.id%>">
+          <%= render "public/likes/like_area2" ,{content: c} %>
         </div>
       </div>
-    <%end %>
-  <% end %>
 
+      <div style="display: none;">
+        <%= render 'public/posts/reply_area', {c: c, topic: topic, new_post: new_post} %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="cp_hr08" />
+  <% if c.children.present? %>
+    <div class="ml-3">
+      <div>
+        <%= render 'public/posts/post2', {posts: c.children, topic: topic, new_post: new_post} %>
+      </div>
+    </div>
+  <%end %>
+<% end %>
 
 
 <script>
