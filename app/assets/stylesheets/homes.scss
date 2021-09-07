@@ -94,6 +94,11 @@ $cLightComment: #FFFDFA;
     	background-color: $cPatch;
   	}
   }
+  .comment-heading{
+  	&::before,&::after{
+    	background-color: $cComment;
+  	}
+  }
 
   .nav-line-height{
     line-height: 40px;

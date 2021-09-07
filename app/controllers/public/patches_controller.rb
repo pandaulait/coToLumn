@@ -3,7 +3,7 @@ class Public::PatchesController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   def index
     @text = Text.find(params[:text_id])
-    @patches = @text.patches.published
+    @patches = @text.patches.published.page(params[:page]).reverse_order
   end
 
   def show

@@ -3,7 +3,7 @@ class Public::ProblemsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy, :subject]
 
   def index
-    @problems = Problem.all.published
+    @problems = Problem.all.published.page(params[:page]).reverse_order
   end
 
   def show

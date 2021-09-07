@@ -4,6 +4,7 @@
     <% @patches.each do |patch| %>
       <%= render "public/patches/show",{patch: patch} %>
     <% end %>
+    <%= paginate @patches %>
   </div>
   <div class="col-lg-3">
     <div class="sidebar-index">

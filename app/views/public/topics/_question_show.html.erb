@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row" style="box-shadow: 0 10px 10px 5px  rgba(161, 161, 161, 0.1); background: white">
+    <div class="col-xl-2"></div>
+    <div class="col-xl-8 posts-box">
+      <h2 class="main-heading text-heading">comment</h2>
+      <%= render 'public/posts/post', {posts: posts, topic: topic, new_post: new_post} %>
+      <div>
+        <% if current_user.present? %>
+        <p>コメント欄</p>
+        <span class="reply-form">
+          <%= form_with model: new_post, url: topic_posts_path(topic) , class: "d-flex", local:true do |f| %>
+            <%= f.text_area :body, class: "form-control" %>
+            <%= f.hidden_field :topic_id , value: topic.id %>
+            <%= f.submit '投稿' , class: "tsbtn btn-11 my-0"%>
+          <% end %>
+        </span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xl-2"></div>
+  </div>
+</div>

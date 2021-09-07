@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_01_091656) do
+ActiveRecord::Schema.define(version: 2021_09_06_110015) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_091656) do
     t.integer "parent_id"
     t.integer "number"
     t.text "body", null: false
+    t.boolean "answer", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "score", precision: 5, scale: 3
@@ -208,6 +209,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_091656) do
   create_table "topics", force: :cascade do |t|
     t.string "title", null: false
     t.integer "user_id"
+    t.boolean "question", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_topics_on_user_id"
@@ -226,6 +228,15 @@ ActiveRecord::Schema.define(version: 2021_09_01_091656) do
     t.boolean "is_deleted", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "word_evaluations", force: :cascade do |t|
+    t.integer "post_id"
+    t.string "entity"
+    t.float "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_word_evaluations_on_post_id"
   end
 
 end

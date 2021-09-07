@@ -1,3 +1,36 @@
 // Place all the styles related to the public/topics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+$cBtn5-1: #8092e2;
+$cBtn5-2: #a9b5ee;
+$cBtn5-3: #d7dcf3;
+
+$cPencil: #707070;
+
+.topic-index{
+  & a{
+    color: $cPencil;
+    text-decoration: none;
+    &:hover{
+      color: $cGreen;
+      text-decoration: none;
+    }
+  }
+}

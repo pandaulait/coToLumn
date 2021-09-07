@@ -10,10 +10,13 @@
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
          <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'トピック一覧', topics_path,class: "nav-link active nav-line-height nav-link-active" ,data: {"turbolinks"=>false}%>
+              <%= link_to 'テキスト一覧', texts_path,class: "nav-link active nav-line-height nav-link-active" ,data: {"turbolinks"=>false}%>
             </li>
             <li class="nav-item">
-              <%= link_to '記事一覧', texts_path,class: "nav-link active nav-line-height nav-link-active" ,data: {"turbolinks"=>false}%>
+              <%= link_to '新規問題投稿', new_problem_path,class: "nav-link active nav-line-height nav-link-active" ,data: {"turbolinks"=>false}%>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'コラム投稿', new_column_path,class: "nav-link active nav-line-height nav-link-active" ,data: {"turbolinks"=>false}%>
             </li>
           <% else %>
             <li class="nav-item">

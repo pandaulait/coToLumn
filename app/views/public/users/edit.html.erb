@@ -2,17 +2,17 @@
   <div class ="col-xl-4">
     <div class="profile_image_box">
       <%= form_with model: @user, local:true do |f| %>
-      <% if @user.profile_image.attached? %>
-        <%= image_tag @user.profile_image, class: "icon-image" %>
-      <% else %>
-        <%= image_tag 'logo2.png' , class: "icon-image"%>
-      <% end %>
-      <label for="inputImage">ProfileImage</label>
-      <%= f.file_field  :profile_image %>
+        <% if @user.profile_image.attached? %>
+          <%= image_tag @user.profile_image, class: "icon-image" %>
+        <% else %>
+          <%= image_tag 'logo2.png' , class: "icon-image"%>
+        <% end %>
+        <label for="inputImage">ProfileImage</label>
+        <%= f.file_field  :profile_image %>
     </div>
   </div>
   <div class ="col-xl-8">
-    <h4>your name</h4>
+      <h4>your name</h4>
       <%= f.text_field :name  ,class: "form-control"%>
       <%= render 'layouts/error_messages', obj: @user, column: :name %>
       <h4>your introduction</h4>
