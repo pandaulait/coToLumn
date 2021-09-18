@@ -12,7 +12,11 @@
     </div>
     <h2 class="main text-main">テキスト編集フォーム</h2>
     <!--テキストにチャプターの紐付け-->
-    <%= form_with model: @chapter, url: text_chapters_path(@text,@chapter) , local:true do |f| %>
+    <%= form_with model: @chapter, url: admin_text_chapters_path(@text,@chapter) , local:true do |f| %>
+      <h4>教科</h4>
+      <%= f.select :subject, {'算数': 'math','理科': 'science', '国語': 'japanese', '社会': 'society', '英語': 'english'}, { include_blank: '教科を選択してください。'}, { class: 'form-control' , required: true } %>
+      <h4>学年</h4>
+      <%= f.select :grade, {'小学校1年': 's_1','小学校2年': 's_2', '小学校3年': 's_3', '小学校4年': 's_4', '小学校5年': 's_5', '小学校6年': 's_6'}, { include_blank: '学年を選択してください。'}, { class: 'form-control' , required: true } %>
       <h4>教科書</h4>
       <%= f.select :status, {'デフォルト': 0,'学校図書 「みんなで学ぶ算数」': 1, '啓林観 「わくわく算数」': 2}, { include_blank: 'どれでもない'}, { class: 'form-control' , required: true } %>
       <h4>チャプター （5-2など）</h4>
@@ -29,6 +33,8 @@
         <% @chapters.each do |chapter|%>
           <% if chapter.id.present? %>
             <tr>
+              <td class="p-1"><%= chapter.subject_i18n %></td>
+              <td class="p-1"><%= chapter.grade_i18n %></td>
               <% if chapter.status == 0 %>
                 <td class="p-1">デフォルト</td>
               <% elsif chapter.status == 1 %>
@@ -39,7 +45,7 @@
               <td class="p-1"><%= chapter.body %></td>
               <td class="p-1">-</td>
               <td class="p-1"><%= chapter.section %></td>
-              <td class="p-1"><%= link_to "削除", text_chapter_path(@text,chapter), method: :delete ,class: "tsbtn btn-16 p-1"%></td>
+              <td class="p-1"><%= link_to "削除", admin_text_chapter_path(@text,chapter), method: :delete ,class: "tsbtn btn-16 p-1"%></td>
             </tr>
           <% end %>
         <% end %>

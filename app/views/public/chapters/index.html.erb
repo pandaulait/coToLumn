@@ -1,0 +1,26 @@
+<%= link_to 'デフォルト', chapters_path(status: 0), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '今日１', chapters_path(status: 1), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '教科書２', chapters_path(status: 2), class: "text-muted p-2 nav-link-active" %>
+<table class="table">
+  <tbody>
+    <% @chapters.each do |chapter|%>
+      <% if chapter.id.present? %>
+        <tr>
+          <td class="p-1"><%= chapter.subject_i18n %></td>
+          <td class="p-1"><%= chapter.grade_i18n %></td>
+          <% if chapter.status == 0 %>
+            <td class="p-1">デフォルト</td>
+          <% elsif chapter.status == 1 %>
+            <td class="p-1">学校図書 「みんなで学ぶ算数」</td>
+          <% elsif chapter.status == 2 %>
+            <td class="p-1">啓林観 「わくわく算数」</td>
+          <% end %>
+          <td class="p-1"><%= chapter.body %></td>
+          <td class="p-1">-</td>
+          <td class="p-1"><%= chapter.section %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
