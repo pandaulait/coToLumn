@@ -75,6 +75,7 @@ gem 'image_processing', '~> 1.2'
 
 gem 'dotenv-rails'
 gem 'rails-i18n'
+gem 'enum_help'
 gem 'kaminari','~> 1.2.1'
 group :production do
   gem 'mysql2'

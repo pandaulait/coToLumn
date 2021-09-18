@@ -71,9 +71,11 @@ ActiveRecord::Schema.define(version: 2021_09_01_091656) do
 
   create_table "chapters", force: :cascade do |t|
     t.integer "text_id"
+    t.integer "subject", null: false
+    t.integer "status", null: false
+    t.integer "grade", null: false
     t.integer "body", null: false
     t.integer "section", null: false
-    t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["text_id"], name: "index_chapters_on_text_id"

@@ -26,7 +26,6 @@ Rails.application.routes.draw do
         get 'ajax',         to: 'posts#ajax'
         get 'ajax2',         to: 'posts#ajax2'
       end
-
     end
     resources :users ,only: [:show,:edit,:update] do
       resource :relationships ,only: [:create, :destroy]
@@ -39,6 +38,8 @@ Rails.application.routes.draw do
     resources :likes ,only: [:create, :destroy]
     resources :comments ,only: [:create, :destroy]
     resources :bookmarks ,only: [:create, :destroy]
+    resources :chapters ,only: [:index]
+    get 'chapters/subject' => 'chapters#subject'
     resources :texts ,only: [:show, :index] do
       resources :patches ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
         get 'literatures' => 'literatures#text_patch_index'
@@ -48,7 +49,6 @@ Rails.application.routes.draw do
         get 'order/ajax1',         to: 'text_patch_orders#ajax1'
         get 'order/ajax2',         to: 'text_patch_orders#ajax2'
       end
-      resources :chapters ,only: [:create, :destroy]
     end
     resources :columns ,only: [:new, :create, :show, :index, :edit, :update, :destroy] do
       post 'literatures' => 'literatures#column_create'
@@ -79,6 +79,7 @@ Rails.application.routes.draw do
       post 'literatures' => 'literatures#text_create'
       delete 'literature/:id' => 'literatures#text_destroy',as: 'literature'
       patch 'status' => 'texts#status', as: 'update_status'
+      resources :chapters ,only: [:create, :destroy]
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
