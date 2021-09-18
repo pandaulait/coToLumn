@@ -24,7 +24,7 @@
     <h5 class="heading patch-heading">パッチテキスト一覧</h5>
     <% patches.each do |patch| %>
       <div class="sidebar-problem">
-        <%= link_to  text_patch_path(patch.text, patch)  do %>
+        <%= link_to  text_patch_path(patch.text, patch, subject: params[:subject], textbook: params[:textbook], section: params[:section])  do %>
           <%= patch.title %>
           <div class="author">
             <% if patch.user.profile_image.attached? %>

@@ -32,8 +32,9 @@ class Admin::TextsController < ApplicationController
   def edit
     @text = Text.find(params[:id])
     @literature = Literature.new
-    @chapter = Chapter.new
-    @chapters = @text.chapters
+    @section = Section.new
+    @subjects = SubjectArea.all
+    @sections = @text.sections
     render layout: 'content_form'
   end
 

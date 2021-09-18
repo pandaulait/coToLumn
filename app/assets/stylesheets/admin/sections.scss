@@ -1,0 +1,43 @@
+// Place all the styles related to the admin/sections controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$cGreen: #87C9B9;
+$cDarkGreen: #60d1b7;
+$cLightGreen: #cdebe4;
+
+$cPencil: #707070;
+$cLightPencil: #D9D9D9;
+
+$cPatch: #8185DB;
+$cDarkPatch: #555abd;
+$cLightPatch: #b8bbf3;
+
+$cColumn: #f396a3;
+$cDarkColumn: #da7f8b;
+$cLightColumn: #facfd4;
+
+$cProblem: #58c1f1;
+$cDarkProblem: #3797c4;
+$cLightProblem: #a0d8f1;
+
+$cComment: #EAC779;
+$cLightComment: #FFFDFA;
+
+.table-of-contents{
+  // display: flex;
+  & .chapter{
+    width: 300px;
+    background-color: #cdebe4;
+  }
+  & a{
+    color: $cPencil;
+    text-decoration: none;
+    padding: 3px 6px;
+    &:hover{
+      color: $cGreen;
+      text-decoration: none;
+      background-color: white;
+    }
+  }
+}

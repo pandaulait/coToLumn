@@ -204,24 +204,3 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-  enums:
-    chapter:
-      subject:
-        math: "算数"
-        science: "理科"
-        japanese: "国語"
-        society: "社会"
-        english: '英語'
-      grade:
-        s_1: "小学校1年"
-        s_2: "小学校2年"
-        s_3: "小学校3年"
-        s_4: "小学校4年"
-        s_5: "小学校5年"
-        s_6: "小学校6年"
-        c_1: "中学校1年"
-        c_2: "中学校2年"
-        c_3: "中学校3年"
-        k_1: "高校1年"
-        k_2: "高校2年"
-        k_3: "高校3年"

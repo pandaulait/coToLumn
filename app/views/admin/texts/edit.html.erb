@@ -11,47 +11,38 @@
       </div>
     </div>
     <h2 class="main text-main">テキスト編集フォーム</h2>
-    <!--テキストにチャプターの紐付け-->
-    <%= form_with model: @chapter, url: admin_text_chapters_path(@text,@chapter) , local:true do |f| %>
-      <h4>教科</h4>
-      <%= f.select :subject, {'算数': 'math','理科': 'science', '国語': 'japanese', '社会': 'society', '英語': 'english'}, { include_blank: '教科を選択してください。'}, { class: 'form-control' , required: true } %>
-      <h4>学年</h4>
-      <%= f.select :grade, {'小学校1年': 's_1','小学校2年': 's_2', '小学校3年': 's_3', '小学校4年': 's_4', '小学校5年': 's_5', '小学校6年': 's_6'}, { include_blank: '学年を選択してください。'}, { class: 'form-control' , required: true } %>
-      <h4>教科書</h4>
-      <%= f.select :status, {'デフォルト': 0,'学校図書 「みんなで学ぶ算数」': 1, '啓林観 「わくわく算数」': 2}, { include_blank: 'どれでもない'}, { class: 'form-control' , required: true } %>
-      <h4>チャプター （5-2など）</h4>
-      <%= f.text_field :body %>
-      <span>-</span>
-      <%= f.text_field :section %>
-      <%= render 'layouts/error_messages', obj: @chapter, column: :body %>
-      <%= render 'layouts/error_messages', obj: @chapter, column: :section %>
-      <%= f.submit '選択' ,class: "tsbtn btn-11 p-1"%>
-    <% end %>
-    <!--紐づけられたチャプターの表示-->
-    <table>
+    <!--テキストにセクションの紐付け-->
+    <div class="row">
+      <div class="col-md-4">
+        <%= form_with url: admin_text_ajax1_path(@text), method: :get, remote: true  do |f| %>
+          <h4>教科</h4>
+          <%= f.collection_select(:subject, @subjects, :id, :name,{prompt: "教科を選択してください"}, {class: "ajax1-select-drop form-control" }) %>
+          <span style="display: none;"><%= f.submit :class=>"ajax1-submit"%></span>
+        <% end %>
+      </div>
+      <div class="col-md-4 ajax2-select"></div>
+      <div class="col-md-4 ajax3-select"></div>
+    </div>
+    <div class="ajax4-select row mt-4"></div>
+    <%= render 'layouts/error_messages', obj: @section, column: :number %>
+    <hr class="cp_hr08" />
+    <!--セクション一覧-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>教科書</th>
+          <th></th>
+        </tr>
+      </thead>
       <tbody>
-        <% @chapters.each do |chapter|%>
-          <% if chapter.id.present? %>
-            <tr>
-              <td class="p-1"><%= chapter.subject_i18n %></td>
-              <td class="p-1"><%= chapter.grade_i18n %></td>
-              <% if chapter.status == 0 %>
-                <td class="p-1">デフォルト</td>
-              <% elsif chapter.status == 1 %>
-                <td class="p-1">学校図書 「みんなで学ぶ算数」</td>
-              <% elsif chapter.status == 2 %>
-                <td class="p-1">啓林観 「わくわく算数」</td>
-              <% end %>
-              <td class="p-1"><%= chapter.body %></td>
-              <td class="p-1">-</td>
-              <td class="p-1"><%= chapter.section %></td>
-              <td class="p-1"><%= link_to "削除", admin_text_chapter_path(@text,chapter), method: :delete ,class: "tsbtn btn-16 p-1"%></td>
-            </tr>
-          <% end %>
+        <% @sections.each do |section| %>
+        <tr>
+          <td><%= section.chapter.textbook_list.title %></td>
+          <td><%= section.chapter.number %> - <%= section.number %></td>
+        </tr>
         <% end %>
       </tbody>
     </table>
-    <hr class="cp_hr08" />
     <!--テキスト編集画面-->
     <%= form_with model: @text,  url: admin_text_path(@text) ,local:true do |f| %>
       <h4>画像</h4>
@@ -105,4 +96,12 @@
     });
   });
   $('.text-view').children('table').wrap('<div class="table-scroll">');
+  $('.ajax1-select-drop').change(function() {
+    $('.ajax1-submit').click();
+  });
+
+  $('.ajax3-select-drop').change(function() {
+    $('.ajax3-submit').click();
+  });
+
 </script>

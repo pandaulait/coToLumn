@@ -1,5 +1,5 @@
-<%= link_to '算数', chapters_path(subject: 'math'), class: "text-muted p-2 nav-link-active" %>
-<%= link_to '理科', chapters_path(subject: 'science'), class: "text-muted p-2 nav-link-active" %>
-<%= link_to '国語', chapters_path(subject: 'japanese'), class: "text-muted p-2 nav-link-active" %>
-<%= link_to '社会', chapters_path(subject: 'society'), class: "text-muted p-2 nav-link-active" %>
-<%= link_to '英語', chapters_path(subject: 'english'), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '算数', chapters_path(subject: '算数',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '理科', chapters_path(subject: '理科',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '国語', chapters_path(subject: '国語',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '社会', chapters_path(subject: '社会',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '英語', chapters_path(subject: '英語',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>

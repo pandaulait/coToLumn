@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_110015) do
+ActiveRecord::Schema.define(version: 2021_09_18_092327) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -70,15 +70,14 @@ ActiveRecord::Schema.define(version: 2021_09_06_110015) do
   end
 
   create_table "chapters", force: :cascade do |t|
-    t.integer "text_id"
-    t.integer "subject", null: false
-    t.integer "status", null: false
-    t.integer "grade", null: false
-    t.integer "body", null: false
-    t.integer "section", null: false
+    t.integer "textbook_list_id"
+    t.integer "grade_id"
+    t.integer "number", null: false
+    t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["text_id"], name: "index_chapters_on_text_id"
+    t.index ["grade_id"], name: "index_chapters_on_grade_id"
+    t.index ["textbook_list_id"], name: "index_chapters_on_textbook_list_id"
   end
 
   create_table "columns", force: :cascade do |t|
@@ -101,6 +100,12 @@ ActiveRecord::Schema.define(version: 2021_09_06_110015) do
     t.datetime "updated_at", null: false
     t.index ["article_type", "article_id"], name: "index_comments_on_article_type_and_article_id"
     t.index ["speaker_type", "speaker_id"], name: "index_comments_on_speaker_type_and_speaker_id"
+  end
+
+  create_table "grades", force: :cascade do |t|
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -179,6 +184,22 @@ ActiveRecord::Schema.define(version: 2021_09_06_110015) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.integer "chapter_id"
+    t.integer "text_id"
+    t.integer "number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id"], name: "index_sections_on_chapter_id"
+    t.index ["text_id"], name: "index_sections_on_text_id"
+  end
+
+  create_table "subject_areas", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.integer "text_id"
     t.integer "problem_id"
@@ -197,6 +218,14 @@ ActiveRecord::Schema.define(version: 2021_09_06_110015) do
     t.datetime "updated_at", null: false
     t.index ["content_type", "content_id"], name: "index_text_patch_orders_on_content_type_and_content_id"
     t.index ["patch_id"], name: "index_text_patch_orders_on_patch_id"
+  end
+
+  create_table "textbook_lists", force: :cascade do |t|
+    t.integer "subject_area_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_area_id"], name: "index_textbook_lists_on_subject_area_id"
   end
 
   create_table "texts", force: :cascade do |t|

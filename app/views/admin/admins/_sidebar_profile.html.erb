@@ -1,6 +1,6 @@
 <div class="sidebar-user">
   <div class="profile_image_box">
-    <%= link_to admin_path(current_admin) do %>
+    <%= link_to admin_path(admin) do %>
       <% if admin.profile_image.attached? %>
         <%= image_tag admin.profile_image, class: "icon-image" %>
       <% else %>
