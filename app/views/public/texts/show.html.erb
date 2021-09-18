@@ -1,6 +1,6 @@
 <div class="row" style="display: flex;">
   <div class ="col-lg-9">
-    <%= render "public/texts/show",{text: @text} %>
+    <%= render "public/texts/show",{text: @text, section: @section} %>
     <!--テキストにlinkしたコラムの表示-->
     <% if @links.present? %>
       <div class="column-back">

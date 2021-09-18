@@ -5,7 +5,13 @@
     <%= link_to '問題一覧', problems_path, class: "text-muted p-2 nav-link-active" %>
     <%= link_to 'コラム一覧', columns_path,class: "text-muted p-2 nav-link-active" %>
     <%= link_to 'トピック一覧', topics_path,class: "text-muted p-2 nav-link-active" %>
-    <a class="text-muted p-2" style="display: box;" href="#">算数</a>
+    <!--<a class="text-muted p-2" style="display: box;" href="#">算数</a>-->
+    <%= link_to '算数', chapters_path(subject: '算数',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+    <%#= link_to '理科', chapters_path(subject: '理科',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+    <%#= link_to '国語', chapters_path(subject: '国語',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+    <%#= link_to '社会', chapters_path(subject: '社会',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+    <%#= link_to '英語', chapters_path(subject: '英語',textbook: params[:textbook]), class: "text-muted p-2 nav-link-active" %>
+
     <a class="text-muted p-2" style="display: box;" href="#">理科</a>
     <a class="text-muted p-2" style="display: box;" href="#">国語</a>
     <a class="text-muted p-2" style="display: box;" href="#">社会</a>

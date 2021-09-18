@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :users ,only: [:index, :update]
+
     resources :activities ,only: [:index]
     resources :patches ,only: [:index, :update]
     resources :columns ,only: [:index, :update]
@@ -83,7 +84,10 @@ Rails.application.routes.draw do
       post 'literatures' => 'literatures#text_create'
       delete 'literature/:id' => 'literatures#text_destroy',as: 'literature'
       patch 'status' => 'texts#status', as: 'update_status'
-      resources :chapters ,only: [:create, :destroy]
+      get 'ajax1',         to: 'sections#ajax1'
+      get 'ajax2',         to: 'sections#ajax2'
+      get 'ajax3',         to: 'sections#ajax3'
+      resources :sections ,only: [:create, :destroy]
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -11,7 +11,9 @@ class Text < ApplicationRecord
 
   has_many :patches, dependent: :destroy
   has_many :literatures, as: :subject, dependent: :destroy
-  has_many :chapters, dependent: :destroy
+  
+  has_many :sections, dependent: :destroy
+  has_many :chapters, through: :sections
 
   has_many :subjects, dependent: :destroy
   has_many :problems, through: :subjects, dependent: :destroy

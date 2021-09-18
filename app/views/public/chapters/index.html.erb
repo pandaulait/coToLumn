@@ -1,26 +1,42 @@
-<%= link_to 'デフォルト', chapters_path(status: 0), class: "text-muted p-2 nav-link-active" %>
-<%= link_to '今日１', chapters_path(status: 1), class: "text-muted p-2 nav-link-active" %>
-<%= link_to '教科書２', chapters_path(status: 2), class: "text-muted p-2 nav-link-active" %>
-<table class="table">
-  <tbody>
-    <% @chapters.each do |chapter|%>
-      <% if chapter.id.present? %>
-        <tr>
-          <td class="p-1"><%= chapter.subject_i18n %></td>
-          <td class="p-1"><%= chapter.grade_i18n %></td>
-          <% if chapter.status == 0 %>
-            <td class="p-1">デフォルト</td>
-          <% elsif chapter.status == 1 %>
-            <td class="p-1">学校図書 「みんなで学ぶ算数」</td>
-          <% elsif chapter.status == 2 %>
-            <td class="p-1">啓林観 「わくわく算数」</td>
-          <% end %>
-          <td class="p-1"><%= chapter.body %></td>
-          <td class="p-1">-</td>
-          <td class="p-1"><%= chapter.section %></td>
-        </tr>
-      <% end %>
+<%# @textbook_lists.each do |tb| %>
+  <%#= link_to tb.title , chapters_path(subject: params[:subject],textbook: tb.title), class: "text-muted p-2 nav-link-active" %>
+<%# end %>
+<%= link_to 'デフォルト' , chapters_path(subject: params[:subject], textbook: 'デフォルト'), class: "text-muted p-2 nav-link-active" %>
+<%= link_to '学校図書株式会社' , chapters_path(subject: params[:subject], textbook: '学校図書株式会社'), class: "text-muted p-2 nav-link-active" %>
+</br>
+<div class="row table-of-contents">
+  <% division =  @chapters.count.div(3) %>
+  <% if @chapters.count % 3 != 0 %>
+    <% division += 1 %>
+  <% end %>
+  <% num = 0 %>
+  <% @chapters.each do |chapter|%>
+    <% if num % division == 0 %>
+     <div class="col-lg-4">
+    <%end%>
+    <% num += 1 %>
+    <% if chapter.present? %>
+      <div class="my-3 mx-auto chapter">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="p-1"><%= chapter.number %></td>
+              <td class="p-1"></td>
+              <td class="p-1"><%= chapter.body %></td>
+            </tr>
+            <% chapter.sections.each do |section| %>
+              <tr>
+                <td class="p-1"></td>
+                <td class="p-1"><%= chapter.number %>-<%=section.number %></td>
+                <td class="p-1"><%=link_to section.text.title,text_path(section.text, subject: params[:subject], textbook: params[:textbook], section: section.id) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
+    <% if num % division == 0 || num == @chapters.count%>
+     </div>
+    <%end%>
+  <% end %>
+</div>

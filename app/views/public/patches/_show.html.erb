@@ -16,11 +16,12 @@
     </div>
   </div>
   <h1 class="patch-main" style="margin-top: 80px;">
-    <% if patch.text.chapters.find_by(status: 0).present? %>
+    <% if params[:section].present? %>
+      <% section = Section.find(params[:section]) %>
       <div class="chapter-box" >
-        <span class="chapter"><%= patch.text.chapters.find_by(status: 0).body %></span>
+        <span class="chapter"><%= section.chapter.number %></span>
         <span class="chapter-bar">-</span>
-        <span class="section"><%= patch.text.chapters.find_by(status: 0).section %></span>
+        <span class="section"><%= section.number %></span>
       </div>
     <% end %>
     <span class="patch-title">
