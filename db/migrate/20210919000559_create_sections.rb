@@ -5,6 +5,7 @@ class CreateSections < ActiveRecord::Migration[5.2]
       t.references :text, foreign_key: true
       t.integer :number, null: false
 
+
       t.timestamps
     end
   end
