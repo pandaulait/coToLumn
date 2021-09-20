@@ -1,12 +1,15 @@
 ## サイト概要
-
-<img width="1679" alt="スクリーンショット 2021-09-21 3 13 07" src="https://user-images.githubusercontent.com/84437188/134053094-9ac3070d-4500-487c-adea-2f4b9810fa95.png">
-
 ### coToLumn
   coToLumnは日々の思考を投稿、深めていくWebアプリケーションです。
 </br>
 </br>
 　coTolumnは、学生の勉強や、社会情勢など、幅広いジャンルについて、問いをたて、その思考を重ね、分析し、深化していくツールです。
+ 
+<img width="1679" alt="スクリーンショット 2021-09-21 3 13 07" src="https://user-images.githubusercontent.com/84437188/134053094-9ac3070d-4500-487c-adea-2f4b9810fa95.png">
+
+URL: https://cotolumn.com/
+
+"ゲストログイン機能があります。"
 
 ・テキストや、記事をもとにユーザーの意見を仰ぎ深めていける。</br>
 ・コメントを元に、専門的か否か、直感的か否かを判断し、分析していく。</br>
