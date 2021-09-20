@@ -1,4 +1,5 @@
 ## サイト概要
+<img width="1679" alt="スクリーンショット 2021-09-21 3 13 07" src="https://user-images.githubusercontent.com/84437188/134053094-9ac3070d-4500-487c-adea-2f4b9810fa95.png">
 ### coToLumn
   coToLumnは日々の思考を投稿、深めていくWebアプリケーションです。
 </br>
