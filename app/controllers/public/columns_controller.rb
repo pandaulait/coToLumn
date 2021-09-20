@@ -3,13 +3,13 @@ class Public::ColumnsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy, :link]
 
   def index
-    @columns = Column.all.published.page(params[:page]).reverse_order
+    @columns = Column.all.includes(:user, image_attachment: :blob).published.page(params[:page]).reverse_order
   end
 
   def show
-    @column = Column.find(params[:id])
-    @comments = @column.comments
-    @liked_content = @column
+    @column = Column.includes([:texts, { texts: [:admin, :image_attachment] }]).find(params[:id])
+    @comments = @column.comments.includes(:speaker)
+    # @liked_content = @column
     @comment = @column.comments.new if current_user.present? || current_admin.present?
   end
 
@@ -57,7 +57,7 @@ class Public::ColumnsController < ApplicationController
     @link = Link.new
     @texts = Text.all
     @text = Text.first
-    @links = @column.links
+    @links = @column.links.includes([:text, { text: [:admin, :image_attachment] }])
     @literature = Literature.new
   end
 

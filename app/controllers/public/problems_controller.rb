@@ -3,11 +3,11 @@ class Public::ProblemsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy, :subject]
 
   def index
-    @problems = Problem.all.published.page(params[:page]).reverse_order
+    @problems = Problem.all.includes(:author).published.page(params[:page]).reverse_order
   end
 
   def show
-    @problem = Problem.find(params[:id])
+    @problem = Problem.includes([:texts, { texts: [:admin, :image_attachment] }]).find(params[:id])
   end
 
   def new
@@ -49,7 +49,7 @@ class Public::ProblemsController < ApplicationController
     @texts = Text.all
     @text = Text.first
     @problem = Problem.find(params[:id])
-    @subjects = Subject.find_by(problem_id: @problem.id)
+    @subjects = @problem.subjects.includes([:text, { text: [:admin, :image_attachment] }])
     @subject = Subject.new
   end
 

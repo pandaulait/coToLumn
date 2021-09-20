@@ -2,7 +2,7 @@ class Public::ChaptersController < ApplicationController
   before_action :set_subject, only: [:index]
   def index
     @textbook_lists = @subject.textbook_lists
-    @section = Section.new 
+    @section = Section.new
     # if params[:status].present?
     #   session[:status] = params[:status]
     #   @chapters = @chapters.where(status: session[:status])
@@ -15,22 +15,23 @@ class Public::ChaptersController < ApplicationController
     # end
     # @chapters = Chapter.all
   end
+
   def subject
   end
 
   private
 
   def set_subject
-    if params[:subject].present?
-      @subject = SubjectArea.find_by(name: params[:subject])
-    else
-      @subject = SubjectArea.find_by(name: '算数')
-    end
-    if params[:textbook].present?
-      textbook_list = @subject.textbook_lists.find_by(title: params[:textbook])
-    else
-      textbook_list = @subject.textbook_lists.find_by(title: 'デフォルト')
-    end
-    @chapters = textbook_list.chapters
+    @subject = if params[:subject].present?
+                 SubjectArea.find_by(name: params[:subject])
+               else
+                 SubjectArea.find_by(name: '算数')
+               end
+    textbook_list = if params[:textbook].present?
+                      @subject.textbook_lists.find_by(title: params[:textbook])
+                    else
+                      @subject.textbook_lists.find_by(title: 'デフォルト')
+                    end
+    @chapters = textbook_list.chapters.includes(:sections)
   end
 end

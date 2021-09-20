@@ -4,5 +4,4 @@ class Chapter < ApplicationRecord
   has_many :sections, dependent: :destroy
   validates :body, presence: true
   validates :number, presence: true
-
 end

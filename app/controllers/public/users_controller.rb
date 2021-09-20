@@ -8,7 +8,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @columns = @user.columns.order(created_at: :desc).limit(5)
+    @columns = @user.columns.order(created_at: :desc).includes(:literatures, image_attachment: :blob).limit(5)
     @problems = @user.problems.order(created_at: :desc).limit(5)
     @patches = @user.patches.order(created_at: :desc).limit(5)
   end
