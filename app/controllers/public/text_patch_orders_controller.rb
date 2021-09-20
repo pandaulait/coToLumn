@@ -2,10 +2,10 @@ class Public::TextPatchOrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user
   def new
-    @patch = Patch.find(params[:patch_id])
+    @patch = Patch.includes(:user).find(params[:patch_id])
     @text = Text.find(params[:text_id])
     @order = TextPatchOrder.new
-    @orders = @patch.text_patch_orders.order(order: 'ASC')
+    @orders = @patch.text_patch_orders.includes(:content).order(order: 'ASC')
   end
 
   def ajax1

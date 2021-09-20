@@ -7,12 +7,12 @@ class Public::PatchesController < ApplicationController
   end
 
   def show
-    @text = Text.find(params[:text_id])
+    @text = Text.includes(patches: :user).find(params[:text_id])
     @patch = Patch.find(params[:id])
     @literature = Literature.new
     @comments = @patch.comments
     @comment = @patch.comments.new
-    @orders = @patch.text_patch_orders.order(order: 'ASC')
+    @orders = @patch.text_patch_orders.includes(:content).order(order: 'ASC')
   end
 
   def new

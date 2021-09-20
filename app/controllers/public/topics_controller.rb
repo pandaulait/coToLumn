@@ -19,7 +19,7 @@ class Public::TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @new_post = Post.new
-    @posts = @topic.posts
+    @posts = @topic.posts.includes(:user, :children)
     posts = if @topic.question == true
               @posts.answered
             else

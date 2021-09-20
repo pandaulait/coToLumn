@@ -2,9 +2,9 @@
   <div class ="col-lg-9">
     <%= render "public/texts/show",{text: @text, section: @section} %>
     <!--テキストにlinkしたコラムの表示-->
-    <% if @links.present? %>
+    <% if @columns.present? %>
       <div class="column-back">
-        <% @text.columns.each do |column| %>
+        <% @columns.each do |column| %>
           <%= render "public/columns/show",{column: column} %>
         <% end %>
       </div>

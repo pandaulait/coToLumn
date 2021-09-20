@@ -8,7 +8,7 @@
     </div>
     <h3>すでに結びつけたテキスト</h3>
     <div>
-      <% @problem.subjects.each do |subject| %>
+      <% @subjects.each do |subject| %>
       <div class="my-5">
         <%= render "public/texts/mini_show",{text: subject.text} %>
         <%= link_to "結びつきを解除",problem_subject_path(@problem,subject) , class: "mbtn btn-18 ml-auto mr-4",method: :delete%>

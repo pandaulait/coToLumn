@@ -6,11 +6,13 @@ class Admin::SectionsController < ApplicationController
     subject = SubjectArea.find(params[:subject])
     @textbook_lists = subject.textbook_lists
   end
+
   def ajax2
     @text = Text.find(params[:text_id])
     @textbook_list = TextbookList.find(params[:textbook_list])
     @chapters = @textbook_list.chapters
   end
+
   def ajax3
     @text = Text.find(params[:text_id])
     @chapter = Chapter.find(params[:chapter])
@@ -31,12 +33,12 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
-
   private
 
   def section_params
     params.require(:section).permit(:number, :chapter_id)
   end
+
   def ensure_correct_user
     admin = Text.find(params[:text_id]).admin
     return if admin == current_admin

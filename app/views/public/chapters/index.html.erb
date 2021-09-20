@@ -4,39 +4,34 @@
 <%= link_to 'デフォルト' , chapters_path(subject: params[:subject], textbook: 'デフォルト'), class: "text-muted p-2 nav-link-active" %>
 <%= link_to '学校図書株式会社' , chapters_path(subject: params[:subject], textbook: '学校図書株式会社'), class: "text-muted p-2 nav-link-active" %>
 </br>
-<div class="row table-of-contents">
-  <% division =  @chapters.count.div(3) %>
-  <% if @chapters.count % 3 != 0 %>
-    <% division += 1 %>
-  <% end %>
-  <% num = 0 %>
-  <% @chapters.each do |chapter|%>
-    <% if num % division == 0 %>
-     <div class="col-lg-4">
-    <%end%>
-    <% num += 1 %>
-    <% if chapter.present? %>
-      <div class="my-3 mx-auto chapter">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td class="p-1"><%= chapter.number %></td>
-              <td class="p-1"></td>
-              <td class="p-1"><%= chapter.body %></td>
-            </tr>
-            <% chapter.sections.each do |section| %>
-              <tr>
-                <td class="p-1"></td>
-                <td class="p-1"><%= chapter.number %>-<%=section.number %></td>
-                <td class="p-1"><%=link_to section.text.title,text_path(section.text, subject: params[:subject], textbook: params[:textbook], section: section.id) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    <% end %>
-    <% if num % division == 0 || num == @chapters.count%>
-     </div>
-    <%end%>
-  <% end %>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link text-muted" id="nav-1-tab" data-toggle="tab" href="#nav-1" role="tab" aria-controls="nav-1" aria-selected="false">1年生</a>
+    <a class="nav-item nav-link text-muted" id="nav-2-tab" data-toggle="tab" href="#nav-2" role="tab" aria-controls="nav-2" aria-selected="false">2年生</a>
+    <a class="nav-item nav-link text-muted" id="nav-3-tab" data-toggle="tab" href="#nav-3" role="tab" aria-controls="nav-3" aria-selected="false">3年生</a>
+    <a class="nav-item nav-link text-muted" id="nav-4-tab" data-toggle="tab" href="#nav-4" role="tab" aria-controls="nav-4" aria-selected="false">4年生</a>
+    <a class="nav-item nav-link active text-muted" id="nav-5-tab" data-toggle="tab" href="#nav-5" role="tab" aria-controls="nav-5" aria-selected="true">5年生</a>
+    <a class="nav-item nav-link text-muted" id="nav-6-tab" data-toggle="tab" href="#nav-6" role="tab" aria-controls="nav-6" aria-selected="false">6年生</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab">
+    <%= render "public/chapters/grade_index",{chapters: @chapters1} %>
+  </div>
+  <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab">
+    <%= render "public/chapters/grade_index",{chapters: @chapters2} %>
+  </div>
+  <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab">
+    <%= render "public/chapters/grade_index",{chapters: @chapters3} %>
+  </div>
+  <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav-4-tab">
+    <%= render "public/chapters/grade_index",{chapters: @chapters4} %>
+  </div>
+  <div class="tab-pane fade show active" id="nav-5" role="tabpanel" aria-labelledby="nav-5-tab">
+    <%= render "public/chapters/grade_index",{chapters: @chapters5} %>
+  </div>
+  <div class="tab-pane fade" id="nav-6" role="tabpanel" aria-labelledby="nav-6-tab">
+    <%= render "public/chapters/grade_index",{chapters: @chapters6} %>
+  </div>
 </div>
+
