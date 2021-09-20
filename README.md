@@ -137,6 +137,9 @@ URL: https://cotolumn.com/
 
 ## 設計書
 - er図</br>
+
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/84437188/134054650-4b25b2e8-b9dc-4277-81ba-c2da324ec971.png)
+
 (https://drive.google.com/file/d/1FsBHP7i3poaVLZf6A1um3TPKIKQn-zh9/view?usp=sharing)
 - テーブル定義書</br>
 (https://docs.google.com/spreadsheets/d/1zugO_B2jcdgGZHRl3txXEgEpuu1a0fzHTvuiWs_S1Co/edit?usp=sharing)
