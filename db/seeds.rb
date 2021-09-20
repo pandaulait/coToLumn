@@ -65,6 +65,27 @@ TextbookList.all.each do |textbook|
        { grade_id: 5, number: num, body: name}
      )
     end
+    [
+     [1,'ならべ方と組み合わせ方'],
+     [2,'文字と式'],
+     [3,'分数と整数の掛け算と割り算'],
+     [4,'分数×分数'],
+     [5,'分数÷分数'],
+     [6,'少数と分数の計算'],
+     [7,'対称'],
+     [8,'円の面積'],
+     [9,'立体の体積'],
+     [10,'比とその利用'],
+     [11,'拡大図と縮図'],
+     [12,'比例と反比例'],
+     [13,'資料の整理'],
+     [14,'データの活用'],
+     [15,'算数のまとめ']
+    ].each do |num, name|
+    textbook.chapters.create!(
+       { grade_id: 6, number: num, body: name}
+     )
+    end
   when '学校図書株式会社'
     [
      [1,'少数と整数'],
@@ -91,6 +112,27 @@ TextbookList.all.each do |textbook|
     ].each do |num, name|
     textbook.chapters.create!(
        { grade_id: 5, number: num, body: name}
+     )
+    end
+    [
+     [1,'ならべ方と組み合わせ方'],
+     [2,'文字と式'],
+     [3,'分数と整数の掛け算と割り算'],
+     [4,'分数×分数'],
+     [5,'分数÷分数'],
+     [6,'少数と分数の計算'],
+     [7,'対称'],
+     [8,'円の面積'],
+     [9,'立体の体積'],
+     [10,'比とその利用'],
+     [11,'拡大図と縮図'],
+     [12,'比例と反比例'],
+     [13,'資料の整理'],
+     [14,'データの活用'],
+     [15,'算数のまとめ']
+    ].each do |num, name|
+    textbook.chapters.create!(
+       { grade_id: 6, number: num, body: name}
      )
     end
   end

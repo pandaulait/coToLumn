@@ -1,9 +1,8 @@
 class HomesController < ApplicationController
   def top
-    @columns = Column.all
-    @patches = Patch.order(created_at: :desc).limit(5)
+    @patches = Patch.includes(:text, :user).order(created_at: :desc).limit(5)
     @problems = Problem.order(created_at: :desc).limit(5)
-    @columns = Column.order(created_at: :desc).limit(5)
+    @columns = Column.includes(:user, image_attachment: :blob).order(created_at: :desc).limit(5)
     @topics = Topic.order(created_at: :desc).limit(5)
     render layout: 'top_visual'
   end

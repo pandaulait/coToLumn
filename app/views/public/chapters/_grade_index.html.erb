@@ -1,0 +1,39 @@
+    <div class="row table-of-contents">
+      <% division =  chapters.count.div(3) %>
+      <% if chapters.count % 3 != 0 %>
+        <% division += 1 %>
+      <% end %>
+      <% num = 0 %>
+      <% chapters.each do |chapter|%>
+        <% if num % division == 0 %>
+         <div class="col-lg-4">
+        <%end%>
+        <% num += 1 %>
+        <% if chapter.present? %>
+          <div class="my-3 mx-auto chapter">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="p-1"><%= chapter.number %></td>
+                  <td class="p-1"></td>
+                  <td class="p-1"><%= chapter.body %></td>
+                </tr>
+                <% chapter.sections.order(:number).each do |section| %>
+                  <tr>
+                    <td class="p-1"></td>
+                    <td class="p-1"><%= chapter.number %>-<%=section.number %></td>
+                    <td class="p-1"><%=link_to section.text.title,text_path(section.text, subject: params[:subject], textbook: params[:textbook], section: section.id) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+        <% if num % division == 0 || num == chapters.count %>
+         </div>
+        <%end%>
+      <% end %>
+      <% if chapters.blank? %>
+      <p class="p-3">工事中です。随時更新してまいります。</p>
+      <% end %>
+    </div>

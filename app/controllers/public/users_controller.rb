@@ -10,7 +10,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     @columns = @user.columns.order(created_at: :desc).includes(:literatures, image_attachment: :blob).limit(5)
     @problems = @user.problems.order(created_at: :desc).limit(5)
-    @patches = @user.patches.order(created_at: :desc).limit(5)
+    @patches = @user.patches.order(created_at: :desc).includes(:text, :user, :image_attachment, :literatures).limit(5)
   end
 
   def confirm

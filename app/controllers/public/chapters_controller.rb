@@ -32,6 +32,11 @@ class Public::ChaptersController < ApplicationController
                     else
                       @subject.textbook_lists.find_by(title: 'デフォルト')
                     end
-    @chapters = textbook_list.chapters.includes(:sections)
+    @chapters1 = textbook_list.chapters.includes(sections: :text).where(grade_id: 1)
+    @chapters2 = textbook_list.chapters.includes(sections: :text).where(grade_id: 2)
+    @chapters3 = textbook_list.chapters.includes(sections: :text).where(grade_id: 3)
+    @chapters4 = textbook_list.chapters.includes(sections: :text).where(grade_id: 4)
+    @chapters5 = textbook_list.chapters.includes(sections: :text).where(grade_id: 5)
+    @chapters6 = textbook_list.chapters.includes(sections: :text).where(grade_id: 6)
   end
 end
