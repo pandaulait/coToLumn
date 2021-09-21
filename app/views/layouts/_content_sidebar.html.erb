@@ -28,7 +28,7 @@
           <%= patch.title %>
           <div class="author">
             <% if patch.user.profile_image.attached? %>
-              <%= image_tag patch.user.profile_imagee, class: "icon-image"%>
+              <%= image_tag patch.user.profile_image, class: "icon-image"%>
             <% else %>
              <%= image_tag 'logo2.png', class: "icon-image" %>
             <% end %>
