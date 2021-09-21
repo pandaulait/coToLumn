@@ -6,6 +6,7 @@ coToLumnは教員が日々の教材研究や実践を投稿、共有し深めて
 
 URL: https://cotolumn.com/
 
+
 '''
 【会員ユーザーアカウント】
   ゲストログイン機能があります。
@@ -14,6 +15,8 @@ URL: https://cotolumn.com/
    メールアドレス： example@example.com 
    パスワード： example
 '''
+
+
 ## サイト概要
 
 ・テキストや、記事をもとにユーザーの意見を仰ぎ深めていける。</br>
