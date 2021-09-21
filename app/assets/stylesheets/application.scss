@@ -2017,11 +2017,11 @@ main {
   }
   & .mini-content-box{
     max-height: 150px;
-    overflow-y: clip;
+    overflow-y: hidden;
   }
   & .mini-problem-box{
     max-height: 160px;
-    overflow-y: clip;
+    overflow-y: hidden;
   }
 }
 .content-bottom{
