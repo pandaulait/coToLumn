@@ -1,6 +1,7 @@
 <%= form_with url: admin_text_ajax3_path(text), method: :get, remote: true  do |f| %>
-  <h4>章</h4>
-  <%= f.collection_select(:chapter, chapters, :id, :body, {prompt: "教科書を選択してください"}, {class: "ajax3-select-drop form-control" }) %>
+  <h4>教科書</h4>
+  <%= f.collection_select(:textbook_list, textbook_lists, :id, :title, {prompt: "教科書を選択してください"}, {class: "ajax3-select-drop form-control" }) %>
+  <%= f.hidden_field :grade, :value => grade.id %>
   <span style="display: none;"><%= f.submit :class=>"ajax3-submit"%></span>
 <% end %>
 

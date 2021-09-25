@@ -1,6 +1,7 @@
 <%= form_with url: admin_text_ajax2_path(text), method: :get, remote: true  do |f| %>
-  <h4>教科書</h4>
-  <%= f.collection_select(:textbook_list, textbook_lists, :id, :title, {prompt: "教科書を選択してください"}, {class: "ajax2-select-drop form-control" }) %>
+  <h4>学年</h4>
+  <%= f.collection_select(:grade, grades, :id, :number_i18n, {prompt: "学年を選択してください"}, {class: "ajax2-select-drop form-control" }) %>
+  <%= f.hidden_field :subject, :value => subject.id %>
   <span style="display: none;"><%= f.submit :class=>"ajax2-submit"%></span>
 <% end %>
 
