@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       get 'ajax1',         to: 'sections#ajax1'
       get 'ajax2',         to: 'sections#ajax2'
       get 'ajax3',         to: 'sections#ajax3'
+      get 'ajax4',         to: 'sections#ajax4'
       resources :sections ,only: [:create, :destroy]
     end
   end

@@ -1,0 +1,14 @@
+<%= form_with model: section, url: admin_text_sections_path(text) , local:true do |f| %>
+   <h4>節</h4>
+  <div class="d-flex ml-3" >
+    <div class="mx-2" style = "line-height: 2.5; white-space: nowrap;" >
+      <%= chapter.number %> -
+    </div>
+    <div class="mx-2" >
+      <%= f.number_field :number ,:min => 0, :max => 20,class: "form-control"%>
+      <%= f.hidden_field :chapter_id, :value => chapter.id %>
+    </div>
+    <%= f.submit '保存',class: "tsbtn btn-11"%>
+  </div>
+<% end %>
+

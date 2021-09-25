@@ -23,26 +23,39 @@
       <div class="col-md-4 ajax2-select"></div>
       <div class="col-md-4 ajax3-select"></div>
     </div>
-    <div class="ajax4-select row mt-4"></div>
+    <div class="row">
+      <div class="ajax4-select col-md-4"></div>
+      <div class="ajax5-select col-md-4"></div>
+    </div>
+
     <%= render 'layouts/error_messages', obj: @section, column: :number %>
     <hr class="cp_hr08" />
     <!--セクション一覧-->
-    <table class="table">
-      <thead>
-        <tr>
-          <th>教科書</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @sections.each do |section| %>
-        <tr>
-          <td><%= section.chapter.textbook_list.title %></td>
-          <td><%= section.chapter.number %> - <%= section.number %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table class="table" style = "min-width: max-content;">
+        <thead>
+          <tr>
+            <th>教科書</th>
+            <th>学年</th>
+            <th>章-節</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sections.each do |section| %>
+          <tr>
+            <td><%= section.chapter.textbook_list.title %></td>
+            <td><%= section.chapter.grade.number_i18n%></td>
+            <td><%= section.chapter.number %> - <%= section.number %></td>
+            <td>
+              <%= link_to "削除", admin_text_section_path(@text,section), method: :delete ,class: "dropdown-item"%>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
     <!--テキスト編集画面-->
     <%= form_with model: @text,  url: admin_text_path(@text) ,local:true do |f| %>
       <h4>画像</h4>
