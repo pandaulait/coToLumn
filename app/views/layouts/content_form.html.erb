@@ -12,14 +12,19 @@
   </head>
 
   <body>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        showProcessingMessages: false,
-        tex2jax: { inlineMath: [['$','$'],['\(','\)']] }
-      });
+    <script>
+      MathJax = {
+        chtml: {
+          matchFontHeight: false
+        },
+        tex: {
+          inlineMath: [['$', '$']]
+        }
+      };
     </script>
-    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
     <header>
 <!--ヘッダ-->
     <%= render "layouts/header"%>
