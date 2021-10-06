@@ -85,5 +85,6 @@ group :development do
   gem 'bullet'
 end
 
+gem 'gretel'
 gem "jqcloud-rails"
 # gem "natto", "~> 1.2"

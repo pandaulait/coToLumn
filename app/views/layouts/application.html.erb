@@ -31,14 +31,15 @@
     </script>
 
     <header>
-    <!--ヘッダ-->
-    <%= render "layouts/header"%>
-    <!--ヘッダー-->
-    <%= render "layouts/header2"%>
+      <!--ヘッダ-->
+      <%= render "layouts/header"%>
+      <!--ヘッダー-->
+      <%= render "layouts/header2"%>
 
     </header>
     <main style="width: 100vw;">
       <div class="container mb-5 pl-3">
+        <%= breadcrumbs separater: " &rsaquo; "%>
         <%= render 'layouts/flash' %>
         <%= yield %>
       </div>
